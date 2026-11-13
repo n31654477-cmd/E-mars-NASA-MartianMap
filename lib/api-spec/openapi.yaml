@@ -24,6 +24,80 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /mars/summary:
+    get:
+      operationId: getMarsSummary
+      responses:
+        "200":
+          description: Evidence, capabilities and source layer inventory
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MarsSummary" }
+  /mars/layers/{id}/features:
+    get:
+      operationId: getMarsFeatures
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Display-only GeoJSON in Mars spherical degrees, not WGS84
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MarsFeatureCollection" }
+  /mars/inspect:
+    get:
+      operationId: inspectMarsLocation
+      parameters:
+        - { name: latitude, in: query, required: true, schema: { type: number } }
+        - { name: longitude, in: query, required: true, schema: { type: number } }
+      responses:
+        "200":
+          description: Exact unsimplified source geometry point coverage and scientific gaps
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MarsInspection" }
+  /mars/grid:
+    post:
+      operationId: generateMarsGrid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MarsGridInput" }
+      responses:
+        "200":
+          description: Source-linked scientific grid; unknown costs and traversability stay null
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MarsGrid" }
+  /mars/route:
+    post:
+      operationId: assessMarsRoute
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MarsRouteInput" }
+      responses:
+        "200":
+          description: Explicit routing eligibility; no route without sufficient evidence
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MarsRoutingStatus" }
+  /mars/lab:
+    post:
+      operationId: runMarsAlgorithm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MarsLabInput" }
+      responses:
+        "200":
+          description: Original C# algorithm on a clearly synthetic fixed test fixture
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MarsLabResult" }
 components:
   schemas:
     HealthStatus:
@@ -33,4 +107,150 @@ components:
           type: string
       required:
         - status
+    MarsSummary:
+      type: object
+      required: [title, scientificRoutingAvailable, limitation, algorithms, layers, missingMeasurements, methods, sourceCount]
+      properties:
+        title: { type: string }
+        scientificRoutingAvailable: { type: boolean }
+        limitation: { type: string }
+        sourceCount: { type: integer }
+        algorithms: { type: array, items: { $ref: "#/components/schemas/MarsAlgorithm" } }
+        layers: { type: array, items: { $ref: "#/components/schemas/MarsLayer" } }
+        missingMeasurements: { type: array, items: { type: string } }
+        methods: { type: array, items: { type: string } }
+    MarsAlgorithm:
+      type: object
+      required: [id, name, objective, description, source]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        objective: { type: string }
+        description: { type: string }
+        source: { type: string }
+    MarsLayer:
+      type: object
+      required: [id, name, filename, count, units, crs, sourceUrl, role, displayAvailable]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        filename: { type: string }
+        count: { type: integer }
+        units: { type: string }
+        crs: { type: string }
+        sourceUrl: { type: string }
+        role: { type: string }
+        displayAvailable: { type: boolean }
+    MarsFeatureCollection:
+      type: object
+      required: [type, features]
+      properties:
+        type: { type: string }
+        features: { type: array, items: { type: object, additionalProperties: true } }
+    MarsInspection:
+      type: object
+      required: [latitude, longitude, status, evidence, missingMeasurements, warning]
+      properties:
+        latitude: { type: number }
+        longitude: { type: number }
+        status: { type: string }
+        warning: { type: string }
+        missingMeasurements: { type: array, items: { type: string } }
+        evidence: { type: array, items: { $ref: "#/components/schemas/MarsEvidence" } }
+    MarsEvidence:
+      type: object
+      required: [layerId, filename, layer, featureId, sourceUrl, properties]
+      properties:
+        layerId: { type: string }
+        filename: { type: string }
+        layer: { type: string }
+        featureId: { type: integer }
+        sourceUrl: { type: string }
+        properties: { type: object, additionalProperties: true }
+    MarsGridInput:
+      type: object
+      required: [startLat, endLat, startLng, endLng, rows, columns]
+      properties:
+        startLat: { type: number, minimum: -90, maximum: 90 }
+        endLat: { type: number, minimum: -90, maximum: 90 }
+        startLng: { type: number, minimum: -180, maximum: 180 }
+        endLng: { type: number, minimum: -180, maximum: 180 }
+        rows: { type: integer, minimum: 1, maximum: 80 }
+        columns: { type: integer, minimum: 1, maximum: 80 }
+    MarsGrid:
+      type: object
+      required: [rows, columns, cells, warning]
+      properties:
+        rows: { type: integer }
+        columns: { type: integer }
+        warning: { type: string }
+        cells: { type: array, items: { $ref: "#/components/schemas/MarsScientificCell" } }
+    MarsScientificCell:
+      type: object
+      required: [row, col, centerLat, centerLng, width, height, safetyStatus, blocked, df, safetyScore, units]
+      properties:
+        row: { type: integer }
+        col: { type: integer }
+        centerLat: { type: number }
+        centerLng: { type: number }
+        width: { type: number }
+        height: { type: number }
+        safetyStatus: { type: string }
+        blocked: { type: ["boolean", "null"] }
+        df: { type: ["number", "null"] }
+        safetyScore: { type: ["number", "null"] }
+        units: { type: array, items: { type: string } }
+    MarsRouteInput:
+      type: object
+      required: [algorithm, startLat, startLng, endLat, endLng]
+      properties:
+        algorithm: { type: string, enum: [bfs, dijkstra, astar] }
+        startLat: { type: number }
+        startLng: { type: number }
+        endLat: { type: number }
+        endLng: { type: number }
+    MarsRoutingStatus:
+      type: object
+      required: [available, reason, missingMeasurements]
+      properties:
+        available: { type: boolean }
+        reason: { type: string }
+        missingMeasurements: { type: array, items: { type: string } }
+    MarsLabInput:
+      type: object
+      required: [algorithm, fixture]
+      properties:
+        algorithm: { type: string, enum: [bfs, dijkstra, astar] }
+        fixture: { type: string, enum: [weighted, tie, unreachable, same-point, zero-cost] }
+    MarsLabResult:
+      type: object
+      required: [algorithm, fixture, synthetic, rows, columns, cells, path, totalCost, avgSafetyScore, minSafetyScore, visitedPathCells, found, warning]
+      properties:
+        algorithm: { type: string }
+        fixture: { type: string }
+        synthetic: { type: boolean }
+        rows: { type: integer }
+        columns: { type: integer }
+        cells: { type: array, items: { $ref: "#/components/schemas/MarsLabCell" } }
+        path: { type: array, items: { $ref: "#/components/schemas/MarsPoint" } }
+        totalCost: { type: number }
+        avgSafetyScore: { type: number }
+        minSafetyScore: { type: number }
+        visitedPathCells: { type: integer }
+        found: { type: boolean }
+        warning: { type: string }
+    MarsPoint:
+      type: object
+      required: [row, col]
+      properties:
+        row: { type: integer }
+        col: { type: integer }
+    MarsLabCell:
+      type: object
+      required: [row, col, df, blocked]
+      properties:
+        row: { type: integer }
+        col: { type: integer }
+        df: { type: number }
+        blocked: { type: boolean }
 

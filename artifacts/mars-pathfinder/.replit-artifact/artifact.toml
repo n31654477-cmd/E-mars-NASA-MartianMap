@@ -1,0 +1,37 @@
+kind = "web"
+previewPath = "/mars-pathfinder/"
+title = "Mars · Surface Analysis & Path Finder"
+description = "Source-grounded interactive Mars GIS map with explicit evidence gaps and an ASP.NET Core backend preserving the supplied BFS, Dijkstra and A* implementations."
+version = "1.0.0"
+id = "artifacts/mars-pathfinder"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/mars-pathfinder/" ]
+localPort = 18219
+
+[services.development]
+run = "pnpm --filter @workspace/mars-pathfinder run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mars-pathfinder", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mars-pathfinder/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18219"
+BASE_PATH = "/mars-pathfinder/"
+
+[[services]]
+name = "Mars API"
+localPort = 18220
+paths = ["/mars-pathfinder/api"]
+[services.development]
+run = "dotnet run --project backend/Mars.Api.csproj --no-launch-profile"
+[services.env]
+PORT = "18220"

@@ -1,0 +1,11 @@
+using Mars;
+var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls($"http://0.0.0.0:{Environment.GetEnvironmentVariable("PORT") ?? "18220"}");
+builder.Services.AddControllers();
+builder.Services.AddSingleton<SourceService>();
+builder.Services.AddSingleton<LabService>();
+var app = builder.Build();
+app.UsePathBase("/mars-pathfinder");
+app.MapControllers();
+app.MapGet("/api/healthz", () => new { status = "ok", backend = "ASP.NET Core", runtime = Environment.Version.ToString() });
+app.Run();

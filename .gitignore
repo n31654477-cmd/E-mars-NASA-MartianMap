@@ -55,3 +55,7 @@ Thumbs.db
 .local/
 /generated-artifacts/
 /artifacts/nasa-data-explorer/public/data/
+**/bin/
+**/obj/
+**/.vs/
+/artifacts/mars-pathfinder/public/data/
