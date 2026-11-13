@@ -5,11 +5,13 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MarsGridInput } from './marsGridInput';
 import type { MarsScientificCell } from './marsScientificCell';
 
 export interface MarsGrid {
   rows: number;
   columns: number;
   warning: string;
+  bounds: MarsGridInput;
   cells: MarsScientificCell[];
 }

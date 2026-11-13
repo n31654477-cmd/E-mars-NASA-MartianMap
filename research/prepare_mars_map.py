@@ -29,11 +29,11 @@ for lid in ["layer-02", "layer-03", "layer-04", "layer-05"]:
             props = byid[fid]
             features.append({"type": "Feature", "id": fid, "properties": props,
                              "geometry": shapely.geometry.mapping(geom.simplify(0.025, preserve_topology=True)) if geom is not None else None})
-            if lid == "layer-03":
+            if lid in ["layer-03", "layer-05"]:
                 exact.append({"wkb": geom.wkb_hex, "properties": props})
     (out / f"{lid}.json").write_text(json.dumps({"type": "FeatureCollection", "features": features}))
     if exact:
-        (out / "geology-exact.json").write_text(json.dumps(exact))
+        (out / ("geology-exact.json" if lid == "layer-03" else "structures-exact.json")).write_text(json.dumps(exact))
 hill = next(x for x in catalog["rasters"] if x["name"] == "MOLA_Hillshade_Robinson_128ppd.tif")
 with rasterio.open(root / "generated-artifacts/nasa-originals" / hill["source"]) as src:
     image = np.zeros((900, 1800), dtype="uint8")

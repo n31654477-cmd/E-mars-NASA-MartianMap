@@ -10,13 +10,36 @@ export default function MethodsPage() {
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Scientific limits</p>
         <h1 className="font-display text-4xl md:text-5xl mt-2 max-w-3xl">What this map knows, and the larger set of things it refuses to guess.</h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          The source geologic map is compiled at 1:20,000,000. At that scale a single line width spans kilometres. Nothing here is a rover navigation guarantee, and unmeasured terrain is never treated as traversable.
+          The source geologic map is compiled at 1:20,000,000. Experimental routing assumes covered cells can be crossed, but this is not measured traversability or a rover navigation guarantee.
         </p>
       </section>
       {q.isLoading && <div className="space-y-3"><Sk className="h-6 w-1/2" /><Sk className="h-40" /></div>}
       {q.isError && <ErrorPanel title="Data unavailable: summary could not be loaded" error={q.error} onRetry={() => q.refetch()} />}
       {s && (
         <>
+          <section className="space-y-5" data-testid="risk-formula-methods">
+            <h2 className="font-display text-3xl">Experimental risk formula</h2>
+            <p className="rounded-md border bg-secondary p-4 font-mono">{s.riskModel.formula}</p>
+            <p className="border-l-4 border-primary pl-4">{s.riskModel.calibration}</p>
+            <p>{s.riskModel.warning}</p>
+            <p>{s.riskModel.spatialPolicy}</p>
+            <p>Each category score is normalized from 0 to 1 and multiplied by its factor weight. The weights sum to 100. Rules are evaluated in the order shown; the first matching terrain rule wins. If multiple polygons or structures apply, take the maximum within that factor—never add duplicate source versions. Scores are not empirically calibrated. A geological category is not a measurement of roughness, ice, soil strength, slope or present weather.</p>
+            {s.riskModel.factors.map(f=><section key={f.id} className="rounded-md border bg-card p-4 space-y-3">
+              <h3 className="font-display text-xl">{f.name} · {f.weight} maximum points</h3><p>{f.rationale}</p>
+              <div className="overflow-auto"><table className="w-full text-left text-sm"><thead><tr><th>Category</th><th>Raw score</th><th>Contribution</th><th>Rule</th></tr></thead>
+                <tbody>{f.rules.map((r,i)=><tr key={i} className="border-t"><td className="py-2 pr-3">{r.name}</td><td>{r.score}</td><td>{(r.score*f.weight).toFixed(2)}</td><td>{r.match}</td></tr>)}</tbody>
+              </table></div>
+            </section>)}
+            <h3 className="font-display text-xl">Worked example</h3>
+            <p>Basin/lowland T=0.3, a mapped scarp M=1, and geology present U=7/8: R = 45×0.3 + 35×1 + 20×0.875 = <strong>66</strong>. Inverse model score = 34. DF = 1.66. This example is arithmetic, not a measured location or a 66% chance of harm.</p>
+            <h3 className="font-display text-xl">How the route uses this formula</h3><p>{s.riskModel.routingPolicy}</p>
+            <p>DF includes a unit step cost. Therefore Dijkstra/A* minimize accumulated step-plus-model-risk cost, not raw total risk alone, shortest kilometers, or actual mission failure probability. This is an explicit new input-cost policy requested for this model; the original prototype algorithms and original ComputeDF implementation remain unchanged. Changing grid resolution changes structural intersections and routes. No cost is charged for entering the starting cell; safety averages include it, as in the prototype.</p>
+            <h3 className="font-display text-xl">Excluded inputs and unresolved limits</h3>
+            <ul className="list-disc pl-5">{s.riskModel.exclusions.map(x=><li key={x}>{x}</li>)}</ul>
+            <h3 className="font-display text-xl">Evidence and interpretation</h3>
+            {s.riskModel.references.map(r=><p key={r.url}><a className="text-primary underline" href={r.url} target="_blank" rel="noreferrer">{r.title}</a><span className="block text-sm">{r.locator}</span></p>)}
+            <p className="font-mono text-xs">Model version: {s.riskModel.version}</p>
+          </section>
           <section className="grid md:grid-cols-[1fr_2fr] gap-6">
             <h2 className="font-display text-2xl">Limitation</h2>
             <p className="border-l-2 border-primary pl-4" data-testid="text-limitation">{s.limitation}</p>

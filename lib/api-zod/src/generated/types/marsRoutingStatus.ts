@@ -5,9 +5,19 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MarsScientificCell } from './marsScientificCell';
 
 export interface MarsRoutingStatus {
   available: boolean;
   reason: string;
   missingMeasurements: string[];
+  path: MarsScientificCell[];
+  totalCost: number;
+  avgSafetyScore: number;
+  minSafetyScore: number;
+  distanceKm: number;
+  modelVersion: string;
+  scientificallyValidated: boolean;
+  accumulatedRisk: number;
+  warning: string;
 }

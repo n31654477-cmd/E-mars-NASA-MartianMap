@@ -109,9 +109,10 @@ components:
         - status
     MarsSummary:
       type: object
-      required: [title, scientificRoutingAvailable, limitation, algorithms, layers, missingMeasurements, methods, sourceCount]
+      required: [title, scientificRoutingAvailable, limitation, algorithms, layers, missingMeasurements, methods, sourceCount, riskModel]
       properties:
         title: { type: string }
+        riskModel: { $ref: "#/components/schemas/MarsRiskModel" }
         scientificRoutingAvailable: { type: boolean }
         limitation: { type: string }
         sourceCount: { type: integer }
@@ -179,15 +180,16 @@ components:
         columns: { type: integer, minimum: 1, maximum: 80 }
     MarsGrid:
       type: object
-      required: [rows, columns, cells, warning]
+      required: [rows, columns, cells, warning, bounds]
       properties:
         rows: { type: integer }
         columns: { type: integer }
         warning: { type: string }
+        bounds: { $ref: "#/components/schemas/MarsGridInput" }
         cells: { type: array, items: { $ref: "#/components/schemas/MarsScientificCell" } }
     MarsScientificCell:
       type: object
-      required: [row, col, centerLat, centerLng, width, height, safetyStatus, blocked, df, safetyScore, units]
+      required: [row, col, centerLat, centerLng, width, height, safetyStatus, blocked, df, safetyScore, units, assessment]
       properties:
         row: { type: integer }
         col: { type: integer }
@@ -196,26 +198,105 @@ components:
         width: { type: number }
         height: { type: number }
         safetyStatus: { type: string }
+        assessment: { $ref: "#/components/schemas/MarsRiskAssessment" }
         blocked: { type: ["boolean", "null"] }
         df: { type: ["number", "null"] }
         safetyScore: { type: ["number", "null"] }
         units: { type: array, items: { type: string } }
     MarsRouteInput:
       type: object
-      required: [algorithm, startLat, startLng, endLat, endLng]
+      required: [algorithm, startLat, startLng, endLat, endLng, grid]
       properties:
         algorithm: { type: string, enum: [bfs, dijkstra, astar] }
+        grid: { $ref: "#/components/schemas/MarsGridInput" }
         startLat: { type: number }
         startLng: { type: number }
         endLat: { type: number }
         endLng: { type: number }
     MarsRoutingStatus:
       type: object
-      required: [available, reason, missingMeasurements]
+      required: [available, reason, missingMeasurements, path, totalCost, avgSafetyScore, minSafetyScore, distanceKm, modelVersion, scientificallyValidated, accumulatedRisk, warning]
       properties:
         available: { type: boolean }
         reason: { type: string }
         missingMeasurements: { type: array, items: { type: string } }
+        path: { type: array, items: { $ref: "#/components/schemas/MarsScientificCell" } }
+        totalCost: { type: number }
+        avgSafetyScore: { type: number }
+        minSafetyScore: { type: number }
+        distanceKm: { type: number }
+        modelVersion: { type: string }
+        scientificallyValidated: { type: boolean }
+        accumulatedRisk: { type: number }
+        warning: { type: string }
+    MarsRiskAssessment:
+      type: object
+      required: [modelVersion, riskScore, modelSafetyScore, movementCost, geologyCovered, status, factors, evidence, unknowns, warning]
+      properties:
+        modelVersion: { type: string }
+        riskScore: { type: number }
+        modelSafetyScore: { type: number }
+        movementCost: { type: number }
+        geologyCovered: { type: boolean }
+        status: { type: string }
+        factors: { type: array, items: { $ref: "#/components/schemas/MarsRiskFactor" } }
+        evidence: { type: array, items: { $ref: "#/components/schemas/MarsRiskEvidence" } }
+        unknowns: { type: array, items: { type: string } }
+        warning: { type: string }
+    MarsRiskFactor:
+      type: object
+      required: [id, name, weight, rawScore, contribution, basis]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        weight: { type: number }
+        rawScore: { type: number }
+        contribution: { type: number }
+        basis: { type: string }
+    MarsRiskEvidence:
+      type: object
+      required: [filename, layer, featureId, value]
+      properties:
+        filename: { type: string }
+        layer: { type: string }
+        featureId: { type: integer }
+        value: { type: string }
+    MarsRiskModel:
+      type: object
+      required: [version, formula, warning, calibration, spatialPolicy, routingPolicy, factors, exclusions, references]
+      properties:
+        version: { type: string }
+        formula: { type: string }
+        warning: { type: string }
+        calibration: { type: string }
+        spatialPolicy: { type: string }
+        routingPolicy: { type: string }
+        factors: { type: array, items: { $ref: "#/components/schemas/MarsRiskDefinition" } }
+        exclusions: { type: array, items: { type: string } }
+        references: { type: array, items: { $ref: "#/components/schemas/MarsRiskReference" } }
+    MarsRiskDefinition:
+      type: object
+      required: [id, name, weight, rationale, rules]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        weight: { type: number }
+        rationale: { type: string }
+        rules: { type: array, items: { $ref: "#/components/schemas/MarsRiskRule" } }
+    MarsRiskRule:
+      type: object
+      required: [name, score, match]
+      properties:
+        name: { type: string }
+        score: { type: number }
+        match: { type: string }
+    MarsRiskReference:
+      type: object
+      required: [title, url, locator]
+      properties:
+        title: { type: string }
+        url: { type: string }
+        locator: { type: string }
     MarsLabInput:
       type: object
       required: [algorithm, fixture]

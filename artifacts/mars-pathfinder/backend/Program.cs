@@ -4,6 +4,8 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{Environment.GetEnvironmentVariable("PO
 builder.Services.AddControllers();
 builder.Services.AddSingleton<SourceService>();
 builder.Services.AddSingleton<LabService>();
+builder.Services.AddSingleton<RiskService>();
+builder.Services.AddSingleton<GridService>();
 var app = builder.Build();
 app.UsePathBase("/mars-pathfinder");
 app.MapControllers();

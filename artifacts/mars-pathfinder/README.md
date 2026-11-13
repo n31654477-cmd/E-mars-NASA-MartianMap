@@ -2,7 +2,17 @@
 
 ## Approved scientific scope
 
-The user approved a source-grounded map and preserved algorithm laboratory with explicit scientific limits. This is not an operational Mars navigation system. Unknown measurements and traversability are not zero, safe, or implicitly unblocked. The scientific route endpoint returns eligibility, not a fabricated route.
+The user requested an explicit experimental per-cell risk formula and safety function using existing data. This is not an operational Mars navigation system. Unknown physical measurements and traversability remain unknown. Experimental routes assume covered cells can be crossed; that is an explicit scenario policy, not measured traversability. Scientifically validated routing is still unavailable.
+
+## Experimental risk model
+
+`sim3292-proxy-1`: `R = 45T + 35M + 20U`, `modelSafetyScore = 100 − R`, `DF = 1 + R/100`.
+
+These dimensionless category scores and weights are analyst-selected assumptions, not NASA recommendations, probabilities, calibrated mission risks or scientifically established terrain rankings. Their rationale is qualitative mobility context, not a quantitative empirical justification. Full executable category rules, first-match order, spatial policy and references are exposed by the summary API and rendered in Methods & limits from the same definitions.
+
+Terrain association uses the maximum category of geology polygons covering a cell midpoint. Structure association uses the maximum category of exact mapped structures intersecting the full cell rectangle, not a proximity threshold. Seven missing categories always contribute U=7/8; missing geology adds the eighth. Missing geology also excludes a cell from routing by data policy, not by asserting a physical obstacle. No mapped structure contributes M=0 but does not establish absence of local hazards.
+
+Original BFS/Dijkstra/A* and original ComputeDF are unchanged. The new adapter directly supplies DF and inverse model scores; it does not call the unvalidated original ComputeDF or random generator. Dijkstra/A* optimize entered-cell step-plus-proxy-risk cost, not pure raw risk or kilometers. Endpoints snap to cell centers, and grid changes affect results. Route distance is a separately derived Mars-sphere center-to-center distance, excluding the offset from clicked locations to snapped centers.
 
 ## Architecture
 
@@ -18,7 +28,7 @@ Run `research/prepare_mars_map.py` from the workspace root. A compatible native 
 
 Four geographic SIM3292 shapefiles are decoded using GDAL. Display geometry is simplified with a topology-preserving **0.025-degree tolerance**; this is an engineering display choice, not a measured hazard threshold. All features and attributes are retained. Ninety-two contact features have null source geometry and cannot be drawn.
 
-Full unsimplified geology WKB is stored separately and indexed using NetTopologySuite for exact point coverage. Boundary points can return multiple units. Grid membership is based on the midpoint, not an area-weighted cell aggregate or a claim that the entire cell is homogeneous.
+Full unsimplified geology and structure WKB are stored separately and indexed using NetTopologySuite. Boundary points can return multiple units. Geology membership is based on the midpoint, not an area-weighted cell aggregate or a claim that the entire cell is homogeneous.
 
 The hillshade image is reprojected from its declared Robinson CRS to Mars-sphere geographic coordinates (radius **3,396,190 m**), bilinearly resampled to 1800×900 pixels. It is intensity, not elevation or slope.
 

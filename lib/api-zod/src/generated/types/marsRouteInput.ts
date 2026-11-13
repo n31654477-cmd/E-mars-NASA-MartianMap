@@ -5,10 +5,12 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MarsGridInput } from './marsGridInput';
 import type { MarsRouteInputAlgorithm } from './marsRouteInputAlgorithm';
 
 export interface MarsRouteInput {
   algorithm: MarsRouteInputAlgorithm;
+  grid: MarsGridInput;
   startLat: number;
   startLng: number;
   endLat: number;

@@ -7,9 +7,11 @@
  */
 import type { MarsAlgorithm } from './marsAlgorithm';
 import type { MarsLayer } from './marsLayer';
+import type { MarsRiskModel } from './marsRiskModel';
 
 export interface MarsSummary {
   title: string;
+  riskModel: MarsRiskModel;
   scientificRoutingAvailable: boolean;
   limitation: string;
   sourceCount: number;

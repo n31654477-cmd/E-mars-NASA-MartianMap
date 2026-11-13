@@ -11,7 +11,7 @@ Use C# ASP.NET Core Web API and a separate HTML/CSS/JavaScript frontend with an 
 
 Use only source-supported measurements and danger thresholds. Missing data is neither zero nor safe. Keep originals separate from derivatives, document transformations, and maintain source/CRS/unit traceability.
 
-The user approved building with explicit scientific limits: real-data exploration and preserved algorithm verification may proceed while scientific safety classification and routing remain unavailable without supported inputs. Synthetic algorithm fixtures must stay separate from the geographic map.
+The user subsequently requested an explicit weighted per-cell risk formula and safety function from the current data, with all factors and scores documented in Methods & limits. Experimental proxy costs and routes are allowed when clearly distinguished from measured or scientifically validated safety. Preserve the algorithm implementations; label analyst-chosen weights as assumptions, keep missing physical measurements unknown, and document assumed traversability. Synthetic test fixtures remain separate from the geographic map.
 
 **Why:** The user explicitly prioritizes prototype algorithm correctness and scientific accuracy over implementation convenience or visual appearance.
 

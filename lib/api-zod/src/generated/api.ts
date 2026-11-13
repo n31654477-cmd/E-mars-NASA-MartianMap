@@ -19,6 +19,31 @@ export const HealthCheckResponse = zod.object({
 
 export const GetMarsSummaryResponse = zod.object({
   "title": zod.string(),
+  "riskModel": zod.object({
+  "version": zod.string(),
+  "formula": zod.string(),
+  "warning": zod.string(),
+  "calibration": zod.string(),
+  "spatialPolicy": zod.string(),
+  "routingPolicy": zod.string(),
+  "factors": zod.array(zod.object({
+  "id": zod.string(),
+  "name": zod.string(),
+  "weight": zod.number(),
+  "rationale": zod.string(),
+  "rules": zod.array(zod.object({
+  "name": zod.string(),
+  "score": zod.number(),
+  "match": zod.string()
+}))
+})),
+  "exclusions": zod.array(zod.string()),
+  "references": zod.array(zod.object({
+  "title": zod.string(),
+  "url": zod.string(),
+  "locator": zod.string()
+}))
+}),
   "scientificRoutingAvailable": zod.boolean(),
   "limitation": zod.string(),
   "sourceCount": zod.number().int(),
@@ -104,10 +129,36 @@ export const GenerateMarsGridBody = zod.object({
   "columns": zod.number().int().min(1).max(generateMarsGridBodyColumnsMax)
 })
 
+export const generateMarsGridResponseBoundsStartLatMin = -90;
+export const generateMarsGridResponseBoundsStartLatMax = 90;
+
+export const generateMarsGridResponseBoundsEndLatMin = -90;
+export const generateMarsGridResponseBoundsEndLatMax = 90;
+
+export const generateMarsGridResponseBoundsStartLngMin = -180;
+export const generateMarsGridResponseBoundsStartLngMax = 180;
+
+export const generateMarsGridResponseBoundsEndLngMin = -180;
+export const generateMarsGridResponseBoundsEndLngMax = 180;
+
+export const generateMarsGridResponseBoundsRowsMax = 80;
+
+export const generateMarsGridResponseBoundsColumnsMax = 80;
+
+
+
 export const GenerateMarsGridResponse = zod.object({
   "rows": zod.number().int(),
   "columns": zod.number().int(),
   "warning": zod.string(),
+  "bounds": zod.object({
+  "startLat": zod.number().min(generateMarsGridResponseBoundsStartLatMin).max(generateMarsGridResponseBoundsStartLatMax),
+  "endLat": zod.number().min(generateMarsGridResponseBoundsEndLatMin).max(generateMarsGridResponseBoundsEndLatMax),
+  "startLng": zod.number().min(generateMarsGridResponseBoundsStartLngMin).max(generateMarsGridResponseBoundsStartLngMax),
+  "endLng": zod.number().min(generateMarsGridResponseBoundsEndLngMin).max(generateMarsGridResponseBoundsEndLngMax),
+  "rows": zod.number().int().min(1).max(generateMarsGridResponseBoundsRowsMax),
+  "columns": zod.number().int().min(1).max(generateMarsGridResponseBoundsColumnsMax)
+}),
   "cells": zod.array(zod.object({
   "row": zod.number().int(),
   "col": zod.number().int(),
@@ -116,6 +167,30 @@ export const GenerateMarsGridResponse = zod.object({
   "width": zod.number(),
   "height": zod.number(),
   "safetyStatus": zod.string(),
+  "assessment": zod.object({
+  "modelVersion": zod.string(),
+  "riskScore": zod.number(),
+  "modelSafetyScore": zod.number(),
+  "movementCost": zod.number(),
+  "geologyCovered": zod.boolean(),
+  "status": zod.string(),
+  "factors": zod.array(zod.object({
+  "id": zod.string(),
+  "name": zod.string(),
+  "weight": zod.number(),
+  "rawScore": zod.number(),
+  "contribution": zod.number(),
+  "basis": zod.string()
+})),
+  "evidence": zod.array(zod.object({
+  "filename": zod.string(),
+  "layer": zod.string(),
+  "featureId": zod.number().int(),
+  "value": zod.string()
+})),
+  "unknowns": zod.array(zod.string()),
+  "warning": zod.string()
+}),
   "blocked": zod.boolean().nullable(),
   "df": zod.number().nullable(),
   "safetyScore": zod.number().nullable(),
@@ -124,8 +199,34 @@ export const GenerateMarsGridResponse = zod.object({
 })
 
 
+export const assessMarsRouteBodyGridStartLatMin = -90;
+export const assessMarsRouteBodyGridStartLatMax = 90;
+
+export const assessMarsRouteBodyGridEndLatMin = -90;
+export const assessMarsRouteBodyGridEndLatMax = 90;
+
+export const assessMarsRouteBodyGridStartLngMin = -180;
+export const assessMarsRouteBodyGridStartLngMax = 180;
+
+export const assessMarsRouteBodyGridEndLngMin = -180;
+export const assessMarsRouteBodyGridEndLngMax = 180;
+
+export const assessMarsRouteBodyGridRowsMax = 80;
+
+export const assessMarsRouteBodyGridColumnsMax = 80;
+
+
+
 export const AssessMarsRouteBody = zod.object({
   "algorithm": zod.enum(['bfs', 'dijkstra', 'astar']),
+  "grid": zod.object({
+  "startLat": zod.number().min(assessMarsRouteBodyGridStartLatMin).max(assessMarsRouteBodyGridStartLatMax),
+  "endLat": zod.number().min(assessMarsRouteBodyGridEndLatMin).max(assessMarsRouteBodyGridEndLatMax),
+  "startLng": zod.number().min(assessMarsRouteBodyGridStartLngMin).max(assessMarsRouteBodyGridStartLngMax),
+  "endLng": zod.number().min(assessMarsRouteBodyGridEndLngMin).max(assessMarsRouteBodyGridEndLngMax),
+  "rows": zod.number().int().min(1).max(assessMarsRouteBodyGridRowsMax),
+  "columns": zod.number().int().min(1).max(assessMarsRouteBodyGridColumnsMax)
+}),
   "startLat": zod.number(),
   "startLng": zod.number(),
   "endLat": zod.number(),
@@ -135,7 +236,52 @@ export const AssessMarsRouteBody = zod.object({
 export const AssessMarsRouteResponse = zod.object({
   "available": zod.boolean(),
   "reason": zod.string(),
-  "missingMeasurements": zod.array(zod.string())
+  "missingMeasurements": zod.array(zod.string()),
+  "path": zod.array(zod.object({
+  "row": zod.number().int(),
+  "col": zod.number().int(),
+  "centerLat": zod.number(),
+  "centerLng": zod.number(),
+  "width": zod.number(),
+  "height": zod.number(),
+  "safetyStatus": zod.string(),
+  "assessment": zod.object({
+  "modelVersion": zod.string(),
+  "riskScore": zod.number(),
+  "modelSafetyScore": zod.number(),
+  "movementCost": zod.number(),
+  "geologyCovered": zod.boolean(),
+  "status": zod.string(),
+  "factors": zod.array(zod.object({
+  "id": zod.string(),
+  "name": zod.string(),
+  "weight": zod.number(),
+  "rawScore": zod.number(),
+  "contribution": zod.number(),
+  "basis": zod.string()
+})),
+  "evidence": zod.array(zod.object({
+  "filename": zod.string(),
+  "layer": zod.string(),
+  "featureId": zod.number().int(),
+  "value": zod.string()
+})),
+  "unknowns": zod.array(zod.string()),
+  "warning": zod.string()
+}),
+  "blocked": zod.boolean().nullable(),
+  "df": zod.number().nullable(),
+  "safetyScore": zod.number().nullable(),
+  "units": zod.array(zod.string())
+})),
+  "totalCost": zod.number(),
+  "avgSafetyScore": zod.number(),
+  "minSafetyScore": zod.number(),
+  "distanceKm": zod.number(),
+  "modelVersion": zod.string(),
+  "scientificallyValidated": zod.boolean(),
+  "accumulatedRisk": zod.number(),
+  "warning": zod.string()
 })
 
 

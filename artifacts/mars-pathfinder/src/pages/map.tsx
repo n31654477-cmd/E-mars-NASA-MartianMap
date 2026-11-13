@@ -9,6 +9,8 @@ import GeoJSON from 'ol/format/GeoJSON';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import Polygon from 'ol/geom/Polygon';
+import LineString from 'ol/geom/LineString';
+import { RiskBreakdown } from '@/components/risk-breakdown';
 import { Style, Fill, Stroke, Circle as CircleStyle, Text } from 'ol/style';
 import type { FeatureLike } from 'ol/Feature';
 import {
@@ -56,6 +58,7 @@ export default function MapPage() {
   const hillRef = useRef<ImageLayer<Static> | null>(null);
   const markSrc = useRef(new VectorSource());
   const gridSrc = useRef(new VectorSource());
+  const routeSrc = useRef(new VectorSource());
 
   const [visible, setVisible] = useState<Record<string, boolean>>({ 'layer-02': true, 'layer-03': true, 'layer-04': true, 'layer-05': true, hill: true, grid: true });
   const [mode, setMode] = useState<Mode>('inspect');
@@ -72,6 +75,18 @@ export default function MapPage() {
   const inspect = useInspectMarsLocation(params, { query: { enabled: !!probe, queryKey: getInspectMarsLocationQueryKey(params) } });
   const grid = useGenerateMarsGrid();
   const route = useAssessMarsRoute();
+  const routeMatches = !!route.variables && route.variables.data.startLat === start?.lat && route.variables.data.startLng === start?.lng
+    && route.variables.data.endLat === end?.lat && route.variables.data.endLng === end?.lng && route.variables.data.algorithm === routeAlg
+    && JSON.stringify(route.variables.data.grid) === JSON.stringify(grid.data?.bounds);
+  const routeResult = routeMatches ? route.data : undefined;
+  const selectedCell = useMemo(() => {
+    if (!probe || !grid.data) return undefined;
+    const b=grid.data.bounds;
+    if(probe.lat<b.startLat||probe.lat>b.endLat||probe.lng<b.startLng||probe.lng>b.endLng)return undefined;
+    const row=Math.min(b.rows-1,Math.floor((probe.lat-b.startLat)/(b.endLat-b.startLat)*b.rows));
+    const col=Math.min(b.columns-1,Math.floor((probe.lng-b.startLng)/(b.endLng-b.startLng)*b.columns));
+    return grid.data.cells.find(c=>c.row===row&&c.col===col);
+  },[probe,grid.data]);
 
   // Build map once
   useEffect(() => {
@@ -86,7 +101,7 @@ export default function MapPage() {
     const order: LayerId[] = ['layer-03', 'layer-02', 'layer-05', 'layer-04'];
     order.forEach((id) => { vec.current[id] = new VectorLayer({ source: new VectorSource(), style: styles[id], opacity: id === 'layer-03' ? 0.75 : 1 }); });
     vec.current.grid = new VectorLayer({ source: gridSrc.current, style: (f) => new Style({
-      fill: new Fill({ color: f.get('known') ? 'rgba(95,143,154,.25)' : 'rgba(80,80,90,.10)' }),
+      fill: new Fill({ color: `hsla(${45-(f.get('risk') ?? 100)*.45},85%,45%,.38)` }),
       stroke: new Stroke({ color: 'rgba(31,38,51,.35)', width: 0.5, lineDash: f.get('known') ? undefined : [2, 2] }),
     }) });
     const marks = new VectorLayer({ source: markSrc.current, style: (f) => new Style({
@@ -94,7 +109,8 @@ export default function MapPage() {
     }) });
     const map = new OLMap({
       target: mapEl.current,
-      layers: [hill, ...order.map((id) => vec.current[id]), vec.current.grid, marks],
+      layers: [hill, ...order.map((id) => vec.current[id]), vec.current.grid,
+        new VectorLayer({source:routeSrc.current,style:new Style({stroke:new Stroke({color:'#006e91',width:4})})}), marks],
       view: new View({ projection: proj, center: [0, 0], zoom: 2, extent: MARS_EXTENT, showFullExtent: true, constrainOnlyCenter: true }),
       controls: [],
     });
@@ -140,9 +156,16 @@ export default function MapPage() {
     grid.data?.cells.forEach((c) => {
       const w = c.width / 2, h = c.height / 2;
       const f = new Feature(new Polygon([[[c.centerLng - w, c.centerLat - h], [c.centerLng + w, c.centerLat - h], [c.centerLng + w, c.centerLat + h], [c.centerLng - w, c.centerLat + h], [c.centerLng - w, c.centerLat - h]]]));
-      f.set('known', c.safetyScore !== null); gridSrc.current.addFeature(f);
+      f.set('known', c.assessment.geologyCovered); f.set('risk',c.assessment.riskScore); gridSrc.current.addFeature(f);
     });
   }, [grid.data]);
+  useEffect(()=>{
+    routeSrc.current.clear();
+    if(routeResult?.path.length) {
+      const points=routeResult.path.map(c=>[c.centerLng,c.centerLat]);
+      routeSrc.current.addFeature(new Feature(points.length===1?new Point(points[0]):new LineString(points)));
+    }
+  },[routeResult]);
 
   const zoom = (d: number) => { const v = mapRef.current?.getView(); if (v) v.animate({ zoom: (v.getZoom() ?? 2) + d, duration: 200 }); };
   const reset = () => mapRef.current?.getView().fit(MARS_EXTENT, { duration: 300 });
@@ -153,8 +176,8 @@ export default function MapPage() {
     return [...m.entries()].sort();
   }, [f03.data]);
 
-  const missingRoute = [!start && 'start point', !end && 'end point'].filter(Boolean) as string[];
-  const gridValid = gridForm.rows >= 1 && gridForm.rows <= 80 && gridForm.columns >= 1 && gridForm.columns <= 80 && gridForm.startLat >= -90 && gridForm.endLat <= 90 && gridForm.startLng >= -180 && gridForm.endLng <= 180;
+  const missingRoute = [!start && 'start point', !end && 'end point',!grid.data && 'generated risk grid'].filter(Boolean) as string[];
+  const gridValid = Object.values(gridForm).every(Number.isFinite) && Number.isInteger(gridForm.rows) && Number.isInteger(gridForm.columns) && gridForm.rows >= 1 && gridForm.rows <= 80 && gridForm.columns >= 1 && gridForm.columns <= 80 && gridForm.startLat >= -90 && gridForm.endLat <= 90 && gridForm.startLng >= -180 && gridForm.endLng <= 180 && gridForm.startLat<gridForm.endLat && gridForm.startLng<gridForm.endLng;
   const layerMeta = (id: string) => summary.data?.layers.find((l) => l.id === id);
 
   return (
@@ -198,7 +221,11 @@ export default function MapPage() {
           {grid.isError && <div className="mt-2"><ErrorPanel title="Grid failed" error={grid.error} onRetry={() => grid.mutate({ data: gridForm })} /></div>}
           {grid.data && (
             <div className="mt-2 text-xs space-y-1" data-testid="text-grid-result">
-              <p className="font-mono">{grid.data.rows}×{grid.data.columns} · {grid.data.cells.filter((c) => c.safetyScore === null).length} cells with unknown safety</p>
+              <p className="font-mono">{grid.data.rows}×{grid.data.columns} · all cells have unverified physical safety</p>
+              <p>Generated bounds: {grid.data.bounds.startLat}…{grid.data.bounds.endLat}° latitude, {grid.data.bounds.startLng}…{grid.data.bounds.endLng}° longitude.</p>
+              <p>Risk range: {Math.min(...grid.data.cells.map(c=>c.assessment.riskScore)).toFixed(2)}–{Math.max(...grid.data.cells.map(c=>c.assessment.riskScore)).toFixed(2)} / 100.</p>
+              <p>Grid colors: amber = lower model score, red = higher model score; dashed = no midpoint geology. Neither color means safe.</p>
+              <p>Inspect a generated cell to see its factor contributions and source feature IDs.</p>
               <p className="text-muted-foreground">{grid.data.warning}</p>
             </div>)}
         </section>
@@ -234,6 +261,8 @@ export default function MapPage() {
       <aside className="border-l bg-card/60 p-4 space-y-6 overflow-y-auto lg:max-h-[calc(100dvh-57px)]">
         <section>
           <h2 className="font-display text-xl">Location inspection</h2>
+          {selectedCell && <><p className="mt-2 text-xs font-mono">Generated cell [{selectedCell.row}, {selectedCell.col}] · footprint {selectedCell.width}° × {selectedCell.height}°</p><RiskBreakdown risk={selectedCell.assessment} /></>}
+          {probe && !selectedCell && <p className="mt-2 text-xs">Generate a grid covering this location to calculate its cell risk.</p>}
           {!probe && <p className="mt-2 text-sm text-muted-foreground">Click the map in Inspect mode. Every answer cites the source feature it came from.</p>}
           {probe && inspect.isLoading && <div className="mt-3 space-y-2"><Sk className="h-4 w-2/3" /><Sk className="h-24" /></div>}
           {probe && inspect.isError && <div className="mt-3"><ErrorPanel title="Inspection unavailable" error={inspect.error} onRetry={() => inspect.refetch()} /></div>}
@@ -259,7 +288,8 @@ export default function MapPage() {
             </div>)}
         </section>
         <section className="border-t pt-5">
-          <h2 className="font-display text-xl">Route eligibility</h2>
+          <h2 className="font-display text-xl">Experimental model route</h2>
+          <p className="mt-2 text-xs">R = 45T + 35M + 20U. Assumed traversability; not a validated safe route. Generate a grid covering both endpoints first.</p>
           <div className="mt-3 space-y-1.5 text-xs font-mono">
             <p>start: {start ? `${start.lat}°, ${start.lng}°` : <Unknown label="not set" />} {start && <button onClick={() => setStart(null)} className="text-muted-foreground underline" data-testid="button-clear-start">clear</button>}</p>
             <p>end: {end ? `${end.lat}°, ${end.lng}°` : <Unknown label="not set" />} {end && <button onClick={() => setEnd(null)} className="text-muted-foreground underline" data-testid="button-clear-end">clear</button>}</p>
@@ -268,18 +298,27 @@ export default function MapPage() {
             <button key={a} onClick={() => setRouteAlg(a)} data-testid={`button-route-alg-${a}`} className={`px-2.5 py-1 rounded border font-mono text-xs ${routeAlg === a ? 'bg-secondary' : 'hover:bg-muted'}`}>{a}</button>))}</div>
           {missingRoute.length > 0 && <p className="mt-2 text-xs text-muted-foreground">Missing inputs: {missingRoute.join(', ')}. Use Set start / Set end on the map.</p>}
           <button disabled={missingRoute.length > 0 || route.isPending} data-testid="button-assess-route"
-            onClick={() => start && end && route.mutate({ data: { algorithm: routeAlg, startLat: start.lat, startLng: start.lng, endLat: end.lat, endLng: end.lng } })}
+            onClick={() => start && end && grid.data && route.mutate({ data: { algorithm: routeAlg, startLat: start.lat, startLng: start.lng, endLat: end.lat, endLng: end.lng, grid:grid.data.bounds } })}
             className="mt-3 w-full inline-flex justify-center items-center gap-2 rounded-md bg-primary text-primary-foreground py-2 text-sm disabled:opacity-50">
-            <RouteIcon className="h-4 w-4" />{route.isPending ? 'Assessing…' : 'Assess scientific route eligibility'}
+            <RouteIcon className="h-4 w-4" />{route.isPending ? 'Calculating…' : 'Calculate experimental route'}
           </button>
           {route.isError && <div className="mt-2"><ErrorPanel title="Assessment failed" error={route.error} onRetry={() => route.reset()} /></div>}
-          {route.data && (
+          {routeResult && (
             <div className="rise mt-3 rounded-md border-2 border-dashed p-3 text-sm" data-testid="panel-route-status">
-              <p className="font-medium">{route.data.available ? 'Routing available' : 'Routing unavailable'}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{route.data.reason}</p>
-              <div className="mt-2 flex flex-wrap gap-1">{route.data.missingMeasurements.map((m) => <Unknown key={m} label={`${m}: missing`} />)}</div>
+              <p className="font-medium">{routeResult.available ? 'Experimental route calculated' : 'No model route found'}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{routeResult.reason}</p>
+              {routeResult.available && <dl className="mt-3 text-xs space-y-1">
+                <div>Path cells: {routeResult.path.length} · Moves: {Math.max(0,routeResult.path.length-1)}</div>
+                <div>Center-to-center distance: {routeResult.distanceKm.toFixed(2)} km</div>
+                <div>Accumulated DF: {routeResult.totalCost.toFixed(4)}</div>
+                <div>Entered-cell risk sum: {routeResult.accumulatedRisk.toFixed(2)} (not a probability)</div>
+                <div>Average / minimum inverse model score: {routeResult.avgSafetyScore.toFixed(2)} / {routeResult.minSafetyScore.toFixed(2)}</div>
+              </dl>}
+              <p className="mt-2 text-xs">{routeResult.warning}</p>
+              <div className="mt-2 flex flex-wrap gap-1">{routeResult.missingMeasurements.map((m) => <Unknown key={m} label={`${m}: missing`} />)}</div>
             </div>)}
-          {summary.data && !summary.data.scientificRoutingAvailable && !route.data && <p className="mt-3 text-xs text-muted-foreground">{summary.data.limitation}</p>}
+          <button className="mt-2 text-xs underline" onClick={()=>{route.reset();routeSrc.current.clear();}}>Clear route</button>
+          {summary.data && !routeResult && <p className="mt-3 text-xs text-muted-foreground">{summary.data.limitation}</p>}
         </section>
         {summary.data && (
           <section className="border-t pt-5 text-xs">

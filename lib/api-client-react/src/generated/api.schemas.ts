@@ -9,6 +9,38 @@ export interface HealthStatus {
   status: string;
 }
 
+export interface MarsRiskRule {
+  name: string;
+  score: number;
+  match: string;
+}
+
+export interface MarsRiskDefinition {
+  id: string;
+  name: string;
+  weight: number;
+  rationale: string;
+  rules: MarsRiskRule[];
+}
+
+export interface MarsRiskReference {
+  title: string;
+  url: string;
+  locator: string;
+}
+
+export interface MarsRiskModel {
+  version: string;
+  formula: string;
+  warning: string;
+  calibration: string;
+  spatialPolicy: string;
+  routingPolicy: string;
+  factors: MarsRiskDefinition[];
+  exclusions: string[];
+  references: MarsRiskReference[];
+}
+
 export interface MarsAlgorithm {
   id: string;
   name: string;
@@ -31,6 +63,7 @@ export interface MarsLayer {
 
 export interface MarsSummary {
   title: string;
+  riskModel: MarsRiskModel;
   scientificRoutingAvailable: boolean;
   limitation: string;
   sourceCount: number;
@@ -100,6 +133,35 @@ export interface MarsGridInput {
   columns: number;
 }
 
+export interface MarsRiskFactor {
+  id: string;
+  name: string;
+  weight: number;
+  rawScore: number;
+  contribution: number;
+  basis: string;
+}
+
+export interface MarsRiskEvidence {
+  filename: string;
+  layer: string;
+  featureId: number;
+  value: string;
+}
+
+export interface MarsRiskAssessment {
+  modelVersion: string;
+  riskScore: number;
+  modelSafetyScore: number;
+  movementCost: number;
+  geologyCovered: boolean;
+  status: string;
+  factors: MarsRiskFactor[];
+  evidence: MarsRiskEvidence[];
+  unknowns: string[];
+  warning: string;
+}
+
 export interface MarsScientificCell {
   row: number;
   col: number;
@@ -108,6 +170,7 @@ export interface MarsScientificCell {
   width: number;
   height: number;
   safetyStatus: string;
+  assessment: MarsRiskAssessment;
   /** @nullable */
   blocked: boolean | null;
   /** @nullable */
@@ -121,6 +184,7 @@ export interface MarsGrid {
   rows: number;
   columns: number;
   warning: string;
+  bounds: MarsGridInput;
   cells: MarsScientificCell[];
 }
 
@@ -135,6 +199,7 @@ export const MarsRouteInputAlgorithm = {
 
 export interface MarsRouteInput {
   algorithm: MarsRouteInputAlgorithm;
+  grid: MarsGridInput;
   startLat: number;
   startLng: number;
   endLat: number;
@@ -145,6 +210,15 @@ export interface MarsRoutingStatus {
   available: boolean;
   reason: string;
   missingMeasurements: string[];
+  path: MarsScientificCell[];
+  totalCost: number;
+  avgSafetyScore: number;
+  minSafetyScore: number;
+  distanceKm: number;
+  modelVersion: string;
+  scientificallyValidated: boolean;
+  accumulatedRisk: number;
+  warning: string;
 }
 
 export type MarsLabInputAlgorithm = typeof MarsLabInputAlgorithm[keyof typeof MarsLabInputAlgorithm];

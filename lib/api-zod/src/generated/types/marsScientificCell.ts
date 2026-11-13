@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MarsRiskAssessment } from './marsRiskAssessment';
 
 export interface MarsScientificCell {
   row: number;
@@ -14,6 +15,7 @@ export interface MarsScientificCell {
   width: number;
   height: number;
   safetyStatus: string;
+  assessment: MarsRiskAssessment;
   /** @nullable */
   blocked: boolean | null;
   /** @nullable */
