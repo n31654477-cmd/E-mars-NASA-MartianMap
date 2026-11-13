@@ -1,1 +1,2 @@
 - [Python native XML compatibility](python-native-xml.md) — rasterio and Python XML may load incompatible Nix Expat versions; use a current compatible shared library.
+- [Mars pathfinder requirements](mars-pathfinder-requirements.md) — inspect the supplied prototype and obtain approach review before coding; preserve its exact algorithms.
