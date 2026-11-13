@@ -35,6 +35,8 @@ _Populate as you build — short repo map plus pointers to the source-of-truth f
 - Scientific fidelity takes precedence over combining data: keep each source/version distinct, preserve original values, and cite filenames plus layers or physical PDF pages.
 - Exact fixed-width DBF strings are exported separately from typed JSON to preserve decimal spelling and padding.
 - Do not reproject, join, deduplicate, simplify geometry, or convert units without explicitly explaining the change.
+- Reusable datasets use JSON literals stored as spreadsheet text, not automatic Excel numeric/date cells. This preserves decimal representations, type distinctions, and source strings against Excel's precision limits and coercion. Long cells are explicitly chunked, never truncated.
+- Rebuild document/spreadsheet packages with `research/build_dataset.py`; validate extracted packages using their portable `verify_dataset.py`. Integrity checks do not certify PDF semantic interpretation or scientific correctness.
 
 ## Product
 
