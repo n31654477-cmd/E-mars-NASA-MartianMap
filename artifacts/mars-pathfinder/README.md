@@ -51,3 +51,31 @@ Checks weighted, tied, zero-cost, unreachable and start=destination fixtures, co
 Use the managed `artifacts/mars-pathfinder: web` and `artifacts/mars-pathfinder: Mars API` workflows. The API is served under `/mars-pathfinder/api/`.
 
 The scientific catalog, originals and generated derivatives are local, excluded from Git and deployment. **Not publish-ready**: durable source storage and a production C# service build/run configuration must be completed before publishing. Do not advertise static frontend deployment alone as a functional application.
+
+## Run locally on Windows
+
+The source-code download alone omits the generated map assets. Download `NASA_Pathfinder_Local_Data.zip` from this Repl's Library (or regenerate it with `research/package_mars_local.py`) and extract its contents into the project root; preserve the archive paths. It includes the runtime map derivatives and source catalog needed to run this preview. The 1.1 GB full NASA source archive is optional for running the app; retain it separately if you need the original inputs.
+
+Install Node.js 24, pnpm 10, and the .NET 9 SDK, then in PowerShell at the extracted project root:
+
+```powershell
+pnpm install
+```
+
+Open two PowerShell windows in that directory. In window 1, start the API:
+
+```powershell
+$env:PORT = "18220"
+dotnet run --project artifacts/mars-pathfinder/backend/Mars.Api.csproj
+```
+
+In window 2, start the web app and its local API proxy:
+
+```powershell
+$env:PORT = "18219"
+$env:BASE_PATH = "/mars-pathfinder/"
+$env:LOCAL_API_PROXY = "1"
+pnpm --filter @workspace/mars-pathfinder run dev
+```
+
+Open `http://localhost:18219/mars-pathfinder/`. Keep both windows running. No Python or database is required to run the packaged preview; Python GIS dependencies are only needed to regenerate the map-data archive.

@@ -69,6 +69,9 @@ export default defineConfig({
     strictPort: true,
     host: '0.0.0.0',
     allowedHosts: true,
+    ...(process.env.LOCAL_API_PROXY === '1'
+      ? { proxy: { '/mars-pathfinder/api': { target: 'http://127.0.0.1:18220', changeOrigin: true } } }
+      : {}),
     fs: {
       strict: true,
     },

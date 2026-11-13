@@ -70,3 +70,17 @@ mtime_ms = 1794572610430
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/c86d4bae-9ce9-4e96-a814-7d6812e2ef46/1bc9cfb4-b715-41c3-97e4-5ed6ca4882bf"
 storage_version_token = "1794572766513260"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "J2mTycUOxMWkcqAKTQhHh"
+uri = "file://generated-artifacts/NASA_Pathfinder_Local_Data.zip"
+type = "unspecified"
+title = "Mars Pathfinder — local runtime data"
+description = "82 MB ZIP with the generated Mars map features, exact-query geometry, hillshade and source catalog. Extract this into the root of the Replit source ZIP for the Windows local run instructions in artifacts/mars-pathfinder/README.md."
+logical_id = "c9d4c697-c429-4d27-bab2-41d0f4f1b583"
+content_hash = "sha256:e57a71106dafa7ac2f22396e2b048720659da5a453c423dd8281ee5807dfc351"
+size = 82248365
+mtime_ms = 1794580796781
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/c9d4c697-c429-4d27-bab2-41d0f4f1b583/f0a2c5b8-c401-4a09-8e96-7a23f2a40d5d"
+storage_version_token = "1794580836718204"
+content_type = "application/octet-stream"
