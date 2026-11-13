@@ -1,0 +1,1042 @@
+[
+  {
+    "name": "SIM3292_Global_Structure.shx",
+    "bytes": 28844,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_README.txt",
+    "bytes": 5687,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_metadata.xml",
+    "bytes": 15025,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_metadata.txt",
+    "bytes": 14450,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_MarsGlobalGeologicGIS_20M_ArcMap10.mxd",
+    "bytes": 940544,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_MarsGlobalGeologicGIS_20M_ArcMap10.1.mxd",
+    "bytes": 1644544,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Structure.sbx",
+    "bytes": 3108,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Structure.shp.xml",
+    "bytes": 51079,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Structure.prj",
+    "bytes": 176,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Landing_sites.shx",
+    "bytes": 172,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Structure.dbf",
+    "bytes": 905726,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Structure.sbn",
+    "bytes": 35908,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Landing_sites.shp.xml",
+    "bytes": 8813,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Landing_sites.shp",
+    "bytes": 676,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Landing_sites.sbx",
+    "bytes": 124,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Landing_sites.sbn",
+    "bytes": 220,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Landing_sites.prj",
+    "bytes": 176,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Landing_sites.dbf",
+    "bytes": 3081,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Geology.shx",
+    "bytes": 10588,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Geology.shp.xml",
+    "bytes": 53319,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Geology.sbx",
+    "bytes": 1612,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Geology.sbn",
+    "bytes": 14124,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Geology.prj",
+    "bytes": 176,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Geology.dbf",
+    "bytes": 156235,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Contacts.shx",
+    "bytes": 30500,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Contacts.shp.xml",
+    "bytes": 34508,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Contacts.sbx",
+    "bytes": 3132,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Contacts.prj",
+    "bytes": 176,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Contacts.sbn",
+    "bytes": 36852,
+    "status": "ok"
+  },
+  {
+    "name": "Noachian.lyr",
+    "bytes": 13824,
+    "status": "ok"
+  },
+  {
+    "name": "landing_sites_oc.lyr",
+    "bytes": 10240,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Contacts.dbf",
+    "bytes": 216762,
+    "status": "ok"
+  },
+  {
+    "name": "Global_Structure.lyr",
+    "bytes": 18944,
+    "status": "ok"
+  },
+  {
+    "name": "Hesperian.lyr",
+    "bytes": 16896,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Structure.shp",
+    "bytes": 11319800,
+    "status": "ok"
+  },
+  {
+    "name": "Global_Geology_Figures.lyr",
+    "bytes": 27648,
+    "status": "ok"
+  },
+  {
+    "name": "Global_Landing_Sites.lyr",
+    "bytes": 10240,
+    "status": "ok"
+  },
+  {
+    "name": "Global_Geology_Units.lyr",
+    "bytes": 23040,
+    "status": "ok"
+  },
+  {
+    "name": "Global_Contact.lyr",
+    "bytes": 8192,
+    "status": "ok"
+  },
+  {
+    "name": "Amazonian.lyr",
+    "bytes": 14848,
+    "status": "ok"
+  },
+  {
+    "name": "timestamps",
+    "bytes": 400,
+    "status": "ok"
+  },
+  {
+    "name": "Global_Geology_Age.lyr",
+    "bytes": 10752,
+    "status": "ok"
+  },
+  {
+    "name": "gdb",
+    "bytes": 4,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002e.Unit.atx",
+    "bytes": 12310,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002e.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002e.gdbtable",
+    "bytes": 2226,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002e.gdbindexes",
+    "bytes": 104,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002e.freelist",
+    "bytes": 4440,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002d.gdbtablx",
+    "bytes": 10272,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002d.spx",
+    "bytes": 24598,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002d.gdbindexes",
+    "bytes": 116,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002c.spx",
+    "bytes": 73750,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002c.gdbtablx",
+    "bytes": 20512,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002d.freelist",
+    "bytes": 4440,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002c.gdbindexes",
+    "bytes": 116,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002c.freelist",
+    "bytes": 4440,
+    "status": "ok"
+  },
+  {
+    "name": "a00000027.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000027.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000027.gdbtable",
+    "bytes": 3553,
+    "status": "ok"
+  },
+  {
+    "name": "a00000027.gdbindexes",
+    "bytes": 116,
+    "status": "ok"
+  },
+  {
+    "name": "a00000025.spx",
+    "bytes": 77846,
+    "status": "ok"
+  },
+  {
+    "name": "a00000025.gdbtablx",
+    "bytes": 20512,
+    "status": "ok"
+  },
+  {
+    "name": "a00000025.gdbindexes",
+    "bytes": 116,
+    "status": "ok"
+  },
+  {
+    "name": "a00000025.freelist",
+    "bytes": 4440,
+    "status": "ok"
+  },
+  {
+    "name": "a00000020.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000020.I36Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000020.I36AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002c.gdbtable",
+    "bytes": 15263020,
+    "status": "ok"
+  },
+  {
+    "name": "a00000020.gdbtable",
+    "bytes": 3437,
+    "status": "ok"
+  },
+  {
+    "name": "a00000020.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000020.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001f.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000025.gdbtable",
+    "bytes": 5746948,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001f.I35AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001f.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001f.I35Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001f.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001f.gdbtable",
+    "bytes": 52316,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001e.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001e.I34Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001e.I34AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001e.gdbtable",
+    "bytes": 16286,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001e.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000002d.gdbtable",
+    "bytes": 30178788,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001e.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001e.freelist",
+    "bytes": 4440,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001d.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001d.I32Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001d.I32AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001d.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001d.gdbtable",
+    "bytes": 2853,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001c.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001d.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001c.I31Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001c.I31AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001c.gdbtable",
+    "bytes": 21536,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001c.gdbtablx",
+    "bytes": 10272,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001c.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001b.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001b.I30Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001b.I30AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001b.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001b.gdbtable",
+    "bytes": 18937,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001a.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001b.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001a.I28Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001a.I28AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001a.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001a.gdbtable",
+    "bytes": 106818,
+    "status": "ok"
+  },
+  {
+    "name": "a0000001a.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a00000019.I27Status.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000019.I27AnnotationCla.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000019.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000019.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000019.gdbindexes",
+    "bytes": 256,
+    "status": "ok"
+  },
+  {
+    "name": "a00000019.gdbtable",
+    "bytes": 106818,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000f.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000f.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000f.gdbtable",
+    "bytes": 2539,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000e.spx",
+    "bytes": 20502,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000f.gdbindexes",
+    "bytes": 116,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000e.gdbtablx",
+    "bytes": 10272,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000e.gdbtable",
+    "bytes": 36010,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000b.Status_Index_10.atx",
+    "bytes": 16406,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000b.gdbtablx",
+    "bytes": 10272,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000e.gdbindexes",
+    "bytes": 116,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000b.gdbtable",
+    "bytes": 596716,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000b.spx",
+    "bytes": 45078,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000b.gdbindexes",
+    "bytes": 276,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000a.Status_Index_9.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000b.AnnoClassID_Index_10.atx",
+    "bytes": 20502,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000a.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000a.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000a.gdbtable",
+    "bytes": 122038,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000a.freelist",
+    "bytes": 29016,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000a.AnnoClassID_Index_9.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a0000000a.gdbindexes",
+    "bytes": 272,
+    "status": "ok"
+  },
+  {
+    "name": "a00000009.spx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000009.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000009.Status_Index_8.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000009.gdbtable",
+    "bytes": 18055,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Contacts.shp",
+    "bytes": 32122912,
+    "status": "ok"
+  },
+  {
+    "name": "a00000009.gdbindexes",
+    "bytes": 272,
+    "status": "ok"
+  },
+  {
+    "name": "a00000009.AnnoClassID_Index_8.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.gdbtable",
+    "bytes": 2504,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.gdbindexes",
+    "bytes": 602,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.CatRelTypesByForwardLabel.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.CatRelTypesByName.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.CatRelTypesByOriginItemTypeID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.CatRelTypesByDestItemTypeID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.CatRelTypesByUUID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000007.CatRelTypesByBackwardLabel.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.gdbtable",
+    "bytes": 5811,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.gdbindexes",
+    "bytes": 318,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.FDO_UUID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.CatRelsByType.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.freelist",
+    "bytes": 4440,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.CatRelsByDestinationID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000006.CatRelsByOriginID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000005.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000005.gdbtable",
+    "bytes": 1803,
+    "status": "ok"
+  },
+  {
+    "name": "a00000005.gdbindexes",
+    "bytes": 296,
+    "status": "ok"
+  },
+  {
+    "name": "a00000005.CatItemTypesByUUID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000005.CatItemTypesByParentTypeID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.gdbindexes",
+    "bytes": 310,
+    "status": "ok"
+  },
+  {
+    "name": "a00000005.CatItemTypesByName.atx",
+    "bytes": 12310,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.spx",
+    "bytes": 151574,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.FDO_UUID.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.gdbtable",
+    "bytes": 2694714,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.freelist",
+    "bytes": 78168,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.CatItemsByType.atx",
+    "bytes": 4118,
+    "status": "ok"
+  },
+  {
+    "name": "a00000003.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000004.CatItemsByPhysicalName.atx",
+    "bytes": 12310,
+    "status": "ok"
+  },
+  {
+    "name": "a00000003.gdbtable",
+    "bytes": 2920,
+    "status": "ok"
+  },
+  {
+    "name": "a00000003.gdbindexes",
+    "bytes": 42,
+    "status": "ok"
+  },
+  {
+    "name": "a00000002.gdbtable",
+    "bytes": 2055,
+    "status": "ok"
+  },
+  {
+    "name": "a00000001.TablesByName.atx",
+    "bytes": 12310,
+    "status": "ok"
+  },
+  {
+    "name": "a00000002.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000001.gdbtablx",
+    "bytes": 5152,
+    "status": "ok"
+  },
+  {
+    "name": "a00000001.gdbtable",
+    "bytes": 1387,
+    "status": "ok"
+  },
+  {
+    "name": "a00000001.freelist",
+    "bytes": 12632,
+    "status": "ok"
+  },
+  {
+    "name": "a00000001.gdbindexes",
+    "bytes": 110,
+    "status": "ok"
+  },
+  {
+    "name": "MOLA_Hillshade_Robinson_128ppd.tif.aux.xml",
+    "bytes": 2381,
+    "status": "ok"
+  },
+  {
+    "name": "MOLA_Hillshade_Robinson_128ppd.tfw",
+    "bytes": 96,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_s_128.jgw",
+    "bytes": 126,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_s_128.jpg",
+    "bytes": 14407308,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_s_128.aux",
+    "bytes": 365840,
+    "status": "ok"
+  },
+  {
+    "name": "SIM3292_Global_Geology.shp",
+    "bytes": 63803656,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_n_128.jpg.aux.xml",
+    "bytes": 2187,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_n_128.jgw",
+    "bytes": 126,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_n_128.jpg",
+    "bytes": 9768753,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_n_128.aux",
+    "bytes": 366307,
+    "status": "ok"
+  },
+  {
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater_arcMap10.1.mxd",
+    "bytes": 791552,
+    "status": "ok"
+  },
+  {
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.shx",
+    "bytes": 276,
+    "status": "ok"
+  },
+  {
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.shp.xml",
+    "bytes": 15798,
+    "status": "ok"
+  },
+  {
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.shp",
+    "bytes": 583800,
+    "status": "ok"
+  },
+  {
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.prj",
+    "bytes": 169,
+    "status": "ok"
+  },
+  {
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.dbf",
+    "bytes": 12678,
+    "status": "ok"
+  },
+  {
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.pdf",
+    "bytes": 1130476,
+    "status": "ok"
+  },
+  {
+    "name": "sim3292_pamphlet.pdf",
+    "bytes": 3415492,
+    "status": "ok"
+  },
+  {
+    "name": "MOLA_Hillshade_Robinson_128ppd.tif.ovr",
+    "bytes": 161587870,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_n_128.rrd",
+    "bytes": 35044370,
+    "status": "ok"
+  },
+  {
+    "name": "hillshade_s_128.rrd",
+    "bytes": 35043903,
+    "status": "ok"
+  },
+  {
+    "name": "sim3292_map.pdf",
+    "bytes": 36137826,
+    "status": "ok"
+  },
+  {
+    "name": "MOLA_Hillshade_Robinson_128ppd.tif",
+    "bytes": 772835624,
+    "status": "ok"
+  }
+]

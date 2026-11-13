@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "NASA · Mars Source Explorer"
+description = "A source-preserving research explorer for the NASA Drive folder, SIM3292 GIS layers and PDFs, with file inventories, layer records, CRS, units, page citations and explicit ambiguity notes."
+version = "1.0.0"
+id = "artifacts/nasa-data-explorer"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22480
+
+[services.development]
+run = "pnpm --filter @workspace/nasa-data-explorer run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nasa-data-explorer", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/nasa-data-explorer/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22480"
+BASE_PATH = "/"

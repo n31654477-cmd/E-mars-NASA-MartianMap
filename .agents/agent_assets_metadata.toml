@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "JhWrwbR9UsKphVTRyukgt"
+uri = "file://generated-artifacts/NASA-SIM3292-extraction-report.html"
+type = "html"
+title = "SIM3292 — Source-cited extraction report"
+description = "Complete file inventory, per-layer CRS and units, schemas, raster metadata, all 50 PDF text pages, and explicit limitations. No datasets reprojected or combined."
+logical_id = "2785e6ed-a84b-4d5c-9f30-9c907b3a1b34"
+content_hash = "sha256:c738f0dd7c7c136094f491af7126975e071753ab13a96479f792963ed92f8ff8"
+size = 721050
+mtime_ms = 1794572021291
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/2785e6ed-a84b-4d5c-9f30-9c907b3a1b34/f354c2a9-a7cc-42d5-b61b-fac723775d71"
+storage_version_token = "1794572119390978"
+content_type = "text/html"

@@ -1,8 +1,13 @@
-# [Project name]
+# Mars Source Explorer
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A source-preserving research explorer for the NASA Drive folder containing USGS SIM3292 Mars GIS data and PDFs.
 
 ## Run & Operate
+
+- Web preview: managed workflow `artifacts/nasa-data-explorer: web`.
+- Extraction: `research/extract_nasa.py`; final report and bundles: `research/finalize_nasa.py`.
+- Large raw files, generated archives, and web data are excluded from Git/deployments. App Storage provisioning failed; configure durable storage before publishing.
+- Extraction requires the Python GIS/PDF packages declared in `pyproject.toml` and an Expat shared library compatible with Python. See agent memory for the native-library caveat.
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
 - `pnpm run typecheck` — full typecheck across all packages
@@ -26,7 +31,10 @@ _Populate as you build — short repo map plus pointers to the source-of-truth f
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- This explorer is a static extraction snapshot, not a live Drive synchronization app. It does not need a database.
+- Scientific fidelity takes precedence over combining data: keep each source/version distinct, preserve original values, and cite filenames plus layers or physical PDF pages.
+- Exact fixed-width DBF strings are exported separately from typed JSON to preserve decimal spelling and padding.
+- Do not reproject, join, deduplicate, simplify geometry, or convert units without explicitly explaining the change.
 
 ## Product
 

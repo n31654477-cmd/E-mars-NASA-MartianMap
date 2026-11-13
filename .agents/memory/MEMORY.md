@@ -1,0 +1,1 @@
+- [Python native XML compatibility](python-native-xml.md) — rasterio and Python XML may load incompatible Nix Expat versions; use a current compatible shared library.

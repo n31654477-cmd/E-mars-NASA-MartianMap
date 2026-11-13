@@ -1,0 +1,1721 @@
+[
+  {
+    "id": "1n_QZbqExkiG6_Y4tqv9eI5hFlerJXXec",
+    "mimeType": "application/pdf",
+    "name": "sim3292_pamphlet.pdf",
+    "parents": [
+      "1_YTdDoegkGlp1WNHcIaHYWgwGUJmchQv"
+    ],
+    "size": "3415492",
+    "webViewLink": "https://drive.google.com/file/d/1n_QZbqExkiG6_Y4tqv9eI5hFlerJXXec/view?usp=drivesdk"
+  },
+  {
+    "id": "14hgqK9h9ruzVJGqKe15f4Sm-35ZKmHJ-",
+    "mimeType": "application/pdf",
+    "name": "sim3292_map.pdf",
+    "parents": [
+      "1_YTdDoegkGlp1WNHcIaHYWgwGUJmchQv"
+    ],
+    "size": "36137826",
+    "webViewLink": "https://drive.google.com/file/d/14hgqK9h9ruzVJGqKe15f4Sm-35ZKmHJ-/view?usp=drivesdk"
+  },
+  {
+    "id": "18QMq8sBbt4X2kyXKUb0iQ_YAv2qcxLt1",
+    "mimeType": "application/vnd.google-apps.folder",
+    "name": "sim3292_database",
+    "parents": [
+      "1_YTdDoegkGlp1WNHcIaHYWgwGUJmchQv"
+    ],
+    "webViewLink": "https://drive.google.com/drive/folders/18QMq8sBbt4X2kyXKUb0iQ_YAv2qcxLt1"
+  },
+  {
+    "id": "1DKE7gSFF1-Qe-5ozdyjm5WG196Audf57",
+    "mimeType": "application/vnd.google-apps.folder",
+    "name": "SIM3292_MarsGlobalGeologicGIS_20M",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M",
+    "webViewLink": "https://drive.google.com/drive/folders/1DKE7gSFF1-Qe-5ozdyjm5WG196Audf57"
+  },
+  {
+    "id": "1jdUU7tWmPlvgax1-HTfqO9vnNTYVItgL",
+    "mimeType": "application/vnd.google-apps.folder",
+    "name": "SIM3292_Shapefiles",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles",
+    "webViewLink": "https://drive.google.com/drive/folders/1jdUU7tWmPlvgax1-HTfqO9vnNTYVItgL"
+  },
+  {
+    "id": "1t15SHB0ygMijiXjmlHWMqMYSKt4j6umg",
+    "mimeType": "application/vnd.google-apps.folder",
+    "name": "SIM3292_LayerSymbols",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols",
+    "webViewLink": "https://drive.google.com/drive/folders/1t15SHB0ygMijiXjmlHWMqMYSKt4j6umg"
+  },
+  {
+    "id": "1OUeKxs-QF_hG9zk1UCwAM697rkPw1Dqm",
+    "mimeType": "application/vnd.google-apps.folder",
+    "name": "SIM3292_geodatabase.gdb",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb",
+    "webViewLink": "https://drive.google.com/drive/folders/1OUeKxs-QF_hG9zk1UCwAM697rkPw1Dqm"
+  },
+  {
+    "id": "1HSSB6fxdBx30GRYzD_FJ46NTPszH3r5A",
+    "mimeType": "application/vnd.google-apps.folder",
+    "name": "Basemaps",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps",
+    "webViewLink": "https://drive.google.com/drive/folders/1HSSB6fxdBx30GRYzD_FJ46NTPszH3r5A"
+  },
+  {
+    "id": "1CDLS9UDO5I6FS2HiL4zDJkpy_73gDKI0",
+    "mimeType": "application/vnd.google-apps.folder",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater",
+    "webViewLink": "https://drive.google.com/drive/folders/1CDLS9UDO5I6FS2HiL4zDJkpy_73gDKI0"
+  },
+  {
+    "id": "1Bba8rnLX0XH2RbziNyALEfZwUyt3y3YA",
+    "mimeType": "text/plain",
+    "name": "SIM3292_README.txt",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_README.txt",
+    "size": "5687",
+    "webViewLink": "https://drive.google.com/file/d/1Bba8rnLX0XH2RbziNyALEfZwUyt3y3YA/view?usp=drivesdk"
+  },
+  {
+    "id": "1bU1eFatkui3D6GB0fKpOR8UXzv-gna-e",
+    "mimeType": "text/xml",
+    "name": "SIM3292_metadata.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_metadata.xml",
+    "size": "15025",
+    "webViewLink": "https://drive.google.com/file/d/1bU1eFatkui3D6GB0fKpOR8UXzv-gna-e/view?usp=drivesdk"
+  },
+  {
+    "id": "1nK6koTIoWdbOW2IKfKiKWqp3zmQ8kd7h",
+    "mimeType": "text/plain",
+    "name": "SIM3292_metadata.txt",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_metadata.txt",
+    "size": "14450",
+    "webViewLink": "https://drive.google.com/file/d/1nK6koTIoWdbOW2IKfKiKWqp3zmQ8kd7h/view?usp=drivesdk"
+  },
+  {
+    "id": "15XFExLI1LbBMF2DgOet-Ltsbqe6T1bb0",
+    "mimeType": "application/msword",
+    "name": "SIM3292_MarsGlobalGeologicGIS_20M_ArcMap10.mxd",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_MarsGlobalGeologicGIS_20M_ArcMap10.mxd",
+    "size": "940544",
+    "webViewLink": "https://docs.google.com/document/d/15XFExLI1LbBMF2DgOet-Ltsbqe6T1bb0/edit?usp=drivesdk&ouid=115449543915782521449&rtpof=true&sd=true"
+  },
+  {
+    "id": "1gU5sRrWkZJSIrsoNoRfxUPmZtyWleQgT",
+    "mimeType": "application/msword",
+    "name": "SIM3292_MarsGlobalGeologicGIS_20M_ArcMap10.1.mxd",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_MarsGlobalGeologicGIS_20M_ArcMap10.1.mxd",
+    "size": "1644544",
+    "webViewLink": "https://docs.google.com/document/d/1gU5sRrWkZJSIrsoNoRfxUPmZtyWleQgT/edit?usp=drivesdk&ouid=115449543915782521449&rtpof=true&sd=true"
+  },
+  {
+    "id": "1Cjxqb-IKASDpO0wzgKYOwJNoY8x6Iq6l",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Structure.shx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Structure.shx",
+    "size": "28844",
+    "webViewLink": "https://drive.google.com/file/d/1Cjxqb-IKASDpO0wzgKYOwJNoY8x6Iq6l/view?usp=drivesdk"
+  },
+  {
+    "id": "16687yrsx05YshPXfDidk6aCNL5Kaz1DC",
+    "mimeType": "text/xml",
+    "name": "SIM3292_Global_Structure.shp.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Structure.shp.xml",
+    "size": "51079",
+    "webViewLink": "https://drive.google.com/file/d/16687yrsx05YshPXfDidk6aCNL5Kaz1DC/view?usp=drivesdk"
+  },
+  {
+    "id": "1lY3wv0OcfErDKTgP4FAZFyafkm8nYUf9",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Structure.shp",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Structure.shp",
+    "size": "11319800",
+    "webViewLink": "https://drive.google.com/file/d/1lY3wv0OcfErDKTgP4FAZFyafkm8nYUf9/view?usp=drivesdk"
+  },
+  {
+    "id": "1E4PNJrvSQPEcWFUS629MAJcMnj6WAG6V",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Structure.sbx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Structure.sbx",
+    "size": "3108",
+    "webViewLink": "https://drive.google.com/file/d/1E4PNJrvSQPEcWFUS629MAJcMnj6WAG6V/view?usp=drivesdk"
+  },
+  {
+    "id": "1dZ6Gke_GUs-s4CHB6GNE8dWoKyHvN6T4",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Structure.sbn",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Structure.sbn",
+    "size": "35908",
+    "webViewLink": "https://drive.google.com/file/d/1dZ6Gke_GUs-s4CHB6GNE8dWoKyHvN6T4/view?usp=drivesdk"
+  },
+  {
+    "id": "17BANhcKieqwLRUZdEeAgpsjSLQ3z5F7k",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Structure.prj",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Structure.prj",
+    "size": "176",
+    "webViewLink": "https://drive.google.com/file/d/17BANhcKieqwLRUZdEeAgpsjSLQ3z5F7k/view?usp=drivesdk"
+  },
+  {
+    "id": "1kyjw8LnXLJ5jNEmKWppKgjyT_zsnd8S2",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Structure.dbf",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Structure.dbf",
+    "size": "905726",
+    "webViewLink": "https://drive.google.com/file/d/1kyjw8LnXLJ5jNEmKWppKgjyT_zsnd8S2/view?usp=drivesdk"
+  },
+  {
+    "id": "1ifgR1r3w0w9ibtut11JtJnOQQ4i8XMoe",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Landing_sites.shx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Landing_sites.shx",
+    "size": "172",
+    "webViewLink": "https://drive.google.com/file/d/1ifgR1r3w0w9ibtut11JtJnOQQ4i8XMoe/view?usp=drivesdk"
+  },
+  {
+    "id": "1yMZc55nMWK4E56EADLpk1Pl3bHo-tzdu",
+    "mimeType": "text/xml",
+    "name": "SIM3292_Global_Landing_sites.shp.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Landing_sites.shp.xml",
+    "size": "8813",
+    "webViewLink": "https://drive.google.com/file/d/1yMZc55nMWK4E56EADLpk1Pl3bHo-tzdu/view?usp=drivesdk"
+  },
+  {
+    "id": "1CjcilOJFTOBeOktdibdIpCPx_yDlf4d9",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Landing_sites.shp",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Landing_sites.shp",
+    "size": "676",
+    "webViewLink": "https://drive.google.com/file/d/1CjcilOJFTOBeOktdibdIpCPx_yDlf4d9/view?usp=drivesdk"
+  },
+  {
+    "id": "1VnEcBwRKivN4DXtZdgoRV58XUBNAa4Oq",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Landing_sites.sbx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Landing_sites.sbx",
+    "size": "124",
+    "webViewLink": "https://drive.google.com/file/d/1VnEcBwRKivN4DXtZdgoRV58XUBNAa4Oq/view?usp=drivesdk"
+  },
+  {
+    "id": "1iYunLbOHHqp3FLdgt9nKV668xUV8AQAS",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Landing_sites.sbn",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Landing_sites.sbn",
+    "size": "220",
+    "webViewLink": "https://drive.google.com/file/d/1iYunLbOHHqp3FLdgt9nKV668xUV8AQAS/view?usp=drivesdk"
+  },
+  {
+    "id": "1BR-abVMhz8IpyEGgaQdFk2C4toPPQDZD",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Landing_sites.prj",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Landing_sites.prj",
+    "size": "176",
+    "webViewLink": "https://drive.google.com/file/d/1BR-abVMhz8IpyEGgaQdFk2C4toPPQDZD/view?usp=drivesdk"
+  },
+  {
+    "id": "1HzMHCpHafqLoY0CgZ945A3f5Mnf-EB0O",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Landing_sites.dbf",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Landing_sites.dbf",
+    "size": "3081",
+    "webViewLink": "https://drive.google.com/file/d/1HzMHCpHafqLoY0CgZ945A3f5Mnf-EB0O/view?usp=drivesdk"
+  },
+  {
+    "id": "1WX6LUsPJLM73lMw_M3LT2OuvewFPbuan",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Geology.shx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.shx",
+    "size": "10588",
+    "webViewLink": "https://drive.google.com/file/d/1WX6LUsPJLM73lMw_M3LT2OuvewFPbuan/view?usp=drivesdk"
+  },
+  {
+    "id": "1iY-e7cODkqdC9tROd7oBaurD_SQGBcAu",
+    "mimeType": "text/xml",
+    "name": "SIM3292_Global_Geology.shp.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.shp.xml",
+    "size": "53319",
+    "webViewLink": "https://drive.google.com/file/d/1iY-e7cODkqdC9tROd7oBaurD_SQGBcAu/view?usp=drivesdk"
+  },
+  {
+    "id": "1o0QToGmk8l5sdzc2eRibkV9XsJjUkvRW",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Geology.shp",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.shp",
+    "size": "63803656",
+    "webViewLink": "https://drive.google.com/file/d/1o0QToGmk8l5sdzc2eRibkV9XsJjUkvRW/view?usp=drivesdk"
+  },
+  {
+    "id": "1m4RerY1OcJ5S85kBS4NaxqimjTdVpvdP",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Geology.sbx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.sbx",
+    "size": "1612",
+    "webViewLink": "https://drive.google.com/file/d/1m4RerY1OcJ5S85kBS4NaxqimjTdVpvdP/view?usp=drivesdk"
+  },
+  {
+    "id": "1twiXjyfTVNec0lbNtCrFzITQrTruHZE9",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Geology.sbn",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.sbn",
+    "size": "14124",
+    "webViewLink": "https://drive.google.com/file/d/1twiXjyfTVNec0lbNtCrFzITQrTruHZE9/view?usp=drivesdk"
+  },
+  {
+    "id": "1MS8Z-7N-nBqOHPzIeArnB87hLYBSecZ4",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Geology.prj",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.prj",
+    "size": "176",
+    "webViewLink": "https://drive.google.com/file/d/1MS8Z-7N-nBqOHPzIeArnB87hLYBSecZ4/view?usp=drivesdk"
+  },
+  {
+    "id": "1JaiqkowqoslsWMwNNfubzwROTNEcWjgE",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Geology.dbf",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.dbf",
+    "size": "156235",
+    "webViewLink": "https://drive.google.com/file/d/1JaiqkowqoslsWMwNNfubzwROTNEcWjgE/view?usp=drivesdk"
+  },
+  {
+    "id": "1LZ_jxnf9b94HQf-cTfSy3nzrRfztKp9_",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Contacts.shx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Contacts.shx",
+    "size": "30500",
+    "webViewLink": "https://drive.google.com/file/d/1LZ_jxnf9b94HQf-cTfSy3nzrRfztKp9_/view?usp=drivesdk"
+  },
+  {
+    "id": "1c-zU6fzep-UAVm2rLkavgAe8s4su3nPJ",
+    "mimeType": "text/xml",
+    "name": "SIM3292_Global_Contacts.shp.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Contacts.shp.xml",
+    "size": "34508",
+    "webViewLink": "https://drive.google.com/file/d/1c-zU6fzep-UAVm2rLkavgAe8s4su3nPJ/view?usp=drivesdk"
+  },
+  {
+    "id": "16dJBc2fwmBpQ3PnYRe142P_tp50mqJE8",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Contacts.shp",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Contacts.shp",
+    "size": "32122912",
+    "webViewLink": "https://drive.google.com/file/d/16dJBc2fwmBpQ3PnYRe142P_tp50mqJE8/view?usp=drivesdk"
+  },
+  {
+    "id": "1LjS134kQDxx9SKQbwR0TXcxVjOqCdRc0",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Contacts.sbx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Contacts.sbx",
+    "size": "3132",
+    "webViewLink": "https://drive.google.com/file/d/1LjS134kQDxx9SKQbwR0TXcxVjOqCdRc0/view?usp=drivesdk"
+  },
+  {
+    "id": "1DEyujhp4Gu_d3iuEPILIsOWRLBG1ktHe",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Contacts.sbn",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Contacts.sbn",
+    "size": "36852",
+    "webViewLink": "https://drive.google.com/file/d/1DEyujhp4Gu_d3iuEPILIsOWRLBG1ktHe/view?usp=drivesdk"
+  },
+  {
+    "id": "1a9Py74meJRfxVxahIGVsfl1tpzKyIhjp",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Contacts.prj",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Contacts.prj",
+    "size": "176",
+    "webViewLink": "https://drive.google.com/file/d/1a9Py74meJRfxVxahIGVsfl1tpzKyIhjp/view?usp=drivesdk"
+  },
+  {
+    "id": "1QCwKjhxW7A9M3KdyL-XnesN2xp31CPJc",
+    "mimeType": "application/octet-stream",
+    "name": "SIM3292_Global_Contacts.dbf",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Contacts.dbf",
+    "size": "216762",
+    "webViewLink": "https://drive.google.com/file/d/1QCwKjhxW7A9M3KdyL-XnesN2xp31CPJc/view?usp=drivesdk"
+  },
+  {
+    "id": "1-tF3zbdeh5hIHBIPfcpt5pAp9qbERPs3",
+    "mimeType": "application/octet-stream",
+    "name": "Noachian.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Noachian.lyr",
+    "size": "13824",
+    "webViewLink": "https://drive.google.com/file/d/1-tF3zbdeh5hIHBIPfcpt5pAp9qbERPs3/view?usp=drivesdk"
+  },
+  {
+    "id": "1YMomsM6e47zsyZt86N43uIR3EjNH0ZAq",
+    "mimeType": "application/octet-stream",
+    "name": "landing_sites_oc.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/landing_sites_oc.lyr",
+    "size": "10240",
+    "webViewLink": "https://drive.google.com/file/d/1YMomsM6e47zsyZt86N43uIR3EjNH0ZAq/view?usp=drivesdk"
+  },
+  {
+    "id": "12fWd14joIkjBlRqzt-slrgZDJyyjidC6",
+    "mimeType": "application/octet-stream",
+    "name": "Hesperian.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Hesperian.lyr",
+    "size": "16896",
+    "webViewLink": "https://drive.google.com/file/d/12fWd14joIkjBlRqzt-slrgZDJyyjidC6/view?usp=drivesdk"
+  },
+  {
+    "id": "1BliwccwNDNagGRoXuDuIxYIJzDp7OMzg",
+    "mimeType": "application/octet-stream",
+    "name": "Global_Structure.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Global_Structure.lyr",
+    "size": "18944",
+    "webViewLink": "https://drive.google.com/file/d/1BliwccwNDNagGRoXuDuIxYIJzDp7OMzg/view?usp=drivesdk"
+  },
+  {
+    "id": "1dGxgd72HGQXxA0WbFS6lWpRx_E-jJUM9",
+    "mimeType": "application/octet-stream",
+    "name": "Global_Landing_Sites.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Global_Landing_Sites.lyr",
+    "size": "10240",
+    "webViewLink": "https://drive.google.com/file/d/1dGxgd72HGQXxA0WbFS6lWpRx_E-jJUM9/view?usp=drivesdk"
+  },
+  {
+    "id": "1vRYcojThJK13mMIoy1VOKZ5zVT_ZSUps",
+    "mimeType": "application/octet-stream",
+    "name": "Global_Geology_Units.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Global_Geology_Units.lyr",
+    "size": "23040",
+    "webViewLink": "https://drive.google.com/file/d/1vRYcojThJK13mMIoy1VOKZ5zVT_ZSUps/view?usp=drivesdk"
+  },
+  {
+    "id": "1uGvVBTJtfad74BDaOrEcxZAl-wwYofhQ",
+    "mimeType": "application/octet-stream",
+    "name": "Global_Geology_Figures.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Global_Geology_Figures.lyr",
+    "size": "27648",
+    "webViewLink": "https://drive.google.com/file/d/1uGvVBTJtfad74BDaOrEcxZAl-wwYofhQ/view?usp=drivesdk"
+  },
+  {
+    "id": "1HZlakvq3w6KA138SpudiyDVjirCqZqm5",
+    "mimeType": "application/octet-stream",
+    "name": "Global_Geology_Age.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Global_Geology_Age.lyr",
+    "size": "10752",
+    "webViewLink": "https://drive.google.com/file/d/1HZlakvq3w6KA138SpudiyDVjirCqZqm5/view?usp=drivesdk"
+  },
+  {
+    "id": "1T-9ccOOr0tG_lo4qZwUHd5JeRHTEtPGK",
+    "mimeType": "application/octet-stream",
+    "name": "Global_Contact.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Global_Contact.lyr",
+    "size": "8192",
+    "webViewLink": "https://drive.google.com/file/d/1T-9ccOOr0tG_lo4qZwUHd5JeRHTEtPGK/view?usp=drivesdk"
+  },
+  {
+    "id": "1WeDTy8QqN6fgbcIb0OtBnQIHQVcjrD9U",
+    "mimeType": "application/octet-stream",
+    "name": "Amazonian.lyr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_LayerSymbols/Amazonian.lyr",
+    "size": "14848",
+    "webViewLink": "https://drive.google.com/file/d/1WeDTy8QqN6fgbcIb0OtBnQIHQVcjrD9U/view?usp=drivesdk"
+  },
+  {
+    "id": "13au6RtQwG-7B_WGFawXjtnyXy0RxT3KW",
+    "mimeType": "application/octet-stream",
+    "name": "timestamps",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/timestamps",
+    "size": "400",
+    "webViewLink": "https://drive.google.com/file/d/13au6RtQwG-7B_WGFawXjtnyXy0RxT3KW/view?usp=drivesdk"
+  },
+  {
+    "id": "1Ui3Ph5O4LhXInSyk1qt6xHL8OZcKnxUM",
+    "mimeType": "application/octet-stream",
+    "name": "gdb",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/gdb",
+    "size": "4",
+    "webViewLink": "https://drive.google.com/file/d/1Ui3Ph5O4LhXInSyk1qt6xHL8OZcKnxUM/view?usp=drivesdk"
+  },
+  {
+    "id": "10ul9uErphZYgsqAAOw2zDyDXBtYWcmzd",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002e.Unit.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002e.Unit.atx",
+    "size": "12310",
+    "webViewLink": "https://drive.google.com/file/d/10ul9uErphZYgsqAAOw2zDyDXBtYWcmzd/view?usp=drivesdk"
+  },
+  {
+    "id": "1ZXG01HPY7Bj1But3nm-aGms9NQ2UzNUb",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002e.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002e.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1ZXG01HPY7Bj1But3nm-aGms9NQ2UzNUb/view?usp=drivesdk"
+  },
+  {
+    "id": "1Tb3L8NFvFMKL-Q_1z7AvImP0nnC0ZQQq",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002e.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002e.gdbtable",
+    "size": "2226",
+    "webViewLink": "https://drive.google.com/file/d/1Tb3L8NFvFMKL-Q_1z7AvImP0nnC0ZQQq/view?usp=drivesdk"
+  },
+  {
+    "id": "145dIrgcG0E7X9dzIPEafpexrUwTnU97R",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002e.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002e.gdbindexes",
+    "size": "104",
+    "webViewLink": "https://drive.google.com/file/d/145dIrgcG0E7X9dzIPEafpexrUwTnU97R/view?usp=drivesdk"
+  },
+  {
+    "id": "1_ExD95i9zvGBYqdolEy4e91si4ucNs1K",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002e.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002e.freelist",
+    "size": "4440",
+    "webViewLink": "https://drive.google.com/file/d/1_ExD95i9zvGBYqdolEy4e91si4ucNs1K/view?usp=drivesdk"
+  },
+  {
+    "id": "1tTdp9u12gCfaYuunl2R23Zck2-Ncf3U4",
+    "mimeType": "audio/ogg",
+    "name": "a0000002d.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002d.spx",
+    "size": "24598",
+    "webViewLink": "https://drive.google.com/file/d/1tTdp9u12gCfaYuunl2R23Zck2-Ncf3U4/view?usp=drivesdk"
+  },
+  {
+    "id": "1WqNzhW_Zp9twXE8X44AXjzszrEtYBDDG",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002d.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002d.gdbtablx",
+    "size": "10272",
+    "webViewLink": "https://drive.google.com/file/d/1WqNzhW_Zp9twXE8X44AXjzszrEtYBDDG/view?usp=drivesdk"
+  },
+  {
+    "id": "1c5tBYjmR6yIuCGlGk1IoeVveswD1v7cL",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002d.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002d.gdbtable",
+    "size": "30178788",
+    "webViewLink": "https://drive.google.com/file/d/1c5tBYjmR6yIuCGlGk1IoeVveswD1v7cL/view?usp=drivesdk"
+  },
+  {
+    "id": "14qiaql0YBYigpTvaD_bs3Q-lZimeQvHQ",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002d.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002d.gdbindexes",
+    "size": "116",
+    "webViewLink": "https://drive.google.com/file/d/14qiaql0YBYigpTvaD_bs3Q-lZimeQvHQ/view?usp=drivesdk"
+  },
+  {
+    "id": "1JfZObp_m6ae7Sjs10pHUEl2JtInmlEsb",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002d.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002d.freelist",
+    "size": "4440",
+    "webViewLink": "https://drive.google.com/file/d/1JfZObp_m6ae7Sjs10pHUEl2JtInmlEsb/view?usp=drivesdk"
+  },
+  {
+    "id": "16DmN6AMQV1vx-qOjuhIzVYSFcXD5HISK",
+    "mimeType": "audio/ogg",
+    "name": "a0000002c.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002c.spx",
+    "size": "73750",
+    "webViewLink": "https://drive.google.com/file/d/16DmN6AMQV1vx-qOjuhIzVYSFcXD5HISK/view?usp=drivesdk"
+  },
+  {
+    "id": "1tsAnnKSaXeiR4m9A71JAxWMGRXD--nU3",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002c.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002c.gdbtablx",
+    "size": "20512",
+    "webViewLink": "https://drive.google.com/file/d/1tsAnnKSaXeiR4m9A71JAxWMGRXD--nU3/view?usp=drivesdk"
+  },
+  {
+    "id": "1xDFAO8qvftPQkta9f8Xb5pgxRFQ6TAo9",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002c.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002c.gdbtable",
+    "size": "15263020",
+    "webViewLink": "https://drive.google.com/file/d/1xDFAO8qvftPQkta9f8Xb5pgxRFQ6TAo9/view?usp=drivesdk"
+  },
+  {
+    "id": "1li7SgjEq8F4jPnQQpXIePLTubQbNeY9T",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002c.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002c.gdbindexes",
+    "size": "116",
+    "webViewLink": "https://drive.google.com/file/d/1li7SgjEq8F4jPnQQpXIePLTubQbNeY9T/view?usp=drivesdk"
+  },
+  {
+    "id": "1SlnS7-3JTTZrTUPLVBUWLcQcevTDjx5l",
+    "mimeType": "application/octet-stream",
+    "name": "a0000002c.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000002c.freelist",
+    "size": "4440",
+    "webViewLink": "https://drive.google.com/file/d/1SlnS7-3JTTZrTUPLVBUWLcQcevTDjx5l/view?usp=drivesdk"
+  },
+  {
+    "id": "1t2LUxVrZgIR5C7q-dPU24JSZ68pX2lhq",
+    "mimeType": "audio/ogg",
+    "name": "a00000027.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000027.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1t2LUxVrZgIR5C7q-dPU24JSZ68pX2lhq/view?usp=drivesdk"
+  },
+  {
+    "id": "10oVwawlaAYbzFRU7wkV5Lgunnq-Plohx",
+    "mimeType": "application/octet-stream",
+    "name": "a00000027.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000027.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/10oVwawlaAYbzFRU7wkV5Lgunnq-Plohx/view?usp=drivesdk"
+  },
+  {
+    "id": "1-C8A0Pvyr7D1hbceiz8MGV21nBx6HX9j",
+    "mimeType": "application/octet-stream",
+    "name": "a00000027.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000027.gdbtable",
+    "size": "3553",
+    "webViewLink": "https://drive.google.com/file/d/1-C8A0Pvyr7D1hbceiz8MGV21nBx6HX9j/view?usp=drivesdk"
+  },
+  {
+    "id": "1u8qrfRR46qzEHJiK-hFHRCBrLK2NWZaW",
+    "mimeType": "application/octet-stream",
+    "name": "a00000027.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000027.gdbindexes",
+    "size": "116",
+    "webViewLink": "https://drive.google.com/file/d/1u8qrfRR46qzEHJiK-hFHRCBrLK2NWZaW/view?usp=drivesdk"
+  },
+  {
+    "id": "13ZioHCcVIZq8k3gwHRS2VN26uA9OwjoQ",
+    "mimeType": "audio/ogg",
+    "name": "a00000025.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000025.spx",
+    "size": "77846",
+    "webViewLink": "https://drive.google.com/file/d/13ZioHCcVIZq8k3gwHRS2VN26uA9OwjoQ/view?usp=drivesdk"
+  },
+  {
+    "id": "1Zd7bER8qtBIVnjCfc28D-0jb36xUPeCB",
+    "mimeType": "application/octet-stream",
+    "name": "a00000025.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000025.gdbtablx",
+    "size": "20512",
+    "webViewLink": "https://drive.google.com/file/d/1Zd7bER8qtBIVnjCfc28D-0jb36xUPeCB/view?usp=drivesdk"
+  },
+  {
+    "id": "1zCg4N-0WELceDwn54XWQ6nvMmVmoUAz6",
+    "mimeType": "application/octet-stream",
+    "name": "a00000025.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000025.gdbtable",
+    "size": "5746948",
+    "webViewLink": "https://drive.google.com/file/d/1zCg4N-0WELceDwn54XWQ6nvMmVmoUAz6/view?usp=drivesdk"
+  },
+  {
+    "id": "1TgCLPS-lcKO5tiyxMNCz8W2bKFPa0XZt",
+    "mimeType": "application/octet-stream",
+    "name": "a00000025.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000025.gdbindexes",
+    "size": "116",
+    "webViewLink": "https://drive.google.com/file/d/1TgCLPS-lcKO5tiyxMNCz8W2bKFPa0XZt/view?usp=drivesdk"
+  },
+  {
+    "id": "1hGQkMsGw9fNG2X-Rkbyw_gv7otln05Fa",
+    "mimeType": "application/octet-stream",
+    "name": "a00000025.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000025.freelist",
+    "size": "4440",
+    "webViewLink": "https://drive.google.com/file/d/1hGQkMsGw9fNG2X-Rkbyw_gv7otln05Fa/view?usp=drivesdk"
+  },
+  {
+    "id": "17gGFxlrZ3RqL5HVFb6GneS_qRpfE21fD",
+    "mimeType": "audio/ogg",
+    "name": "a00000020.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000020.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/17gGFxlrZ3RqL5HVFb6GneS_qRpfE21fD/view?usp=drivesdk"
+  },
+  {
+    "id": "1Gtjakv6IrOeZubYFY0Au0r6uvqGV4CZc",
+    "mimeType": "application/octet-stream",
+    "name": "a00000020.I36Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000020.I36Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1Gtjakv6IrOeZubYFY0Au0r6uvqGV4CZc/view?usp=drivesdk"
+  },
+  {
+    "id": "1Ai1QyP_RtK6u2EIHaPfG115IFlRL48Cj",
+    "mimeType": "application/octet-stream",
+    "name": "a00000020.I36AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000020.I36AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1Ai1QyP_RtK6u2EIHaPfG115IFlRL48Cj/view?usp=drivesdk"
+  },
+  {
+    "id": "1c75kVV_XRqC5P6K_M5700SKVPN9_w2ET",
+    "mimeType": "application/octet-stream",
+    "name": "a00000020.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000020.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1c75kVV_XRqC5P6K_M5700SKVPN9_w2ET/view?usp=drivesdk"
+  },
+  {
+    "id": "1keohKY2nt4E-fz6eFqGcqei3LhWbyAe-",
+    "mimeType": "application/octet-stream",
+    "name": "a00000020.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000020.gdbtable",
+    "size": "3437",
+    "webViewLink": "https://drive.google.com/file/d/1keohKY2nt4E-fz6eFqGcqei3LhWbyAe-/view?usp=drivesdk"
+  },
+  {
+    "id": "1q6ZQLyi2ZBt3mO2YbprER1UDroNGqMDr",
+    "mimeType": "application/octet-stream",
+    "name": "a00000020.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000020.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/1q6ZQLyi2ZBt3mO2YbprER1UDroNGqMDr/view?usp=drivesdk"
+  },
+  {
+    "id": "1RhZgvmu8giuL16sm-wMuG3Qgw9EWA3nk",
+    "mimeType": "audio/ogg",
+    "name": "a0000001f.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001f.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1RhZgvmu8giuL16sm-wMuG3Qgw9EWA3nk/view?usp=drivesdk"
+  },
+  {
+    "id": "1-FS7DXbIgJknISKYxckh476xC5foXpN4",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001f.I35Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001f.I35Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1-FS7DXbIgJknISKYxckh476xC5foXpN4/view?usp=drivesdk"
+  },
+  {
+    "id": "1L5YqHzHxbiVyutEflUkbHh21WyxxCWkJ",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001f.I35AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001f.I35AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1L5YqHzHxbiVyutEflUkbHh21WyxxCWkJ/view?usp=drivesdk"
+  },
+  {
+    "id": "1fjYJuGnuZUZJ2qVgu42bZvpg-LeKD5dR",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001f.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001f.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1fjYJuGnuZUZJ2qVgu42bZvpg-LeKD5dR/view?usp=drivesdk"
+  },
+  {
+    "id": "15cxgiRMct0mMG9uee01h4CeHiY--lhqa",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001f.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001f.gdbtable",
+    "size": "52316",
+    "webViewLink": "https://drive.google.com/file/d/15cxgiRMct0mMG9uee01h4CeHiY--lhqa/view?usp=drivesdk"
+  },
+  {
+    "id": "1OIOrrRFYvAsrE3oQMipNqjuJ9Zq5Zl95",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001f.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001f.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/1OIOrrRFYvAsrE3oQMipNqjuJ9Zq5Zl95/view?usp=drivesdk"
+  },
+  {
+    "id": "1NmG2k7hDCm0XAYSTnrUHkNELSh4IstzN",
+    "mimeType": "audio/ogg",
+    "name": "a0000001e.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001e.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1NmG2k7hDCm0XAYSTnrUHkNELSh4IstzN/view?usp=drivesdk"
+  },
+  {
+    "id": "1px1M58U5GQwKNn22ADG7w8TC0tR4zsvr",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001e.I34Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001e.I34Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1px1M58U5GQwKNn22ADG7w8TC0tR4zsvr/view?usp=drivesdk"
+  },
+  {
+    "id": "1-ePkJBIVK0dw2a1RaoMiPNgH_88uv_1S",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001e.I34AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001e.I34AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1-ePkJBIVK0dw2a1RaoMiPNgH_88uv_1S/view?usp=drivesdk"
+  },
+  {
+    "id": "1TDOttIl7by-cuu_-108gZPF43x1k3ZhM",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001e.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001e.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1TDOttIl7by-cuu_-108gZPF43x1k3ZhM/view?usp=drivesdk"
+  },
+  {
+    "id": "1VXFwA3bG_S_OcZk91_oiOV0a3cJ-8buu",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001e.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001e.gdbtable",
+    "size": "16286",
+    "webViewLink": "https://drive.google.com/file/d/1VXFwA3bG_S_OcZk91_oiOV0a3cJ-8buu/view?usp=drivesdk"
+  },
+  {
+    "id": "1VbrLGyodpacVN50Kc-H-8mwSEL2beaVe",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001e.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001e.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/1VbrLGyodpacVN50Kc-H-8mwSEL2beaVe/view?usp=drivesdk"
+  },
+  {
+    "id": "1hH0G0qc5xug_W1WDjP09EvSupEsuPKAI",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001e.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001e.freelist",
+    "size": "4440",
+    "webViewLink": "https://drive.google.com/file/d/1hH0G0qc5xug_W1WDjP09EvSupEsuPKAI/view?usp=drivesdk"
+  },
+  {
+    "id": "13sNQEIXHyNr3-eLt5iC7GcvdWbVKxK0V",
+    "mimeType": "audio/ogg",
+    "name": "a0000001d.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001d.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/13sNQEIXHyNr3-eLt5iC7GcvdWbVKxK0V/view?usp=drivesdk"
+  },
+  {
+    "id": "1Ge0gehInAc4-uMJNgk6Ob_R6A3kHNMlN",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001d.I32Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001d.I32Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1Ge0gehInAc4-uMJNgk6Ob_R6A3kHNMlN/view?usp=drivesdk"
+  },
+  {
+    "id": "1paW8sR2Bg5uK0H4HejMpfpNAyRZa7t9o",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001d.I32AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001d.I32AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1paW8sR2Bg5uK0H4HejMpfpNAyRZa7t9o/view?usp=drivesdk"
+  },
+  {
+    "id": "1BKi1D1mienhwcAsolNzgEn5ecOQ-vr0s",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001d.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001d.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1BKi1D1mienhwcAsolNzgEn5ecOQ-vr0s/view?usp=drivesdk"
+  },
+  {
+    "id": "1JXsjf2ZhesdMBHc9mJB0SskCWVrH2pmx",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001d.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001d.gdbtable",
+    "size": "2853",
+    "webViewLink": "https://drive.google.com/file/d/1JXsjf2ZhesdMBHc9mJB0SskCWVrH2pmx/view?usp=drivesdk"
+  },
+  {
+    "id": "1ouPh89vJ9hk60vvmdTrmeEDhB8JGqWcO",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001d.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001d.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/1ouPh89vJ9hk60vvmdTrmeEDhB8JGqWcO/view?usp=drivesdk"
+  },
+  {
+    "id": "1awvsnOby9INdL5L5lGgRdADnz8ohAMHw",
+    "mimeType": "audio/ogg",
+    "name": "a0000001c.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001c.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1awvsnOby9INdL5L5lGgRdADnz8ohAMHw/view?usp=drivesdk"
+  },
+  {
+    "id": "19bsCBOTBm5bpNC0CQjQ9d6nbXoGQE8so",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001c.I31Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001c.I31Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/19bsCBOTBm5bpNC0CQjQ9d6nbXoGQE8so/view?usp=drivesdk"
+  },
+  {
+    "id": "1dwPfTalAYYQ4le5yfx1FunLAoxxHQ1mW",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001c.I31AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001c.I31AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1dwPfTalAYYQ4le5yfx1FunLAoxxHQ1mW/view?usp=drivesdk"
+  },
+  {
+    "id": "1bS-YX_L6LoCYixxUuLG7SWdCWq39DdG8",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001c.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001c.gdbtablx",
+    "size": "10272",
+    "webViewLink": "https://drive.google.com/file/d/1bS-YX_L6LoCYixxUuLG7SWdCWq39DdG8/view?usp=drivesdk"
+  },
+  {
+    "id": "1Q7ehfZEkA2QuVOOxDQhGh04TG1WqRL56",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001c.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001c.gdbtable",
+    "size": "21536",
+    "webViewLink": "https://drive.google.com/file/d/1Q7ehfZEkA2QuVOOxDQhGh04TG1WqRL56/view?usp=drivesdk"
+  },
+  {
+    "id": "1ZuprQUvS9JmefGKe4es3XASHR7ieOrJl",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001c.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001c.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/1ZuprQUvS9JmefGKe4es3XASHR7ieOrJl/view?usp=drivesdk"
+  },
+  {
+    "id": "1B1W0gAJAmBEXjODG1U2ozVxrodHnxVUC",
+    "mimeType": "audio/ogg",
+    "name": "a0000001b.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001b.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1B1W0gAJAmBEXjODG1U2ozVxrodHnxVUC/view?usp=drivesdk"
+  },
+  {
+    "id": "127DaFT6ibUlr0zjuOgn6gBsM9EiM4tsN",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001b.I30Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001b.I30Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/127DaFT6ibUlr0zjuOgn6gBsM9EiM4tsN/view?usp=drivesdk"
+  },
+  {
+    "id": "1PLx3rp8fq8oIDDrvgoitkR4KCuNJS-0q",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001b.I30AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001b.I30AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1PLx3rp8fq8oIDDrvgoitkR4KCuNJS-0q/view?usp=drivesdk"
+  },
+  {
+    "id": "1lsQzueRtX5eBF_eotkw4g0ij9z5iOuC0",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001b.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001b.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1lsQzueRtX5eBF_eotkw4g0ij9z5iOuC0/view?usp=drivesdk"
+  },
+  {
+    "id": "10YZntnPbmc6qM1bT8g9K4vQVd3MOnzEP",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001b.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001b.gdbtable",
+    "size": "18937",
+    "webViewLink": "https://drive.google.com/file/d/10YZntnPbmc6qM1bT8g9K4vQVd3MOnzEP/view?usp=drivesdk"
+  },
+  {
+    "id": "1XCx_5pB9NRhdZiUR71nV56T0faU3GWMu",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001b.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001b.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/1XCx_5pB9NRhdZiUR71nV56T0faU3GWMu/view?usp=drivesdk"
+  },
+  {
+    "id": "1Re-e1DCRyuH1PM5AGRLkPF5aWsnVMz_A",
+    "mimeType": "audio/ogg",
+    "name": "a0000001a.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001a.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1Re-e1DCRyuH1PM5AGRLkPF5aWsnVMz_A/view?usp=drivesdk"
+  },
+  {
+    "id": "1h8DO4CMiD5ihgK5x_RHwK1DpRnNTUxcW",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001a.I28Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001a.I28Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1h8DO4CMiD5ihgK5x_RHwK1DpRnNTUxcW/view?usp=drivesdk"
+  },
+  {
+    "id": "1MnMMQIaLL8tSQbzz0vrd_OxMan1aU-D4",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001a.I28AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001a.I28AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1MnMMQIaLL8tSQbzz0vrd_OxMan1aU-D4/view?usp=drivesdk"
+  },
+  {
+    "id": "14yglIpDMA2AnK5BVyGLw_CA74DlvxJsF",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001a.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001a.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/14yglIpDMA2AnK5BVyGLw_CA74DlvxJsF/view?usp=drivesdk"
+  },
+  {
+    "id": "1wleXU1SonW6LgJR8rKPuBqG-IRbbpPes",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001a.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001a.gdbtable",
+    "size": "106818",
+    "webViewLink": "https://drive.google.com/file/d/1wleXU1SonW6LgJR8rKPuBqG-IRbbpPes/view?usp=drivesdk"
+  },
+  {
+    "id": "1avpdKx_V98MyJzvA6w3YeoVv3c2hqX8F",
+    "mimeType": "application/octet-stream",
+    "name": "a0000001a.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000001a.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/1avpdKx_V98MyJzvA6w3YeoVv3c2hqX8F/view?usp=drivesdk"
+  },
+  {
+    "id": "1mShN7pi2Wfp6pJGer3_z1mu8ekV1Drpc",
+    "mimeType": "audio/ogg",
+    "name": "a00000019.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000019.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1mShN7pi2Wfp6pJGer3_z1mu8ekV1Drpc/view?usp=drivesdk"
+  },
+  {
+    "id": "1YpmjD3vpgp51-PVz1Es3plcrBwfo8J-A",
+    "mimeType": "application/octet-stream",
+    "name": "a00000019.I27Status.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000019.I27Status.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1YpmjD3vpgp51-PVz1Es3plcrBwfo8J-A/view?usp=drivesdk"
+  },
+  {
+    "id": "1zYYMpkA3J0soyf8Vah-XIXHfe4_aQ3hU",
+    "mimeType": "application/octet-stream",
+    "name": "a00000019.I27AnnotationCla.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000019.I27AnnotationCla.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1zYYMpkA3J0soyf8Vah-XIXHfe4_aQ3hU/view?usp=drivesdk"
+  },
+  {
+    "id": "1Sj2gN-XnzYAHStVJLJjzZDUIUD7tsbG2",
+    "mimeType": "application/octet-stream",
+    "name": "a00000019.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000019.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1Sj2gN-XnzYAHStVJLJjzZDUIUD7tsbG2/view?usp=drivesdk"
+  },
+  {
+    "id": "1rx6zla7oYAjhUc6CTeGO6I8lmjHt_Xct",
+    "mimeType": "application/octet-stream",
+    "name": "a00000019.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000019.gdbtable",
+    "size": "106818",
+    "webViewLink": "https://drive.google.com/file/d/1rx6zla7oYAjhUc6CTeGO6I8lmjHt_Xct/view?usp=drivesdk"
+  },
+  {
+    "id": "178R3Uj68L0zOaH2VbRynaebRW-R5cqpI",
+    "mimeType": "application/octet-stream",
+    "name": "a00000019.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000019.gdbindexes",
+    "size": "256",
+    "webViewLink": "https://drive.google.com/file/d/178R3Uj68L0zOaH2VbRynaebRW-R5cqpI/view?usp=drivesdk"
+  },
+  {
+    "id": "1UkKZ81OJ1cDmPTbvJ1b5ARsufQmCg564",
+    "mimeType": "audio/ogg",
+    "name": "a0000000f.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000f.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1UkKZ81OJ1cDmPTbvJ1b5ARsufQmCg564/view?usp=drivesdk"
+  },
+  {
+    "id": "1diWRP3v-KeKXbltbADIKCLwNKXEJdobI",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000f.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000f.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1diWRP3v-KeKXbltbADIKCLwNKXEJdobI/view?usp=drivesdk"
+  },
+  {
+    "id": "1b693nxl3Ln5oZYQosBzB8qeliunWIMHO",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000f.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000f.gdbtable",
+    "size": "2539",
+    "webViewLink": "https://drive.google.com/file/d/1b693nxl3Ln5oZYQosBzB8qeliunWIMHO/view?usp=drivesdk"
+  },
+  {
+    "id": "14NSlOHHcHmLVO1Ff6LdQTdmUYndnFmKi",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000f.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000f.gdbindexes",
+    "size": "116",
+    "webViewLink": "https://drive.google.com/file/d/14NSlOHHcHmLVO1Ff6LdQTdmUYndnFmKi/view?usp=drivesdk"
+  },
+  {
+    "id": "1AHQ6caoFeXdSPKPdynocfza26WyrZAIB",
+    "mimeType": "audio/ogg",
+    "name": "a0000000e.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000e.spx",
+    "size": "20502",
+    "webViewLink": "https://drive.google.com/file/d/1AHQ6caoFeXdSPKPdynocfza26WyrZAIB/view?usp=drivesdk"
+  },
+  {
+    "id": "17Lbd4fMdrPxIAVrZMUkXDbtTe8G_zTS4",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000e.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000e.gdbtablx",
+    "size": "10272",
+    "webViewLink": "https://drive.google.com/file/d/17Lbd4fMdrPxIAVrZMUkXDbtTe8G_zTS4/view?usp=drivesdk"
+  },
+  {
+    "id": "1FhzRFxPKblHQYiQnZb8EDoPAgcfah5gG",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000e.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000e.gdbtable",
+    "size": "36010",
+    "webViewLink": "https://drive.google.com/file/d/1FhzRFxPKblHQYiQnZb8EDoPAgcfah5gG/view?usp=drivesdk"
+  },
+  {
+    "id": "1-gBgEr0omEi_yQNk_xItelCeuO65sHW_",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000e.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000e.gdbindexes",
+    "size": "116",
+    "webViewLink": "https://drive.google.com/file/d/1-gBgEr0omEi_yQNk_xItelCeuO65sHW_/view?usp=drivesdk"
+  },
+  {
+    "id": "1SwHq-j5KGisgl4ZiYSjlFLNwFJ0toREo",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000b.Status_Index_10.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000b.Status_Index_10.atx",
+    "size": "16406",
+    "webViewLink": "https://drive.google.com/file/d/1SwHq-j5KGisgl4ZiYSjlFLNwFJ0toREo/view?usp=drivesdk"
+  },
+  {
+    "id": "1jt2bx6Sl0LfRMJ9CDgojWqNvKsgeO3SH",
+    "mimeType": "audio/ogg",
+    "name": "a0000000b.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000b.spx",
+    "size": "45078",
+    "webViewLink": "https://drive.google.com/file/d/1jt2bx6Sl0LfRMJ9CDgojWqNvKsgeO3SH/view?usp=drivesdk"
+  },
+  {
+    "id": "1eVZJ7iBzM5yJcZt86LdGVKbhQzK0kGBs",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000b.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000b.gdbtablx",
+    "size": "10272",
+    "webViewLink": "https://drive.google.com/file/d/1eVZJ7iBzM5yJcZt86LdGVKbhQzK0kGBs/view?usp=drivesdk"
+  },
+  {
+    "id": "1FhVQkO6zlDa-Zrj14uGcNwAbpgRk0rIs",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000b.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000b.gdbtable",
+    "size": "596716",
+    "webViewLink": "https://drive.google.com/file/d/1FhVQkO6zlDa-Zrj14uGcNwAbpgRk0rIs/view?usp=drivesdk"
+  },
+  {
+    "id": "1bEkwMpC_4pESwpRK6RWYA3_bOIRfSSwY",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000b.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000b.gdbindexes",
+    "size": "276",
+    "webViewLink": "https://drive.google.com/file/d/1bEkwMpC_4pESwpRK6RWYA3_bOIRfSSwY/view?usp=drivesdk"
+  },
+  {
+    "id": "1bRROcf1RqxHt-r7tsrKwuXMwd3M5q0Pv",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000b.AnnoClassID_Index_10.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000b.AnnoClassID_Index_10.atx",
+    "size": "20502",
+    "webViewLink": "https://drive.google.com/file/d/1bRROcf1RqxHt-r7tsrKwuXMwd3M5q0Pv/view?usp=drivesdk"
+  },
+  {
+    "id": "1T6ZrEhm7iePH3RBxqDYn-R9ehqQSHitR",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000a.Status_Index_9.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000a.Status_Index_9.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1T6ZrEhm7iePH3RBxqDYn-R9ehqQSHitR/view?usp=drivesdk"
+  },
+  {
+    "id": "17BZLo9B6fIgEoaMSxtWArL8y08q0jdUp",
+    "mimeType": "audio/ogg",
+    "name": "a0000000a.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000a.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/17BZLo9B6fIgEoaMSxtWArL8y08q0jdUp/view?usp=drivesdk"
+  },
+  {
+    "id": "15m4nn4CV1sEFsFb9eLDEKuT1HQga2tpf",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000a.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000a.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/15m4nn4CV1sEFsFb9eLDEKuT1HQga2tpf/view?usp=drivesdk"
+  },
+  {
+    "id": "1DT5abkcDFgn8rWZytYUKPqlHw1bWJ33R",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000a.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000a.gdbtable",
+    "size": "122038",
+    "webViewLink": "https://drive.google.com/file/d/1DT5abkcDFgn8rWZytYUKPqlHw1bWJ33R/view?usp=drivesdk"
+  },
+  {
+    "id": "18_UiQfePxYlHe_m_q04uvWPdUHbLzWyG",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000a.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000a.gdbindexes",
+    "size": "272",
+    "webViewLink": "https://drive.google.com/file/d/18_UiQfePxYlHe_m_q04uvWPdUHbLzWyG/view?usp=drivesdk"
+  },
+  {
+    "id": "1aPJA3eNusPgQLeu7hVW1iYKDXuAEqWUN",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000a.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000a.freelist",
+    "size": "29016",
+    "webViewLink": "https://drive.google.com/file/d/1aPJA3eNusPgQLeu7hVW1iYKDXuAEqWUN/view?usp=drivesdk"
+  },
+  {
+    "id": "11H3eZlW6EFPo7eZZugkmzp3_kuJRFQhJ",
+    "mimeType": "application/octet-stream",
+    "name": "a0000000a.AnnoClassID_Index_9.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a0000000a.AnnoClassID_Index_9.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/11H3eZlW6EFPo7eZZugkmzp3_kuJRFQhJ/view?usp=drivesdk"
+  },
+  {
+    "id": "11BQvrG7bbbdjbHy4opu0SI1dDZOlMgPV",
+    "mimeType": "application/octet-stream",
+    "name": "a00000009.Status_Index_8.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000009.Status_Index_8.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/11BQvrG7bbbdjbHy4opu0SI1dDZOlMgPV/view?usp=drivesdk"
+  },
+  {
+    "id": "1WyNesQVr_WTp34Y-5Rf8ORzr6ukI4NVU",
+    "mimeType": "audio/ogg",
+    "name": "a00000009.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000009.spx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1WyNesQVr_WTp34Y-5Rf8ORzr6ukI4NVU/view?usp=drivesdk"
+  },
+  {
+    "id": "1_jRd17a_Y6tWghrv56L0B2g1AFUzvpdX",
+    "mimeType": "application/octet-stream",
+    "name": "a00000009.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000009.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1_jRd17a_Y6tWghrv56L0B2g1AFUzvpdX/view?usp=drivesdk"
+  },
+  {
+    "id": "1_qlG2sOJLeQh7s3dY5lFjgpWbcQBi0cG",
+    "mimeType": "application/octet-stream",
+    "name": "a00000009.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000009.gdbtable",
+    "size": "18055",
+    "webViewLink": "https://drive.google.com/file/d/1_qlG2sOJLeQh7s3dY5lFjgpWbcQBi0cG/view?usp=drivesdk"
+  },
+  {
+    "id": "1MaSlN7YYjfNlUprw8wbvhQEqIadZ-ArX",
+    "mimeType": "application/octet-stream",
+    "name": "a00000009.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000009.gdbindexes",
+    "size": "272",
+    "webViewLink": "https://drive.google.com/file/d/1MaSlN7YYjfNlUprw8wbvhQEqIadZ-ArX/view?usp=drivesdk"
+  },
+  {
+    "id": "1VAujF6ZwU0u1zjK9WUsNESySlt1u5iS1",
+    "mimeType": "application/octet-stream",
+    "name": "a00000009.AnnoClassID_Index_8.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000009.AnnoClassID_Index_8.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1VAujF6ZwU0u1zjK9WUsNESySlt1u5iS1/view?usp=drivesdk"
+  },
+  {
+    "id": "1jzPBKsToPqwjV7rUJ0XLUf7dTpdL0QsX",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1jzPBKsToPqwjV7rUJ0XLUf7dTpdL0QsX/view?usp=drivesdk"
+  },
+  {
+    "id": "1dT424fPCa6l4oRyIm7coa6n5b7Uz_eA9",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.gdbtable",
+    "size": "2504",
+    "webViewLink": "https://drive.google.com/file/d/1dT424fPCa6l4oRyIm7coa6n5b7Uz_eA9/view?usp=drivesdk"
+  },
+  {
+    "id": "11zpZ5PspblS-_HxXEmVPAwcz49N6J-Vn",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.gdbindexes",
+    "size": "602",
+    "webViewLink": "https://drive.google.com/file/d/11zpZ5PspblS-_HxXEmVPAwcz49N6J-Vn/view?usp=drivesdk"
+  },
+  {
+    "id": "1pvnckmAD7RFMkz_8QhZ-XbyUZIOrerPN",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.CatRelTypesByUUID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.CatRelTypesByUUID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1pvnckmAD7RFMkz_8QhZ-XbyUZIOrerPN/view?usp=drivesdk"
+  },
+  {
+    "id": "1b4mqOeYxufaNLS94fgwZ_WHizr4HFRR-",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.CatRelTypesByOriginItemTypeID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.CatRelTypesByOriginItemTypeID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1b4mqOeYxufaNLS94fgwZ_WHizr4HFRR-/view?usp=drivesdk"
+  },
+  {
+    "id": "1mjVpBS8LiHdIvgYiKdVKl2AAk3Wb7pLb",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.CatRelTypesByName.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.CatRelTypesByName.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1mjVpBS8LiHdIvgYiKdVKl2AAk3Wb7pLb/view?usp=drivesdk"
+  },
+  {
+    "id": "1To3Hsr5s-lCeLiYsth59Jq6eBqtieoAP",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.CatRelTypesByForwardLabel.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.CatRelTypesByForwardLabel.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1To3Hsr5s-lCeLiYsth59Jq6eBqtieoAP/view?usp=drivesdk"
+  },
+  {
+    "id": "1Q-Pu9DtrOCoZvy7vn2QWhSZg0G0xScXU",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.CatRelTypesByDestItemTypeID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.CatRelTypesByDestItemTypeID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1Q-Pu9DtrOCoZvy7vn2QWhSZg0G0xScXU/view?usp=drivesdk"
+  },
+  {
+    "id": "1a28wmOW4IAS2fYzH_bh7OBE5zxb9PSF-",
+    "mimeType": "application/octet-stream",
+    "name": "a00000007.CatRelTypesByBackwardLabel.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000007.CatRelTypesByBackwardLabel.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1a28wmOW4IAS2fYzH_bh7OBE5zxb9PSF-/view?usp=drivesdk"
+  },
+  {
+    "id": "1upegU9hfYmFcV27YMafwC9wRDqkGC0L9",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1upegU9hfYmFcV27YMafwC9wRDqkGC0L9/view?usp=drivesdk"
+  },
+  {
+    "id": "1snraD0ndcOEvG4X3Qx_1nSfHgFS0tVHC",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.gdbtable",
+    "size": "5811",
+    "webViewLink": "https://drive.google.com/file/d/1snraD0ndcOEvG4X3Qx_1nSfHgFS0tVHC/view?usp=drivesdk"
+  },
+  {
+    "id": "1jARPjDNAXv4YveGZgrHAKYvKJAPdTxE2",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.gdbindexes",
+    "size": "318",
+    "webViewLink": "https://drive.google.com/file/d/1jARPjDNAXv4YveGZgrHAKYvKJAPdTxE2/view?usp=drivesdk"
+  },
+  {
+    "id": "1QPaCkeI3zibfAKpHcCEoI6Y3Q40JNWKh",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.freelist",
+    "size": "4440",
+    "webViewLink": "https://drive.google.com/file/d/1QPaCkeI3zibfAKpHcCEoI6Y3Q40JNWKh/view?usp=drivesdk"
+  },
+  {
+    "id": "1nzxikIP0TNE60NndJpF6mRNQ9ZrCEHTS",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.FDO_UUID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.FDO_UUID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1nzxikIP0TNE60NndJpF6mRNQ9ZrCEHTS/view?usp=drivesdk"
+  },
+  {
+    "id": "1-S7Q9GwKeMdxjlakCFsa79MU6XAxBtkp",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.CatRelsByType.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.CatRelsByType.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1-S7Q9GwKeMdxjlakCFsa79MU6XAxBtkp/view?usp=drivesdk"
+  },
+  {
+    "id": "1FXLsvItbcJ7YIs5nK_tEY5bCBUkRKqHW",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.CatRelsByOriginID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.CatRelsByOriginID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/1FXLsvItbcJ7YIs5nK_tEY5bCBUkRKqHW/view?usp=drivesdk"
+  },
+  {
+    "id": "15sBxE87iUWo0yIKP4alScMzm065HNH6l",
+    "mimeType": "application/octet-stream",
+    "name": "a00000006.CatRelsByDestinationID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000006.CatRelsByDestinationID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/15sBxE87iUWo0yIKP4alScMzm065HNH6l/view?usp=drivesdk"
+  },
+  {
+    "id": "1NRYKwic_mwrjyod-A2ljSiutlUWWhb_B",
+    "mimeType": "application/octet-stream",
+    "name": "a00000005.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000005.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1NRYKwic_mwrjyod-A2ljSiutlUWWhb_B/view?usp=drivesdk"
+  },
+  {
+    "id": "1HjBE2yvxZr-AJ9RJzWYdaJJXSogFRD6u",
+    "mimeType": "application/octet-stream",
+    "name": "a00000005.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000005.gdbtable",
+    "size": "1803",
+    "webViewLink": "https://drive.google.com/file/d/1HjBE2yvxZr-AJ9RJzWYdaJJXSogFRD6u/view?usp=drivesdk"
+  },
+  {
+    "id": "13_EuXLixRMDgO2Bubs_o09QzDIkfigaR",
+    "mimeType": "application/octet-stream",
+    "name": "a00000005.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000005.gdbindexes",
+    "size": "296",
+    "webViewLink": "https://drive.google.com/file/d/13_EuXLixRMDgO2Bubs_o09QzDIkfigaR/view?usp=drivesdk"
+  },
+  {
+    "id": "10-7kpVdCWIFrvi13G5FLrvJAx5Vh6ODq",
+    "mimeType": "application/octet-stream",
+    "name": "a00000005.CatItemTypesByUUID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000005.CatItemTypesByUUID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/10-7kpVdCWIFrvi13G5FLrvJAx5Vh6ODq/view?usp=drivesdk"
+  },
+  {
+    "id": "17dr5I-J3teneBmEHa53VcqyPi9SWHVhP",
+    "mimeType": "application/octet-stream",
+    "name": "a00000005.CatItemTypesByParentTypeID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000005.CatItemTypesByParentTypeID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/17dr5I-J3teneBmEHa53VcqyPi9SWHVhP/view?usp=drivesdk"
+  },
+  {
+    "id": "14e8qs2V4GHLVwZOaJjoz7P3AKGKWuFld",
+    "mimeType": "application/octet-stream",
+    "name": "a00000005.CatItemTypesByName.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000005.CatItemTypesByName.atx",
+    "size": "12310",
+    "webViewLink": "https://drive.google.com/file/d/14e8qs2V4GHLVwZOaJjoz7P3AKGKWuFld/view?usp=drivesdk"
+  },
+  {
+    "id": "18Y7L6nEQJ58atdlhAd2YDLcyXceq2q9H",
+    "mimeType": "audio/ogg",
+    "name": "a00000004.spx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.spx",
+    "size": "151574",
+    "webViewLink": "https://drive.google.com/file/d/18Y7L6nEQJ58atdlhAd2YDLcyXceq2q9H/view?usp=drivesdk"
+  },
+  {
+    "id": "1LFHuYvJn25J3pvnSaqgILdFCrnF8ifeh",
+    "mimeType": "application/octet-stream",
+    "name": "a00000004.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1LFHuYvJn25J3pvnSaqgILdFCrnF8ifeh/view?usp=drivesdk"
+  },
+  {
+    "id": "18pllAWwPXBZGn0h1p_2tjvxnq6sFP4vV",
+    "mimeType": "application/octet-stream",
+    "name": "a00000004.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.gdbtable",
+    "size": "2694714",
+    "webViewLink": "https://drive.google.com/file/d/18pllAWwPXBZGn0h1p_2tjvxnq6sFP4vV/view?usp=drivesdk"
+  },
+  {
+    "id": "15siYJTlzbl35C0pnj9pgdkdilVpbH4uo",
+    "mimeType": "application/octet-stream",
+    "name": "a00000004.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.gdbindexes",
+    "size": "310",
+    "webViewLink": "https://drive.google.com/file/d/15siYJTlzbl35C0pnj9pgdkdilVpbH4uo/view?usp=drivesdk"
+  },
+  {
+    "id": "1vJqmZAQ_Yp-ORZ3A9ZeF_VHDeOJGL6Zg",
+    "mimeType": "application/octet-stream",
+    "name": "a00000004.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.freelist",
+    "size": "78168",
+    "webViewLink": "https://drive.google.com/file/d/1vJqmZAQ_Yp-ORZ3A9ZeF_VHDeOJGL6Zg/view?usp=drivesdk"
+  },
+  {
+    "id": "17E5f6mr6TvSgvRJdFUxebaA4IRL7wjq1",
+    "mimeType": "application/octet-stream",
+    "name": "a00000004.FDO_UUID.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.FDO_UUID.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/17E5f6mr6TvSgvRJdFUxebaA4IRL7wjq1/view?usp=drivesdk"
+  },
+  {
+    "id": "16JCfYkJdG67ZpNyRIbzoY8Yrei4rgOIV",
+    "mimeType": "application/octet-stream",
+    "name": "a00000004.CatItemsByType.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.CatItemsByType.atx",
+    "size": "4118",
+    "webViewLink": "https://drive.google.com/file/d/16JCfYkJdG67ZpNyRIbzoY8Yrei4rgOIV/view?usp=drivesdk"
+  },
+  {
+    "id": "1diHBrH9S7yrNX0k_B9vOCIWf1QGXAvjK",
+    "mimeType": "application/octet-stream",
+    "name": "a00000004.CatItemsByPhysicalName.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000004.CatItemsByPhysicalName.atx",
+    "size": "12310",
+    "webViewLink": "https://drive.google.com/file/d/1diHBrH9S7yrNX0k_B9vOCIWf1QGXAvjK/view?usp=drivesdk"
+  },
+  {
+    "id": "1oNJNgbbuaQ28nfusimP_pK_qHPZVM1rI",
+    "mimeType": "application/octet-stream",
+    "name": "a00000003.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000003.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1oNJNgbbuaQ28nfusimP_pK_qHPZVM1rI/view?usp=drivesdk"
+  },
+  {
+    "id": "1ljQlUnxjU0TPrwRgfAmF7JsisjvvnGJK",
+    "mimeType": "application/octet-stream",
+    "name": "a00000003.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000003.gdbtable",
+    "size": "2920",
+    "webViewLink": "https://drive.google.com/file/d/1ljQlUnxjU0TPrwRgfAmF7JsisjvvnGJK/view?usp=drivesdk"
+  },
+  {
+    "id": "16kieuVjo7BtaMu9Y-qr2Eb4pF03BHtnK",
+    "mimeType": "application/octet-stream",
+    "name": "a00000003.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000003.gdbindexes",
+    "size": "42",
+    "webViewLink": "https://drive.google.com/file/d/16kieuVjo7BtaMu9Y-qr2Eb4pF03BHtnK/view?usp=drivesdk"
+  },
+  {
+    "id": "1bUcoybFTx1CrRftKwss8HvelmnvWvidd",
+    "mimeType": "application/octet-stream",
+    "name": "a00000002.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000002.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1bUcoybFTx1CrRftKwss8HvelmnvWvidd/view?usp=drivesdk"
+  },
+  {
+    "id": "1UkcZbj83HWjJ6CxJEtc9SXmazfsAG0Fj",
+    "mimeType": "application/octet-stream",
+    "name": "a00000002.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000002.gdbtable",
+    "size": "2055",
+    "webViewLink": "https://drive.google.com/file/d/1UkcZbj83HWjJ6CxJEtc9SXmazfsAG0Fj/view?usp=drivesdk"
+  },
+  {
+    "id": "1kUSExGx7kH6tE5PtGEE4f5Ar_E7LFua1",
+    "mimeType": "application/octet-stream",
+    "name": "a00000001.TablesByName.atx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000001.TablesByName.atx",
+    "size": "12310",
+    "webViewLink": "https://drive.google.com/file/d/1kUSExGx7kH6tE5PtGEE4f5Ar_E7LFua1/view?usp=drivesdk"
+  },
+  {
+    "id": "1PlTRKGrkH5WTwbFMIe7Fl1ogJxfCChRX",
+    "mimeType": "application/octet-stream",
+    "name": "a00000001.gdbtablx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000001.gdbtablx",
+    "size": "5152",
+    "webViewLink": "https://drive.google.com/file/d/1PlTRKGrkH5WTwbFMIe7Fl1ogJxfCChRX/view?usp=drivesdk"
+  },
+  {
+    "id": "19Wh2P_XezQGiWSSR1jo5TOz2udJ2SjGV",
+    "mimeType": "application/octet-stream",
+    "name": "a00000001.gdbtable",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000001.gdbtable",
+    "size": "1387",
+    "webViewLink": "https://drive.google.com/file/d/19Wh2P_XezQGiWSSR1jo5TOz2udJ2SjGV/view?usp=drivesdk"
+  },
+  {
+    "id": "1W9C7h82te8qOi5qiFk9XOoNIF4X8fHk_",
+    "mimeType": "application/octet-stream",
+    "name": "a00000001.gdbindexes",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000001.gdbindexes",
+    "size": "110",
+    "webViewLink": "https://drive.google.com/file/d/1W9C7h82te8qOi5qiFk9XOoNIF4X8fHk_/view?usp=drivesdk"
+  },
+  {
+    "id": "1eHyLHotL9J92iogfiRARBgedVWcLL9X7",
+    "mimeType": "application/octet-stream",
+    "name": "a00000001.freelist",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_geodatabase.gdb/a00000001.freelist",
+    "size": "12632",
+    "webViewLink": "https://drive.google.com/file/d/1eHyLHotL9J92iogfiRARBgedVWcLL9X7/view?usp=drivesdk"
+  },
+  {
+    "id": "1NailS_tFQP7qvXV2HM5s15tQXLsUL7d7",
+    "mimeType": "image/tiff",
+    "name": "MOLA_Hillshade_Robinson_128ppd.tif.ovr",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/MOLA_Hillshade_Robinson_128ppd.tif.ovr",
+    "size": "161587870",
+    "webViewLink": "https://drive.google.com/file/d/1NailS_tFQP7qvXV2HM5s15tQXLsUL7d7/view?usp=drivesdk"
+  },
+  {
+    "id": "1vD2MwPOB80TPmpPAbzApLtA0ta6I3RaZ",
+    "mimeType": "text/xml",
+    "name": "MOLA_Hillshade_Robinson_128ppd.tif.aux.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/MOLA_Hillshade_Robinson_128ppd.tif.aux.xml",
+    "size": "2381",
+    "webViewLink": "https://drive.google.com/file/d/1vD2MwPOB80TPmpPAbzApLtA0ta6I3RaZ/view?usp=drivesdk"
+  },
+  {
+    "id": "1MtXK1v7jGox60rgwtU3ZDwWz5YvzC04v",
+    "mimeType": "image/tiff",
+    "name": "MOLA_Hillshade_Robinson_128ppd.tif",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/MOLA_Hillshade_Robinson_128ppd.tif",
+    "size": "772835624",
+    "webViewLink": "https://drive.google.com/file/d/1MtXK1v7jGox60rgwtU3ZDwWz5YvzC04v/view?usp=drivesdk"
+  },
+  {
+    "id": "1cEE241JPW3y27FB6z2nmr6SfWGqoBB5N",
+    "mimeType": "application/octet-stream",
+    "name": "MOLA_Hillshade_Robinson_128ppd.tfw",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/MOLA_Hillshade_Robinson_128ppd.tfw",
+    "size": "96",
+    "webViewLink": "https://drive.google.com/file/d/1cEE241JPW3y27FB6z2nmr6SfWGqoBB5N/view?usp=drivesdk"
+  },
+  {
+    "id": "1yVaSjoij3ToYgBPTkQ5JY49Zf9mvTsUc",
+    "mimeType": "application/octet-stream",
+    "name": "hillshade_s_128.rrd",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_s_128.rrd",
+    "size": "35043903",
+    "webViewLink": "https://drive.google.com/file/d/1yVaSjoij3ToYgBPTkQ5JY49Zf9mvTsUc/view?usp=drivesdk"
+  },
+  {
+    "id": "1DIkaNbT6ROfAUC4SVkk24Blv1-FczqNo",
+    "mimeType": "image/jpeg",
+    "name": "hillshade_s_128.jpg",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_s_128.jpg",
+    "size": "14407308",
+    "webViewLink": "https://drive.google.com/file/d/1DIkaNbT6ROfAUC4SVkk24Blv1-FczqNo/view?usp=drivesdk"
+  },
+  {
+    "id": "1U3QqVXB6c66OZOKP33gDqdbomlpNa2BW",
+    "mimeType": "application/octet-stream",
+    "name": "hillshade_s_128.jgw",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_s_128.jgw",
+    "size": "126",
+    "webViewLink": "https://drive.google.com/file/d/1U3QqVXB6c66OZOKP33gDqdbomlpNa2BW/view?usp=drivesdk"
+  },
+  {
+    "id": "1DODtlcnf37W-e8_HYiET8FkbZTW1hR6z",
+    "mimeType": "application/octet-stream",
+    "name": "hillshade_s_128.aux",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_s_128.aux",
+    "size": "365840",
+    "webViewLink": "https://drive.google.com/file/d/1DODtlcnf37W-e8_HYiET8FkbZTW1hR6z/view?usp=drivesdk"
+  },
+  {
+    "id": "19m9ZbVfGXQOMPz0LUPXvyrbegi01ozpg",
+    "mimeType": "application/octet-stream",
+    "name": "hillshade_n_128.rrd",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_n_128.rrd",
+    "size": "35044370",
+    "webViewLink": "https://drive.google.com/file/d/19m9ZbVfGXQOMPz0LUPXvyrbegi01ozpg/view?usp=drivesdk"
+  },
+  {
+    "id": "149vYUPqjbgHNIa_ceFrBMDLvSESWni9M",
+    "mimeType": "text/xml",
+    "name": "hillshade_n_128.jpg.aux.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_n_128.jpg.aux.xml",
+    "size": "2187",
+    "webViewLink": "https://drive.google.com/file/d/149vYUPqjbgHNIa_ceFrBMDLvSESWni9M/view?usp=drivesdk"
+  },
+  {
+    "id": "1pwxCLCpWqlp1WkQdi6sQnSNp8kAW92Gd",
+    "mimeType": "image/jpeg",
+    "name": "hillshade_n_128.jpg",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_n_128.jpg",
+    "size": "9768753",
+    "webViewLink": "https://drive.google.com/file/d/1pwxCLCpWqlp1WkQdi6sQnSNp8kAW92Gd/view?usp=drivesdk"
+  },
+  {
+    "id": "15eRElRuO9uz7fP2C1cCeuuIUmvCqLBPw",
+    "mimeType": "application/octet-stream",
+    "name": "hillshade_n_128.jgw",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_n_128.jgw",
+    "size": "126",
+    "webViewLink": "https://drive.google.com/file/d/15eRElRuO9uz7fP2C1cCeuuIUmvCqLBPw/view?usp=drivesdk"
+  },
+  {
+    "id": "19fBqP-MRqiSs-ezAk_87cWM9vuBJ-_oc",
+    "mimeType": "application/octet-stream",
+    "name": "hillshade_n_128.aux",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Basemaps/hillshade_n_128.aux",
+    "size": "366307",
+    "webViewLink": "https://drive.google.com/file/d/19fBqP-MRqiSs-ezAk_87cWM9vuBJ-_oc/view?usp=drivesdk"
+  },
+  {
+    "id": "1reIVZj_MHoGTyfToldIWHlM9hj20Tjy5",
+    "mimeType": "application/msword",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater_arcMap10.1.mxd",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater/Mars_PublishedGeologicMaps_1Mscale_greater_arcMap10.1.mxd",
+    "size": "791552",
+    "webViewLink": "https://docs.google.com/document/d/1reIVZj_MHoGTyfToldIWHlM9hj20Tjy5/edit?usp=drivesdk&ouid=115449543915782521449&rtpof=true&sd=true"
+  },
+  {
+    "id": "1fusJZFtjupYUnfcYJo6bSaq23urRYgbb",
+    "mimeType": "application/octet-stream",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.shx",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater/Mars_PublishedGeologicMaps_1Mscale_greater.shx",
+    "size": "276",
+    "webViewLink": "https://drive.google.com/file/d/1fusJZFtjupYUnfcYJo6bSaq23urRYgbb/view?usp=drivesdk"
+  },
+  {
+    "id": "1iv77z-QZZ3cqpv9YAEbR4Q-lMcu_z9SP",
+    "mimeType": "text/xml",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.shp.xml",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater/Mars_PublishedGeologicMaps_1Mscale_greater.shp.xml",
+    "size": "15798",
+    "webViewLink": "https://drive.google.com/file/d/1iv77z-QZZ3cqpv9YAEbR4Q-lMcu_z9SP/view?usp=drivesdk"
+  },
+  {
+    "id": "1B3tIFa4IM8BEHsxiM79oLs-kzBPxU4fR",
+    "mimeType": "application/octet-stream",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.shp",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater/Mars_PublishedGeologicMaps_1Mscale_greater.shp",
+    "size": "583800",
+    "webViewLink": "https://drive.google.com/file/d/1B3tIFa4IM8BEHsxiM79oLs-kzBPxU4fR/view?usp=drivesdk"
+  },
+  {
+    "id": "12CJtF3s64lXZqKYTxOgVBoZWKbWD_80Y",
+    "mimeType": "application/octet-stream",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.prj",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater/Mars_PublishedGeologicMaps_1Mscale_greater.prj",
+    "size": "169",
+    "webViewLink": "https://drive.google.com/file/d/12CJtF3s64lXZqKYTxOgVBoZWKbWD_80Y/view?usp=drivesdk"
+  },
+  {
+    "id": "1wkjocM9QeCnQF5De_OCh1rghh35DDzv9",
+    "mimeType": "application/pdf",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.pdf",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater/Mars_PublishedGeologicMaps_1Mscale_greater.pdf",
+    "size": "1130476",
+    "webViewLink": "https://drive.google.com/file/d/1wkjocM9QeCnQF5De_OCh1rghh35DDzv9/view?usp=drivesdk"
+  },
+  {
+    "id": "1usD0D9jil7QvBElDadM-zNnMr_Gd8dTE",
+    "mimeType": "application/octet-stream",
+    "name": "Mars_PublishedGeologicMaps_1Mscale_greater.dbf",
+    "path": "sim3292_database/SIM3292_MarsGlobalGeologicGIS_20M/Mars_PublishedGeologicMaps_1Mscale_greater/Mars_PublishedGeologicMaps_1Mscale_greater.dbf",
+    "size": "12678",
+    "webViewLink": "https://drive.google.com/file/d/1usD0D9jil7QvBElDadM-zNnMr_Gd8dTE/view?usp=drivesdk"
+  }
+]
