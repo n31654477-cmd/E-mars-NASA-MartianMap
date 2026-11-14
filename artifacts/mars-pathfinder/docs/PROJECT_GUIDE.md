@@ -533,37 +533,7 @@ The response contains grid, oldRoute, newRoute, event and events. Each stored ev
 
 The server rebuilds the baseline and replays events, including closures. It does not accept arbitrary replacements for source evidence. A maximum of 50 events is allowed. There is no scenario save/import UI or persistent scenario database; reload loses page state.
 
-## 13. Troubleshooting
-
-| Symptom | What to check |
-| --- | --- |
-| node is not recognized | Reopen PowerShell after installing; add C:\Program Files\nodejs to this session's PATH |
-| npm.ps1 cannot be loaded | Use npm.cmd and pnpm.cmd; do not loosen execution policy just for this |
-| pnpm.cmd is not recognized | Add the path printed by npm.cmd config get prefix |
-| sh is not recognized during install | Install Git for Windows; add C:\Program Files\Git\usr\bin |
-| Cannot find @rollup/rollup-win32-x64-msvc or other native modules | Apply the four Windows x64 exclusion removals, then reinstall with --no-frozen-lockfile |
-| Vite says PORT or BASE_PATH is missing | Run the frontend environment assignments in the same window that starts Vite |
-| API startup reports missing catalog or geometry files | Restore the eight runtime files at the exact root-relative paths |
-| Workspace data root unavailable | Keep the complete source layout, including research; do not copy only backend |
-| Map shows an error reading length / API returns HTML | Confirm both processes; enable LOCAL_API_PROXY=1 and restart Vite |
-| Proxy works but map remains stale | Refresh the browser; check both PowerShell windows for errors |
-| No route | Check bounds, midpoint geology coverage and forbidden event origins; B may be closed |
-| Safe route still enters a purple neighbor | Residuals are passable weighted costs, not closures; only central event cells are strictly forbidden |
-| Amber path crosses red | It is historical and no longer feasible; follow the solid blue model route only |
-| Changing controls removes scenario | Expected invalidation behavior; the previous calculation no longer matches inputs |
-| Another process uses port 18219 or 18220 | Inspect Get-NetTCPConnection -LocalPort 18219,18220; stop only the process you recognize |
-
-Check the frontend proxy's content type if needed:
-
-```powershell
-$r = Invoke-WebRequest -UseBasicParsing `
-  "http://localhost:18219/mars-pathfinder/api/mars/layers/layer-03/features"
-$r.Headers["Content-Type"]
-```
-
-It should be application/json, not text/html. Current source includes the conditional local proxy. If an older download lacks LOCAL_API_PROXY in vite.config.ts, update that source rather than assuming the environment flag alone creates a proxy.
-
-## 14. Developer checks and maintenance
+## 13. Developer checks and maintenance
 
 Run from the workspace root:
 
@@ -590,7 +560,7 @@ pnpm.cmd --filter @workspace/api-spec run codegen
 
 Keep original observations separate from derived risk and simulated events. Do not substitute a different algorithm or objective without documenting the change. Large source/derived data and generated documentation exports are excluded from Git; retain or regenerate them separately.
 
-## 15. Scope of local operation
+## 14. Scope of local operation
 
 The two-process procedure above runs the Mars map and API locally. It does not automatically start the separate Source Explorer, regenerate missing export archives, or publish the app.
 
