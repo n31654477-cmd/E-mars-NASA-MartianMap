@@ -1,0 +1,28 @@
+kind = "slides"
+previewPath = "/emars-mission/"
+title = "E-Mars · Interplanetary Survival Guide"
+description = "An interactive 16:9 opening presentation slide with procedural 3D Martian terrain, an astronaut, destination beacon and a cinematic tactical route reveal. Illustrative scenario, separate from scientific routing results."
+version = "1.0.0"
+id = "artifacts/emars-mission"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/emars-mission/" ]
+localPort = 23542
+
+[services.development]
+run = "pnpm --filter @workspace/emars-mission run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/emars-mission", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/emars-mission/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23542"
+BASE_PATH = "/emars-mission/"
