@@ -15,6 +15,10 @@ The user subsequently requested an explicit weighted per-cell risk formula and s
 
 The user's “D-value increase” means increasing one existing factor at a cell, not changing factor weights or adding an unrelated penalty. Random-event scenarios must support manual map-area selection, area-dependent residual increases in at most eight neighboring cells, automatic rerouting, and differently colored old/new paths. Treat these as hypothetical changes to derived factors, never edited source observations.
 
+The user requires route graphics to connect to the exact plotted endpoint dots. Preserve center-based routing accuracy by identifying any within-cell display connectors as schematic and uncosted rather than implying measured sub-cell safety.
+
+The user also requires optional traveler placement on the current path **before** triggering a random event; rerouting then begins at that position and ends at B. With no position provided, preserve full-route event behavior. Once moved, later events must not return the traveler to A unless the scenario is reset.
+
 **Why:** The user explicitly defined D-value changes this way in the screenshot-based feature request and prioritizes prototype algorithm correctness and scientific accuracy over implementation convenience or visual appearance.
 
 **How to apply:** Apply these requirements to the Mars pathfinder development, not merely the existing source-data explorer. Missing prototype source must not be replaced with guessed implementations.

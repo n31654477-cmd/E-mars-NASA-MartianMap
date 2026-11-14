@@ -99,4 +99,15 @@ var absent=baseline with { Cells=(ScientificCell[])baseline.Cells.Clone() };
 absent.Cells[12]=absent.Cells[12] with { Assessment=empty };
 try{HazardService.Apply(absent,ev);throw new Exception("Missing geology origin accepted");}catch(ArgumentException){checks++;}
 Check(HazardService.Apply(absent,new(2,1,"terrain",.1)).Changes.All(c=>c.Row!=2||c.Col!=2),"Missing coverage neighbor excluded");
+var pathFixture=baseline.Cells.Take(5).ToArray();
+var full=new ScientificRoute(true,"fixture",[],pathFixture,pathFixture.Skip(1).Sum(c=>c.Df),69,69,0,"fixture",false,124,"fixture");
+var remaining=GridService.RemainingRoute(full,2);
+Check(remaining.Path.SequenceEqual(pathFixture.Skip(2)),"Traveler keeps exact path suffix");
+Check(remaining.TotalCost==pathFixture.Skip(3).Sum(c=>c.Df),"Traveler cost excludes completed travel and current cell");
+Check(remaining.AccumulatedRisk==pathFixture.Skip(3).Sum(c=>c.Assessment.RiskScore),"Remaining risk excludes completed travel");
+Check(remaining.DistanceKm>0&&remaining.Path.Length==3,"Remaining path has recomputed distance");
+Check(full.Path.Length==5,"Trimming does not mutate original route");
+foreach(int index in new[]{-1,4,5,999}) {
+ try{GridService.RemainingRoute(full,index);throw new Exception("Invalid traveler index accepted");}catch(ArgumentException){checks++;}
+}
 Console.WriteLine($"PASS: {checks} algorithm, risk, scenario and input checks");

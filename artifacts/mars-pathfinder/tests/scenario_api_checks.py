@@ -34,6 +34,15 @@ def positions(route):
 def close(a, b):
     return math.isclose(a, b, rel_tol=1e-10, abs_tol=1e-10)
 
+def distance(path):
+    total = 0
+    for a, b in zip(path, path[1:]):
+        lat_a, lat_b = math.radians(a["centerLat"]), math.radians(b["centerLat"])
+        dl = math.radians(b["centerLng"] - a["centerLng"])
+        hav = math.sin((lat_b-lat_a)/2)**2 + math.cos(lat_a)*math.cos(lat_b)*math.sin(dl/2)**2
+        total += 2*3396.190*math.asin(math.sqrt(max(0, min(1, hav))))
+    return total
+
 
 bounds = dict(startLat=-10, endLat=10, startLng=-20, endLng=20, rows=10, columns=10)
 for algorithm in ("bfs", "dijkstra", "astar"):
@@ -82,6 +91,42 @@ for algorithm in ("bfs", "dijkstra", "astar"):
     check(close(second["oldRoute"]["totalCost"], first["newRoute"]["totalCost"]), "Cumulative costs replay")
     replay = post("/route", {**route, "events": second["events"]})
     check(replay == second["newRoute"], "Route endpoint replays scenario costs exactly")
+
+    # Traveler is chosen BEFORE hazard generation on the visible current route.
+    index = len(baseline["path"]) // 2
+    traveler = baseline["path"][index]
+    moved = post("/event", dict(route=route, seed=42, travelerPathIndex=index))
+    remaining = positions(baseline)[index:]
+    check(positions(moved["oldRoute"]) == remaining, "Pre-event comparison keeps exact remaining suffix")
+    check(positions(moved["newRoute"])[0] == remaining[0], "New route starts at traveler")
+    check(positions(moved["newRoute"])[-1] == remaining[-1], "Destination B unchanged")
+    check(close(moved["oldRoute"]["totalCost"], sum(c["df"] for c in baseline["path"][index+1:])),
+          "Remaining comparison excludes traveled cells and starting traveler")
+    check(close(moved["oldRoute"]["avgSafetyScore"],
+                sum(c["safetyScore"] for c in baseline["path"][index:]) / len(remaining)),
+          "Remaining safety average reflects only suffix")
+    moved_spec = moved["event"]["spec"]
+    check((moved_spec["row"], moved_spec["col"]) in remaining[1:],
+          "Event origin is ahead of traveler on remaining route")
+    check(close(moved["oldRoute"]["distanceKm"], distance(baseline["path"][index:])),
+          "Remaining distance matches exact remaining model path")
+    continued_input = {**route, "startLat": traveler["centerLat"], "startLng": traveler["centerLng"],
+                       "events": moved["events"]}
+    continued = post("/event", dict(route=continued_input, seed=91))
+    check(positions(continued["oldRoute"]) == positions(moved["newRoute"]),
+          "Consecutive event keeps moved origin without teleporting to A")
+    check(continued["newRoute"]["path"][0]["row"] == traveler["row"] and
+          continued["newRoute"]["path"][0]["col"] == traveler["col"], "Continued route still starts at traveler")
+    next_index = min(1, len(continued["newRoute"]["path"]) - 2)
+    advanced = post("/event", dict(route={**continued_input, "events": continued["events"]},
+                                  seed=3, travelerPathIndex=next_index))
+    check(positions(advanced["oldRoute"]) == positions(continued["newRoute"])[next_index:],
+          "Can advance traveler again before next event")
+    unchanged = post("/event", dict(route=route, seed=42, travelerPathIndex=0))
+    check(positions(unchanged["newRoute"]) == positions(first["newRoute"]) and
+          unchanged["event"] == first["event"], "Selecting first cell preserves random scenario")
+    for invalid_index in (-1, len(baseline["path"]) - 1, 99999, 1.5):
+        post("/event", dict(route=route, travelerPathIndex=invalid_index), 400)
 
 post("/event", {"route": None}, 400)
 post("/event", {"route": {**route, "algorithm": "invalid"}}, 400)

@@ -67,6 +67,14 @@ The interval 0.05–0.25, attenuation 0.5 and reference area 10,000 km² are ana
 
 The unchanged algorithms recalculate with updated DF. The old route is wide/dashed amber and the new route solid blue; geometry may remain identical, particularly with unweighted BFS. The UI compares pre-event cost, the old path re-costed on the new grid (start uncharged), and new path cost. This distinguishes a real reroute advantage from a change in costs alone.
 
+### Traveler position and endpoint display
+
+Before triggering an event, optionally select the traveler/vehicle's current waypoint on the active route. Selection is snapped to an existing modeled cell center; it is not a continuous GPS or sub-cell location. Selection alone does not trigger an event. The next event is sampled on the remaining entered route cells ahead of that position, then rerouting runs from the traveler to B. The old-route comparison uses the exact remaining suffix, not completed travel. Costs exclude the current starting cell, as in the unchanged algorithms. The destination cannot be used as a traveler position because no remaining journey exists.
+
+The event API accepts optional `travelerPathIndex` (zero-based index on the route reconstructed from the request's origin and current event history). The server validates that index before sampling, and rejects negative, destination or off-path indices. After movement, subsequent event requests must retain the moved origin along with event history; omitting a new position does not teleport the traveler back to A. Reset restores the original A-to-B baseline. With no position ever selected, behavior remains unchanged.
+
+Exact A/B click markers connect to the center-to-center route using separately styled dashed, schematic within-cell links. These links fix the visual endpoint mismatch without changing grid nodes, prototype algorithms, route costs or reported center-to-center distance. No sub-cell topography or traversability is inferred from these display links.
+
 Events accumulate up to 50, with an event seed and explicit replayable increments returned by `POST /mars-pathfinder/api/mars/event`. `POST /route` accepts the same optional event history. The server re-derives a source grid then replays increments rather than accepting arbitrary replacements for measured/source values. Scenarios live only in page memory: Reset restores the baseline grid and original route; changing endpoints, algorithm or bounds clears the scenario, and reload discards it.
 
 Additional checks:

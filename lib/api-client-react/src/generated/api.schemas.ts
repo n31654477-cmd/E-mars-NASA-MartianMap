@@ -232,6 +232,11 @@ export interface MarsRouteInput {
 export interface MarsScenarioInput {
   route: MarsRouteInput;
   seed?: number;
+  /**
+     * Optional index on the current pre-event route. Set before the event; uses that cell as the remaining-route origin. Must precede the destination. Omit to preserve full-route behavior.
+     * @minimum 0
+     */
+  travelerPathIndex?: number;
 }
 
 export interface MarsEventChange {

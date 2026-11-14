@@ -328,6 +328,8 @@ export const simulateMarsEventBodyRouteEventsItemDeltaMax = 0.25;
 
 export const simulateMarsEventBodyRouteEventsMax = 50;
 
+export const simulateMarsEventBodyTravelerPathIndexMin = 0;
+
 
 
 export const SimulateMarsEventBody = zod.object({
@@ -352,7 +354,8 @@ export const SimulateMarsEventBody = zod.object({
   "delta": zod.number().gt(simulateMarsEventBodyRouteEventsItemDeltaExclusiveMin).max(simulateMarsEventBodyRouteEventsItemDeltaMax)
 })).max(simulateMarsEventBodyRouteEventsMax).optional()
 }),
-  "seed": zod.number().int().optional()
+  "seed": zod.number().int().optional(),
+  "travelerPathIndex": zod.number().int().min(simulateMarsEventBodyTravelerPathIndexMin).optional().describe('Optional index on the current pre-event route. Set before the event; uses that cell as the remaining-route origin. Must precede the destination. Omit to preserve full-route behavior.')
 })
 
 export const simulateMarsEventResponseGridBoundsStartLatMin = -90;

@@ -248,6 +248,10 @@ components:
       properties:
         route: { $ref: "#/components/schemas/MarsRouteInput" }
         seed: { type: integer, format: int32 }
+        travelerPathIndex:
+          type: integer
+          minimum: 0
+          description: Optional index on the current pre-event route. Set before the event; uses that cell as the remaining-route origin. Must precede the destination. Omit to preserve full-route behavior.
     MarsEventChange:
       type: object
       required: [row, col, origin, areaKm2, factorBefore, factorAfter, dfBefore, dfAfter, deltaDf]

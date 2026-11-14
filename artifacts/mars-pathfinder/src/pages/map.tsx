@@ -11,7 +11,7 @@ import Point from 'ol/geom/Point';
 import Polygon from 'ol/geom/Polygon';
 import LineString from 'ol/geom/LineString';
 import { RiskBreakdown } from '@/components/risk-breakdown';
-import { Style, Fill, Stroke, Circle as CircleStyle, Text } from 'ol/style';
+import { Style, Fill, Stroke, Circle as CircleStyle, Text, RegularShape } from 'ol/style';
 import type { FeatureLike } from 'ol/Feature';
 import {
   useGetMarsSummary, useGetMarsFeatures, useInspectMarsLocation, useGenerateMarsGrid, useAssessMarsRoute,
@@ -19,7 +19,7 @@ import {
 } from '@workspace/api-client-react';
 import type { MarsFeatureCollection, MarsGrid, MarsRouteInput, MarsRoutingStatus, MarsRouteInputAlgorithm as RouteAlg } from '@workspace/api-client-react';
 import { BoxSelect, Crosshair, Flag, MapPin, Maximize, Minus, Plus, Grid3x3, Route as RouteIcon, X } from 'lucide-react';
-import { boundsFromCorners, insideBounds, pathCostOnGrid } from '@/lib/scenario';
+import { boundsFromCorners, insideBounds, pathCostOnGrid, routeDisplayGeometry, nearestPathIndex, type XY } from '@/lib/scenario';
 import { RouteLegend, ScenarioPanel, type Scenario } from '@/components/scenario-panel';
 import { marsProjection, MARS_EXTENT, unitColor } from '@/lib/mars-proj';
 import { ErrorPanel, Sk, Unknown } from '@/components/shell';
@@ -32,7 +32,7 @@ const LAYERS: { id: LayerId; label: string }[] = [
   { id: 'layer-04', label: 'Landing sites' },
 ];
 type Pt = { lat: number; lng: number };
-type Mode = 'inspect' | 'start' | 'end' | 'area';
+type Mode = 'inspect' | 'start' | 'end' | 'area' | 'traveler';
 const cellRing = (c: { centerLng: number; centerLat: number; width: number; height: number }) => { const w = c.width / 2, h = c.height / 2; return [[[c.centerLng - w, c.centerLat - h], [c.centerLng + w, c.centerLat - h], [c.centerLng + w, c.centerLat + h], [c.centerLng - w, c.centerLat + h], [c.centerLng - w, c.centerLat - h]]]; };
 const rectRing = (a: Pt, b: Pt) => [[[a.lng, a.lat], [b.lng, a.lat], [b.lng, b.lat], [a.lng, b.lat], [a.lng, a.lat]]];
 
@@ -67,6 +67,7 @@ export default function MapPage() {
   const eventSrc = useRef(new VectorSource());
   const cornerRef = useRef<Pt | null>(null);
   const applyCornersRef = useRef<(a: Pt, b: Pt) => void>(() => {});
+  const pickTravelerRef = useRef<(px: XY) => void>(() => {});
 
   const [visible, setVisible] = useState<Record<string, boolean>>({ 'layer-02': true, 'layer-03': true, 'layer-04': true, 'layer-05': true, hill: true, grid: true });
   const [mode, setMode] = useState<Mode>('inspect');
@@ -90,6 +91,8 @@ export default function MapPage() {
   const [activeGrid, setActiveGrid] = useState<MarsGrid | null>(null);
   const [routeState, setRouteState] = useState<{ input: MarsRouteInput; result: MarsRoutingStatus } | null>(null);
   const [scenario, setScenario] = useState<Scenario | null>(null);
+  const [traveler, setTraveler] = useState<number | null>(null);
+  const [travelerMsg, setTravelerMsg] = useState<string | null>(null);
   const [corner, setCorner] = useState<Pt | null>(null);
   const [areaMsg, setAreaMsg] = useState<string | null>(null);
   const routeResult = routeState?.result;
@@ -98,13 +101,13 @@ export default function MapPage() {
 
   const clearRoute = useCallback(() => {
     routeEpoch.current++; route.reset(); sim.reset();
-    setRouteState(null); setScenario(null); setActiveGrid(sourceGridRef.current);
+    setRouteState(null); setScenario(null); setActiveGrid(sourceGridRef.current); setTraveler(null); setTravelerMsg(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const gridKey = JSON.stringify(gridForm);
   useEffect(() => { // bounds/resolution changed: old grid, route and scenario no longer describe the selection
     gridEpoch.current++; routeEpoch.current++; grid.reset(); route.reset(); sim.reset();
-    setSourceGrid(null); setActiveGrid(null); setRouteState(null); setScenario(null);
+    setSourceGrid(null); setActiveGrid(null); setRouteState(null); setScenario(null); setTraveler(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gridKey]);
   useEffect(() => { clearRoute(); }, [start?.lat, start?.lng, end?.lat, end?.lng, routeAlg, clearRoute]);
@@ -123,29 +126,49 @@ export default function MapPage() {
   const generate = () => {
     const ep = ++gridEpoch.current; routeEpoch.current++;
     setSourceGrid(null); setActiveGrid(null);
-    setRouteState(null); setScenario(null); sim.reset(); route.reset();
+    setRouteState(null); setScenario(null); setTraveler(null); sim.reset(); route.reset();
     const input = { ...gridForm };
     grid.mutate({ data: input }, { onSuccess: (g) => { if (ep !== gridEpoch.current) return; setSourceGrid(g); setActiveGrid(g); } });
   };
   const assess = () => {
     if (!start || !end || !sourceGrid) return;
-    const ep = ++routeEpoch.current; sim.reset(); setScenario(null); setActiveGrid(sourceGrid); setRouteState(null);
+    const ep = ++routeEpoch.current; sim.reset(); setScenario(null); setTraveler(null); setActiveGrid(sourceGrid); setRouteState(null);
     const input: MarsRouteInput = { algorithm: routeAlg, startLat: start.lat, startLng: start.lng, endLat: end.lat, endLng: end.lng, grid: sourceGrid.bounds };
     route.mutate({ data: input }, { onSuccess: (r) => { if (ep === routeEpoch.current) setRouteState({ input, result: r }); } });
   };
+  const currentPath = scenario ? scenario.newRoute : routeResult;
+  const selectableCount = currentPath?.available ? Math.max(0, currentPath.path.length - 1) : 0;
+  const travelerCell = traveler !== null && traveler < selectableCount ? currentPath?.path[traveler] : undefined;
   const simulate = () => {
-    if (!routeState) return;
+    if (!routeState || !currentPath) return;
     const ep = routeEpoch.current;
     const prevEvents = scenario?.events ?? [];
-    sim.mutate({ data: { route: { ...routeState.input, events: prevEvents } } }, { onSuccess: (r) => {
+    // Effective origin reconstructs the SAME active path server-side, even after selection is cleared.
+    const origin = scenario?.origin ?? { lat: routeState.input.startLat, lng: routeState.input.startLng };
+    const idx = traveler !== null && traveler < selectableCount ? traveler : null;
+    const cell = idx !== null ? currentPath.path[idx] : null;
+    const nextOrigin = cell ? { lat: cell.centerLat, lng: cell.centerLng } : origin;
+    const moved = (scenario?.moved ?? false) || idx !== null;
+    sim.mutate({ data: { route: { ...routeState.input, startLat: origin.lat, startLng: origin.lng, events: prevEvents }, ...(idx !== null ? { travelerPathIndex: idx } : {}) } }, { onSuccess: (r) => {
       if (ep !== routeEpoch.current) return;
       setActiveGrid(r.grid);
-      setScenario({ events: r.events, oldRoute: r.oldRoute, oldPathScenarioCost: pathCostOnGrid(r.oldRoute.path, r.grid), newRoute: r.newRoute, event: r.event });
+      setScenario({ events: r.events, oldRoute: r.oldRoute, oldPathScenarioCost: pathCostOnGrid(r.oldRoute.path, r.grid), newRoute: r.newRoute, event: r.event, origin: nextOrigin, moved });
+      // Traveler now stands at index 0 of the rerouted path; later picks move forward from there.
+      setTraveler(idx !== null && r.newRoute.available && r.newRoute.path.length > 1 ? 0 : null);
+      setMode((m) => m === 'traveler' ? 'inspect' : m);
     } });
   };
-  const resetScenario = () => { routeEpoch.current++; sim.reset(); setScenario(null); setActiveGrid(sourceGrid); };
-  const currentPath = scenario ? scenario.newRoute : routeResult;
-  const eventBlock = !routeState ? 'Calculate an experimental route first.' : !currentPath?.available || currentPath.path.length < 2 ? 'The current route has no cell after the start to perturb.' : (scenario?.events.length ?? 0) >= 50 ? 'Scenario limit reached (50 events). Reset to continue.' : undefined;
+  const resetScenario = () => { routeEpoch.current++; sim.reset(); setScenario(null); setTraveler(null); setTravelerMsg(null); setActiveGrid(sourceGrid); };
+  const eventBlock = !routeState ? 'Calculate an experimental route first.' : !currentPath?.available || currentPath.path.length < 2 ? 'The current route has no cell after the start to perturb.' : (scenario?.events.length ?? 0) >= 50 ? 'Scenario limit reached (50 events). Reset to continue.' : traveler !== null && traveler >= selectableCount ? 'Traveler has no remaining entered cell before B.' : undefined;
+  pickTravelerRef.current = (px) => {
+    const map = mapRef.current;
+    if (!map || sim.isPending || !currentPath?.available) return;
+    const pixels = currentPath.path.map((c) => map.getPixelFromCoordinate([c.centerLng, c.centerLat]) as XY);
+    const i = nearestPathIndex(pixels, px, 18);
+    if (i === null) { setTravelerMsg('No selectable waypoint within 18 px. Click near a route cell center (not B).'); return; }
+    setTravelerMsg(null); setTraveler(i);
+  };
+  useEffect(() => { if (mode === 'traveler' && (traveler === null || sim.isPending)) setMode('inspect'); }, [mode, traveler, sim.isPending]);
 
   const selectedCell = useMemo(() => {
     if (!probe || !activeGrid) return undefined;
@@ -173,9 +196,14 @@ export default function MapPage() {
       fill: new Fill({ color: `hsla(${45-(f.get('risk') ?? 100)*.45},85%,45%,.38)` }),
       stroke: new Stroke({ color: 'rgba(31,38,51,.35)', width: 0.5, lineDash: f.get('known') ? undefined : [2, 2] }),
     }) });
-    const marks = new VectorLayer({ source: markSrc.current, style: (f) => new Style({
-      image: new CircleStyle({ radius: 7, fill: new Fill({ color: f.get('kind') === 'probe' ? '#1f2633' : f.get('kind') === 'start' ? '#2f7a6a' : '#a8432a' }), stroke: new Stroke({ color: '#f6efe2', width: 2 }) }),
-    }) });
+    const marks = new VectorLayer({ source: markSrc.current, style: (f) => {
+      const k = f.get('kind');
+      if (k === 'traveler' || k === 'origin') return new Style({ image: new RegularShape({ points: 4, radius: k === 'traveler' ? 10 : 8, angle: 0, fill: new Fill({ color: k === 'traveler' ? '#d9a03a' : '#f6efe2' }), stroke: new Stroke({ color: '#1f2633', width: 2 }) }) });
+      return new Style({
+        image: new CircleStyle({ radius: 7, fill: new Fill({ color: k === 'probe' ? '#1f2633' : k === 'start' ? '#2f7a6a' : '#a8432a' }), stroke: new Stroke({ color: '#f6efe2', width: 2 }) }),
+        text: k === 'probe' ? undefined : new Text({ text: k === 'start' ? 'A' : 'B', font: '600 9px IBM Plex Sans', fill: new Fill({ color: '#f6efe2' }) }),
+      });
+    } });
     const map = new OLMap({
       target: mapEl.current,
       layers: [hill, ...order.map((id) => vec.current[id]), vec.current.grid,
@@ -183,6 +211,7 @@ export default function MapPage() {
         new VectorLayer({ source: routeSrc.current, style: (f) => {
           const k = f.get('kind');
           if (k === 'old') return new Style({ stroke: new Stroke({ color: '#b5651d', width: 7, lineDash: [10, 7] }), image: new CircleStyle({ radius: 8, stroke: new Stroke({ color: '#b5651d', width: 3 }) }) });
+          if (k === 'conn' || k === 'conn-old') return new Style({ stroke: new Stroke({ color: k === 'conn' ? '#1f2633' : '#b5651d', width: 3, lineDash: [0.1, 6], lineCap: 'round' }) });
           if (k === 'new') return new Style({ stroke: new Stroke({ color: '#006e91', width: 3 }), image: new CircleStyle({ radius: 4, fill: new Fill({ color: '#006e91' }) }) });
           return new Style({ stroke: new Stroke({ color: '#006e91', width: 4 }), image: new CircleStyle({ radius: 5, fill: new Fill({ color: '#006e91' }) }) });
         } }),
@@ -197,6 +226,7 @@ export default function MapPage() {
     map.on('singleclick', (e) => {
       const [lng, lat] = e.coordinate;
       const p = { lat: +lat.toFixed(4), lng: +lng.toFixed(4) };
+      if (modeRef.current === 'traveler') { pickTravelerRef.current(e.pixel as XY); return; }
       if (modeRef.current === 'area') {
         if (!cornerRef.current) { cornerRef.current = p; setCorner(p); } else applyCornersRef.current(cornerRef.current, p);
         return;
@@ -233,12 +263,14 @@ export default function MapPage() {
     hillRef.current?.setVisible(visible.hill);
   }, [visible]);
 
+  const travelerPt = travelerCell ? { lat: travelerCell.centerLat, lng: travelerCell.centerLng } : null;
+  const originPt = scenario?.moved ? scenario.origin : null;
   useEffect(() => {
     markSrc.current.clear();
-    ([['probe', probe], ['start', start], ['end', end]] as const).forEach(([kind, p]) => {
+    ([['probe', probe], ['start', start], ['end', end], ['origin', originPt], ['traveler', travelerPt]] as const).forEach(([kind, p]) => {
       if (!p) return; const f = new Feature(new Point([p.lng, p.lat])); f.set('kind', kind); markSrc.current.addFeature(f);
     });
-  }, [probe, start, end]);
+  }, [probe, start, end, originPt?.lat, originPt?.lng, travelerPt?.lat, travelerPt?.lng]);
 
   useEffect(() => {
     gridSrc.current.clear();
@@ -249,9 +281,16 @@ export default function MapPage() {
   }, [activeGrid]);
   useEffect(()=>{
     routeSrc.current.clear(); eventSrc.current.clear();
+    // Exact endpoints come from the request that produced each route, never from later map clicks.
+    const inp = routeState?.input;
+    const exactEnd: XY | null = inp ? [inp.endLng, inp.endLat] : null;
+    const exactStart: XY | null = scenario ? [scenario.origin.lng, scenario.origin.lat] : inp ? [inp.startLng, inp.startLat] : null;
     const add = (r: MarsRoutingStatus | undefined, kind: string) => {
       if (!r?.path.length) return;
-      const points=r.path.map(c=>[c.centerLng,c.centerLat]);
+      const points: XY[] = r.path.map(c=>[c.centerLng,c.centerLat]);
+      // Scenario old/new routes both begin at scenario.origin (exact A, or a traveler cell center where the link is zero-length).
+      const g = routeDisplayGeometry(points, r.available ? exactStart : null, r.available ? exactEnd : null);
+      g.connectors.forEach((c) => { const f = new Feature(new LineString(c.coords)); f.set('kind', kind === 'old' ? 'conn-old' : 'conn'); routeSrc.current.addFeature(f); });
       const f = new Feature(points.length===1?new Point(points[0]):new LineString(points)); f.set('kind', kind); routeSrc.current.addFeature(f);
     };
     if (scenario) {
@@ -261,7 +300,7 @@ export default function MapPage() {
         const f = new Feature(new Polygon(cellRing(c))); f.set('origin', ch.origin); eventSrc.current.addFeature(f);
       });
     } else add(routeResult, 'route');
-  },[routeResult, scenario, activeGrid]);
+  },[routeResult, routeState, scenario, activeGrid]);
   useEffect(() => { // selection rectangle (current bounds) + first corner
     const src = areaSrc.current;
     src.getFeatures().filter((f) => f.get('kind') !== 'preview').forEach((f) => src.removeFeature(f));
@@ -365,7 +404,9 @@ export default function MapPage() {
             <button key={m} onClick={() => setMode(m)} data-testid={`button-mode-${m}`}
               className={`px-3 py-1.5 inline-flex items-center gap-1.5 ${mode === m ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'}`}><Icon className="h-3.5 w-3.5" />{l}</button>))}
         </div>
-        {(routeResult || scenario) && <div className="absolute top-14 right-3"><RouteLegend hasScenario={!!scenario} /></div>}
+        {(routeResult || scenario) && <div className="absolute top-14 right-3"><RouteLegend hasScenario={!!scenario} moved={scenario?.moved} hasTraveler={!!travelerCell} /></div>}
+        {mode === 'traveler' && <div className="absolute top-14 left-1/2 -translate-x-1/2 rounded-md border bg-card/95 px-3 py-1.5 text-xs shadow-sm flex items-center gap-2" data-testid="text-traveler-instructions">
+          Click a route waypoint (snaps to cell center){travelerMsg && <span className="text-destructive">{travelerMsg}</span>}<button onClick={() => setMode('inspect')} className="underline">done</button></div>}
         {mode === 'area' && <div className="absolute top-14 left-1/2 -translate-x-1/2 rounded-md border bg-card/95 px-3 py-1.5 text-xs shadow-sm flex items-center gap-2" data-testid="text-area-instructions">
           {corner ? 'Now click the opposite corner' : 'Click the first corner'}<button onClick={() => setMode('inspect')} className="underline">cancel</button></div>}
         {(f03.isLoading || f02.isLoading) && <div className="absolute inset-x-0 top-0 h-0.5 bg-primary/60 animate-pulse" />}
@@ -429,6 +470,7 @@ export default function MapPage() {
               <p className="mt-1 text-xs text-muted-foreground">{routeResult.reason}</p>
               {routeResult.available && <dl className="mt-3 text-xs space-y-1">
                 <div>Path cells: {routeResult.path.length} · Moves: {Math.max(0,routeResult.path.length-1)}</div>
+                <div className="text-muted-foreground">Costs and distance use cell centers only; dotted links to the exact A/B dots are display-only.</div>
                 <div>Center-to-center distance: {routeResult.distanceKm.toFixed(2)} km</div>
                 <div>Accumulated DF: {routeResult.totalCost.toFixed(4)}</div>
                 <div>Entered-cell risk sum: {routeResult.accumulatedRisk.toFixed(2)} (not a probability)</div>
@@ -442,7 +484,10 @@ export default function MapPage() {
           {summary.data && !routeResult && <p className="mt-3 text-xs text-muted-foreground">{summary.data.limitation}</p>}
         </section>
         <ScenarioPanel canSimulate={!eventBlock} disabledReason={eventBlock} pending={sim.isPending} error={sim.isError ? sim.error : null}
-          onSimulate={simulate} onReset={resetScenario} scenario={scenario} />
+          onSimulate={simulate} onReset={resetScenario} scenario={scenario}
+          selectableCount={selectableCount} traveler={traveler} travelerCell={travelerCell}
+          onTravelerChange={(i) => { if (sim.isPending) return; setTraveler(i); setTravelerMsg(null); if (i === null) setMode('inspect'); }}
+          picking={mode === 'traveler'} onTogglePick={() => setMode(mode === 'traveler' ? 'inspect' : 'traveler')} />
         {summary.data && (
           <section className="border-t pt-5 text-xs">
             <h2 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-2">Inventory · {summary.data.layers.length} layers</h2>

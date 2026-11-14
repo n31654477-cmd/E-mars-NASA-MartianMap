@@ -43,6 +43,22 @@ public class GridService(RiskService risk) {
             _=>throw new ArgumentException("Unknown algorithm")
         };
         var path=result.Path.Select(p=>g.Cells[p.Row*g.Columns+p.Col]).ToArray();
+        return new(path.Length>0,path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers.":"No route within the model's covered grid.",
+            RiskService.Unknowns,path,result.TotalCost,result.AvgSafetyScore,result.MinSafetyScore,PathDistanceKm(path),RiskService.Version,false,
+            path.Skip(1).Sum(c=>c.Assessment.RiskScore),RiskService.Warning);
+    }
+    public static ScientificRoute RemainingRoute(ScientificRoute route,int index) {
+        if(index<0||index>=route.Path.Length-1)
+            throw new ArgumentException("Traveler position must be a cell on the current path before destination B.");
+        var path=route.Path.Skip(index).ToArray();
+        return route with {
+            Path=path,TotalCost=path.Skip(1).Sum(c=>c.Df),
+            AvgSafetyScore=path.Average(c=>c.SafetyScore),MinSafetyScore=path.Min(c=>c.SafetyScore),
+            DistanceKm=PathDistanceKm(path),AccumulatedRisk=path.Skip(1).Sum(c=>c.Assessment.RiskScore),
+            Reason="Remaining experimental route from the selected traveler cell to B; not verified traversability."
+        };
+    }
+    private static double PathDistanceKm(ScientificCell[] path) {
         double distance=0;
         for(int i=1;i<path.Length;i++) {
             double a=path[i-1].CenterLat*Math.PI/180,b=path[i].CenterLat*Math.PI/180;
@@ -50,8 +66,6 @@ public class GridService(RiskService risk) {
             double hav=Math.Pow(Math.Sin((b-a)/2),2)+Math.Cos(a)*Math.Cos(b)*Math.Pow(Math.Sin(dl/2),2);
             distance+=2*3396.190*Math.Asin(Math.Sqrt(Math.Clamp(hav,0,1)));
         }
-        return new(path.Length>0,path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers.":"No route within the model's covered grid.",
-            RiskService.Unknowns,path,result.TotalCost,result.AvgSafetyScore,result.MinSafetyScore,distance,RiskService.Version,false,
-            path.Skip(1).Sum(c=>c.Assessment.RiskScore),RiskService.Warning);
+        return distance;
     }
 }

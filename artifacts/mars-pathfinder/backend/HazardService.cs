@@ -3,7 +3,7 @@ namespace Mars;
 // Scenario increments are separate from immutable source observations. They are
 // replayed on a freshly derived grid so requests cannot silently replace evidence.
 public record HazardEventSpec(int Row,int Col,string Factor,double Delta);
-public record ScenarioInput(RouteInput Route,int? Seed=null);
+public record ScenarioInput(RouteInput Route,int? Seed=null,int? TravelerPathIndex=null);
 public record EventChange(int Row,int Col,bool Origin,double AreaKm2,double FactorBefore,double FactorAfter,double DfBefore,double DfAfter,double DeltaDf);
 public record EventDetail(int Seed,HazardEventSpec Spec,EventChange[] Changes,string Formula,string Warning);
 public record ScenarioResult(ScientificGrid Grid,ScientificRoute OldRoute,ScientificRoute NewRoute,EventDetail Event,HazardEventSpec[] Events);
@@ -81,6 +81,15 @@ public class HazardService(GridService grids)
         var oldRoute=grids.RouteOnGrid(r,grid);
         if(!oldRoute.Available||oldRoute.Path.Length<2)
             throw new ArgumentException("Generate a route between different cells before simulating an event.");
+        // Validate against the visible pre-event path, before sampling the event.
+        // Keep its exact remaining suffix rather than silently substituting an
+        // alternative equally optimal pre-event route from the traveler.
+        if(input.TravelerPathIndex is int index)
+        {
+            oldRoute=GridService.RemainingRoute(oldRoute,index);
+            var traveler=oldRoute.Path[0];
+            r=r with { StartLat=traveler.CenterLat,StartLng=traveler.CenterLng };
+        }
         // Start is uncharged by the original algorithms, so select only entered
         // path cells. Pick an eligible cell uniformly, then an eligible factor.
         var candidates=oldRoute.Path.Skip(1).Where(c=>c.Assessment.Factors.Any(f=>f.Id is "terrain" or "structure" && f.RawScore<1-1e-10)).ToArray();

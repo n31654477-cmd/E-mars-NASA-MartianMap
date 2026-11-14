@@ -58,3 +58,28 @@ test('samePathGeometry compares ordered row/col sequences', () => {
   assert.ok(!samePathGeometry(route([[0, 0]]), route([[0, 0], [0, 1]])));
   assert.ok(!samePathGeometry(undefined, route([[0, 0]])));
 });
+
+import { routeDisplayGeometry, nearestPathIndex } from './scenario';
+
+test('display geometry keeps centers and adds exact-endpoint connectors', () => {
+  const g = routeDisplayGeometry([[0, 0], [1, 0]], [0.2, 0.1], [1.3, -0.2]);
+  assert.deepEqual(g.core, [[0, 0], [1, 0]]);
+  assert.deepEqual(g.connectors, [{ at: 'start', coords: [[0.2, 0.1], [0, 0]] }, { at: 'end', coords: [[1, 0], [1.3, -0.2]] }]);
+});
+
+test('display geometry: same cell route and duplicate coords', () => {
+  const g = routeDisplayGeometry([[5, 5]], [5.1, 5], [4.9, 5]);
+  assert.equal(g.connectors.length, 2);
+  assert.deepEqual(g.connectors[0].coords[1], [5, 5]);
+  assert.deepEqual(g.connectors[1].coords[0], [5, 5]);
+  assert.equal(routeDisplayGeometry([[5, 5]], [5, 5], [5, 5]).connectors.length, 0);
+  assert.equal(routeDisplayGeometry([], [1, 1], [2, 2]).connectors.length, 0);
+});
+
+test('nearest path index excludes destination and respects tolerance', () => {
+  const px: [number, number][] = [[0, 0], [20, 0], [40, 0]];
+  assert.equal(nearestPathIndex(px, [18, 3], 10), 1);
+  assert.equal(nearestPathIndex(px, [40, 0], 10), null);
+  assert.equal(nearestPathIndex(px, [100, 100], 10), null);
+  assert.equal(nearestPathIndex([[0, 0]], [0, 0], 10), null);
+});

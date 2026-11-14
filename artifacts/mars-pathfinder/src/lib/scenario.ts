@@ -50,3 +50,34 @@ export function pathCostOnGrid(path: { row: number; col: number }[], grid: MarsG
   }
   return sum;
 }
+
+export type XY = [number, number];
+const sameXY = (a: XY, b: XY) => a[0] === b[0] && a[1] === b[1];
+
+/**
+ * Display geometry for a cell-center path whose true endpoints are exact plotted points.
+ * `core` is the unchanged center-to-center path (what the algorithm costed). Connectors are
+ * uncosted, schematic within-cell links from the exact start point to the first center and
+ * from the last center to the exact end point. Zero-length connectors are omitted.
+ */
+export function routeDisplayGeometry(centers: XY[], exactStart: XY | null, exactEnd: XY | null) {
+  const connectors: { at: 'start' | 'end'; coords: [XY, XY] }[] = [];
+  if (!centers.length) return { core: centers, connectors };
+  const first = centers[0], last = centers[centers.length - 1];
+  if (exactStart && !sameXY(exactStart, first)) connectors.push({ at: 'start', coords: [exactStart, first] });
+  if (exactEnd && !sameXY(exactEnd, last)) connectors.push({ at: 'end', coords: [last, exactEnd] });
+  return { core: centers, connectors };
+}
+
+/**
+ * Nearest selectable path waypoint to a screen pixel. Only indices 0..length-2 are eligible
+ * (the destination cell cannot host the traveler). Returns null beyond the pixel tolerance.
+ */
+export function nearestPathIndex(pixels: XY[], click: XY, tolerancePx: number): number | null {
+  let best: number | null = null, bestD = Infinity;
+  for (let i = 0; i < pixels.length - 1; i++) {
+    const d = Math.hypot(pixels[i][0] - click[0], pixels[i][1] - click[1]);
+    if (d < bestD) { bestD = d; best = i; }
+  }
+  return best !== null && bestD <= tolerancePx ? best : null;
+}
