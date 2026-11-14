@@ -2,7 +2,7 @@
 
 ## Complete project documentation
 
-See [the project guide](docs/PROJECT_GUIDE.md) for Windows PowerShell installation and startup, runtime data, interface usage, exact DF/category equations, route objectives, traveler placement, event closures/residuals, API examples, troubleshooting and developer checks. Word and PDF copies can be regenerated using `python artifacts/mars-pathfinder/docs/export_guide.py` when python-docx and ReportLab are installed; Python is not required to run the app.
+See [the Markdown project guide](docs/PROJECT_GUIDE.md) for Windows PowerShell installation and startup, runtime data, interface usage, exact DF/category equations, route objectives, traveler placement, event closures/residuals, API examples, and developer checks. Word and PDF copies can be regenerated using `python artifacts/mars-pathfinder/docs/export_guide.py` when python-docx and ReportLab are installed; Python is not required to run the app.
 
 ## Approved scientific scope
 
