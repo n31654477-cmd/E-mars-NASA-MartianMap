@@ -74,14 +74,15 @@ for algorithm in ("bfs", "dijkstra", "astar"):
             check(close(change["deltaDf"], weight * residual / 100), "Exact area residual equation")
             check(0 < change["deltaDf"] < origin["deltaDf"], "Residual added danger is smaller")
     cells = {(c["row"], c["col"]): c for c in first["grid"]["cells"]}
-    old_path_updated_cost = sum(cells[p]["df"] for p in positions(baseline)[1:])
-    check(first["newRoute"]["totalCost"] <= old_path_updated_cost + 1e-10,
-          "Reroute no more costly than old path on same scenario")
+    check(not any(c["blocked"] for c in first["newRoute"]["path"]), "New path avoids every forbidden cell")
+    check((spec["row"], spec["col"]) not in positions(first["newRoute"]), "Event origin never crossed")
+    check(positions(first["oldRoute"]) != positions(first["newRoute"]), "Even BFS must leave old forbidden path")
     for cell in first["grid"]["cells"]:
         assessment = cell["assessment"]
         check(close(cell["df"], 1 + sum(f["contribution"] for f in assessment["factors"]) / 100),
               "All cells follow exact weighted model")
-        check(cell["blocked"] is None, "Physical traversability remains unknown")
+        check(cell["blocked"] is True if (cell["row"], cell["col"]) == (spec["row"], spec["col"])
+              else cell["blocked"] is None, "Only event origin is operationally forbidden")
         check(len(assessment["unknowns"]) >= 7, "Missing measurements remain missing")
     same_seed = post("/event", dict(route=route, seed=42))
     check(first == same_seed, "Seed reproduces complete event and reroute")
@@ -91,6 +92,8 @@ for algorithm in ("bfs", "dijkstra", "astar"):
     check(close(second["oldRoute"]["totalCost"], first["newRoute"]["totalCost"]), "Cumulative costs replay")
     replay = post("/route", {**route, "events": second["events"]})
     check(replay == second["newRoute"], "Route endpoint replays scenario costs exactly")
+    check(all((e["row"], e["col"]) not in positions(second["newRoute"]) for e in second["events"]),
+          "Cumulative origins remain forbidden")
 
     # Traveler is chosen BEFORE hazard generation on the visible current route.
     index = len(baseline["path"]) // 2
@@ -122,11 +125,25 @@ for algorithm in ("bfs", "dijkstra", "astar"):
                                   seed=3, travelerPathIndex=next_index))
     check(positions(advanced["oldRoute"]) == positions(continued["newRoute"])[next_index:],
           "Can advance traveler again before next event")
+    check(all((e["row"], e["col"]) not in positions(advanced["newRoute"]) for e in advanced["events"]),
+          "Traveler reroute avoids all accumulated closures")
     unchanged = post("/event", dict(route=route, seed=42, travelerPathIndex=0))
     check(positions(unchanged["newRoute"]) == positions(first["newRoute"]) and
           unchanged["event"] == first["event"], "Selecting first cell preserves random scenario")
     for invalid_index in (-1, len(baseline["path"]) - 1, 99999, 1.5):
         post("/event", dict(route=route, travelerPathIndex=invalid_index), 400)
+
+    # Event at B: not an exception, and never a line into the forbidden cell.
+    destination = baseline["path"][-1]
+    closed_b = post("/route", {**route, "events": [
+        dict(row=destination["row"], col=destination["col"], factor="structure", delta=.01)]})
+    check(not closed_b["available"] and closed_b["path"] == [] and "forbidden" in closed_b["reason"],
+          "Closed destination reports no route")
+    final_step = post("/event", dict(route=route, seed=42, travelerPathIndex=len(baseline["path"])-2))
+    check(not final_step["newRoute"]["available"] and final_step["newRoute"]["path"] == [],
+          "Event on last remaining step closes B without failing the simulation")
+    check(final_step["grid"]["cells"][destination["row"]*bounds["columns"]+destination["col"]]["blocked"],
+          "Closed B remains visible in returned scenario grid")
 
 post("/event", {"route": None}, 400)
 post("/event", {"route": {**route, "algorithm": "invalid"}}, 400)

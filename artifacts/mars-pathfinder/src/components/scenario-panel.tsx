@@ -22,9 +22,9 @@ export function RouteLegend({ hasScenario, moved, hasTraveler }: { hasScenario: 
   return (
     <div className="rounded bg-card/95 border px-2 py-1.5 space-y-1 font-mono text-[10px] shadow-sm max-w-[250px]" data-testid="legend-routes">
       {hasScenario ? <>
-        <div className="flex items-center gap-2"><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#b5651d" strokeWidth="6" strokeDasharray="6 4" /></svg>previous {moved ? 'remaining ' : ''}route (dashed, wide)</div>
+        <div className="flex items-center gap-2"><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#b5651d" strokeWidth="6" strokeDasharray="6 4" /></svg>historical {moved ? 'remaining ' : ''}route — now forbidden</div>
         <div className="flex items-center gap-2"><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#006e91" strokeWidth="3" /></svg>rerouted (solid, narrow)</div>
-        <div className="flex items-center gap-2"><svg width="28" height="10"><rect x="9" y="0" width="10" height="10" fill="none" stroke="#5b2a86" strokeWidth="2.5" /></svg>event origin · <svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="none" stroke="#5b2a86" strokeDasharray="2 2" /></svg> residual cells</div>
+        <div className="flex items-center gap-2"><svg width="28" height="10"><rect x="9" y="0" width="10" height="10" fill="#9b2020" stroke="#6b1111" strokeWidth="2.5" /></svg>forbidden event cells · <svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="none" stroke="#5b2a86" strokeDasharray="2 2" /></svg> passable residuals</div>
       </> : <div className="flex items-center gap-2"><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#006e91" strokeWidth="4" /></svg>experimental route (cell centers)</div>}
       <div className="flex items-center gap-2"><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#1f2633" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="0.1 5" /></svg>within-cell display link, uncosted</div>
       <div className="flex items-center gap-2"><Dot c="#2f7a6a" label="A" /><Dot c="#a8432a" label="B" />exact plotted points</div>
@@ -51,7 +51,7 @@ export function ScenarioPanel({ canSimulate, disabledReason, pending, error, onS
   return (
     <section className="border-t pt-5" data-testid="panel-scenario">
       <h2 className="font-display text-xl">Simulated hazard event</h2>
-      <p className="mt-2 text-xs">A hypothetical scenario, not an observation. The server picks one random cell on the current path (after start) and raises one terrain or structure factor; up to 8 neighboring cells get a smaller residual. The route is then recomputed with the same algorithm; the geometry may or may not change. Source data are never modified.</p>
+      <p className="mt-2 text-xs">A hypothetical scenario, not an observation. The server picks one random cell on the remaining path (after start), raises one terrain or structure factor, and forbids entry to that cell until Reset. Every routing algorithm must avoid all event origins. Up to 8 neighbors get a smaller risk increase but remain passable: safe routing (Dijkstra/A*) counts their higher cost; fastest-by-moves BFS ignores that cost. No route is returned if B or the remaining journey is blocked. Source data are never modified.</p>
       <div className="mt-3 rounded-md border bg-card p-3 space-y-2 text-xs" data-testid="panel-traveler">
         <label className="flex items-center gap-2 font-medium">
           <input type="checkbox" checked={traveler !== null} disabled={pending || selectableCount < 1} data-testid="checkbox-traveler"
@@ -85,12 +85,12 @@ export function ScenarioPanel({ canSimulate, disabledReason, pending, error, onS
         <div className="rise mt-3 space-y-3 text-xs" data-testid="panel-scenario-result">
           <div className="rounded-md border-2 border-dashed border-[#5b2a86]/50 p-3 space-y-1">
             <p className="font-mono text-[10px] uppercase tracking-wider text-[#5b2a86]">Scenario · {s.events.length} cumulative event{s.events.length === 1 ? '' : 's'} · seed {ev.seed}</p>
-            <p>Latest: <b>{ev.spec.factor}</b> raised by {ev.spec.delta.toFixed(4)} at cell [{ev.spec.row}, {ev.spec.col}]; {ev.changes.length - 1} residual neighbor{ev.changes.length === 2 ? '' : 's'}.</p>
+            <p>Latest: cell [{ev.spec.row}, {ev.spec.col}] is <b>forbidden</b>; <b>{ev.spec.factor}</b> raised by {ev.spec.delta.toFixed(4)}; {ev.changes.length - 1} residual neighbor{ev.changes.length === 2 ? '' : 's'}.</p>
             <p className="font-mono text-[10px] break-words">{ev.formula}</p>
           </div>
           <div className={`rounded-md p-3 ${same ? 'bg-secondary' : 'bg-accent'}`} data-testid="text-reroute-outcome">
             {same
-              ? <p><b>Identical geometry.</b> The rerouted path visits exactly the same cells as before; only its cost changed.{s.newRoute.path.length > 0 && ' BFS ignores DF, so it will usually keep its path.'}</p>
+              ? <p><b>Identical geometry.</b> The rerouted path visits the same cells.</p>
               : s.newRoute.available
                 ? <p><b>Path changed.</b> {sharedCellCount(s.oldRoute, s.newRoute)} of {s.newRoute.path.length} new cells are shared with the previous path.</p>
                 : <p><b>No model route</b> after the event. {s.newRoute.reason}</p>}
@@ -99,9 +99,9 @@ export function ScenarioPanel({ canSimulate, disabledReason, pending, error, onS
             <thead className="text-muted-foreground"><tr><th className="font-normal">accumulated DF</th><th className="font-normal text-right">cost</th></tr></thead>
             <tbody>
               <tr className="border-t"><td className="py-1">pre-event {s.moved ? 'remaining ' : ''}route, pre-event grid</td><td className="text-right">{s.oldRoute.totalCost.toFixed(4)}</td></tr>
-              <tr className="border-t"><td className="py-1">same pre-event path, after event</td><td className="text-right">{s.oldPathScenarioCost === null ? 'n/a' : s.oldPathScenarioCost.toFixed(4)}</td></tr>
+              <tr className="border-t"><td className="py-1">same pre-event path, after event</td><td className="text-right">{s.oldPathScenarioCost === null ? 'forbidden / unavailable' : s.oldPathScenarioCost.toFixed(4)}</td></tr>
               <tr className="border-t"><td className="py-1">rerouted, scenario grid</td><td className="text-right">{s.newRoute.available ? s.newRoute.totalCost.toFixed(4) : 'none'}</td></tr>
-              <tr className="border-t"><td className="py-1">change vs pre-event</td><td className="text-right">{s.newRoute.available ? (s.newRoute.totalCost - s.oldRoute.totalCost >= 0 ? '+' : '') + (s.newRoute.totalCost - s.oldRoute.totalCost).toFixed(4) : 'n/a'}</td></tr>
+              <tr className="border-t"><td className="py-1">change vs pre-event (now infeasible)</td><td className="text-right">{s.newRoute.available ? (s.newRoute.totalCost - s.oldRoute.totalCost >= 0 ? '+' : '') + (s.newRoute.totalCost - s.oldRoute.totalCost).toFixed(4) : 'n/a'}</td></tr>
             </tbody>
           </table>
           <div className="overflow-x-auto">

@@ -22,6 +22,11 @@ test('comparison reports missing path cells instead of inventing zero cost', () 
   assert.equal(pathCostOnGrid(route([[0, 0], [0, 1]]).path, grid), null);
 });
 
+test('comparison rejects a now-forbidden previous route', () => {
+  const grid = { cells: [{ row: 0, col: 0, df: 1.5 }, { row: 0, col: 1, df: 1.7, blocked: true }] } as unknown as MarsGrid;
+  assert.equal(pathCostOnGrid(route([[0, 0], [0, 1]]).path, grid), null);
+});
+
 test('reversed corners normalize to min/max', () => {
   const r = boundsFromCorners({ lat: 10, lng: 20 }, { lat: -5, lng: -30 });
   assert.deepEqual(r.bounds, { startLat: -5, endLat: 10, startLng: -30, endLng: 20 });

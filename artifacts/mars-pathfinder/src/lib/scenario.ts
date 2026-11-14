@@ -45,7 +45,7 @@ export function pathCostOnGrid(path: { row: number; col: number }[], grid: MarsG
   let sum = 0;
   for (const p of path.slice(1)) {
     const c = grid.cells.find((x) => x.row === p.row && x.col === p.col);
-    if (!c) return null;
+    if (!c || c.blocked === true) return null;
     sum += c.df ?? c.assessment.movementCost;
   }
   return sum;

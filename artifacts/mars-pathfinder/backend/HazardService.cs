@@ -13,7 +13,7 @@ public class HazardService(GridService grids)
     public const int MaxEvents=50;
     public const double ReferenceAreaKm2=10000;
     public const string Formula="Origin δf ∈ [min(0.05,1−f), min(0.25,1−f)]; neighbor δf = min(1−f, origin δf × 0.5 / (1 + A/10000) / sqrt(dr²+dc²)); ΔDF = weight × δf / 100.";
-    public const string Warning="Synthetic what-if event, not an observed Mars hazard or calibrated hazard probability. Only normalized terrain/structure factors increase; source evidence and missing measurements remain unchanged. Residual inequality applies to added danger, not absolute pre-existing scores.";
+    public const string Warning="Synthetic what-if event, not an observed Mars hazard or calibrated hazard probability. Each event origin is forbidden for every route until reset (scenario closure, not measured physical traversability). Residual neighbors remain passable with increased terrain/structure cost; weighted routes consider that penalty, BFS ignores it. Source evidence and missing measurements remain unchanged. Residual inequality applies to added danger, not absolute pre-existing scores.";
 
     public static double AreaKm2(ScientificCell cell)
     {
@@ -58,7 +58,7 @@ public class HazardService(GridService grids)
             double score=factors.Sum(x=>x.Contribution);
             var assessment=c.Assessment with { Factors=factors,RiskScore=score,ModelSafetyScore=100-score,MovementCost=1+score/100,
                 Status="simulated",Warning=RiskService.Warning+" "+Warning };
-            var updated=c with { Df=assessment.MovementCost,SafetyScore=assessment.ModelSafetyScore,SafetyStatus="simulated",Assessment=assessment };
+            var updated=c with { Blocked=isOrigin?true:c.Blocked,Df=assessment.MovementCost,SafetyScore=assessment.ModelSafetyScore,SafetyStatus=isOrigin||c.Blocked==true?"scenario-forbidden":"simulated",Assessment=assessment };
             cells[index]=updated;
             changes.Add(new(row,col,isOrigin,area,f.RawScore,raw,c.Df,updated.Df,updated.Df-c.Df));
         }

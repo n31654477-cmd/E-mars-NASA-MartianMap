@@ -207,7 +207,7 @@ export default function MapPage() {
     const map = new OLMap({
       target: mapEl.current,
       layers: [hill, ...order.map((id) => vec.current[id]), vec.current.grid,
-        new VectorLayer({ source: eventSrc.current, style: (f) => new Style({ fill: new Fill({ color: f.get('origin') ? 'rgba(91,42,134,.28)' : 'rgba(91,42,134,.1)' }), stroke: new Stroke({ color: '#5b2a86', width: f.get('origin') ? 2.5 : 1.2, lineDash: f.get('origin') ? undefined : [3, 3] }) }) }),
+        new VectorLayer({ source: eventSrc.current, style: (f) => new Style({ fill: new Fill({ color: f.get('origin') ? 'rgba(155,32,32,.65)' : 'rgba(91,42,134,.1)' }), stroke: new Stroke({ color: f.get('origin') ? '#6b1111' : '#5b2a86', width: f.get('origin') ? 2.5 : 1.2, lineDash: f.get('origin') ? undefined : [3, 3] }) }) }),
         new VectorLayer({ source: routeSrc.current, style: (f) => {
           const k = f.get('kind');
           if (k === 'old') return new Style({ stroke: new Stroke({ color: '#b5651d', width: 7, lineDash: [10, 7] }), image: new CircleStyle({ radius: 8, stroke: new Stroke({ color: '#b5651d', width: 3 }) }) });
@@ -295,8 +295,12 @@ export default function MapPage() {
     };
     if (scenario) {
       add(scenario.oldRoute, 'old'); add(scenario.newRoute, 'new');
+      activeGrid?.cells.filter((c) => c.blocked === true).forEach((c) => {
+        const f = new Feature(new Polygon(cellRing(c))); f.set('origin', true); eventSrc.current.addFeature(f);
+      });
       scenario.event.changes.forEach((ch) => {
         const c = activeGrid?.cells.find((x) => x.row === ch.row && x.col === ch.col); if (!c) return;
+        if (c.blocked === true) return;
         const f = new Feature(new Polygon(cellRing(c))); f.set('origin', ch.origin); eventSrc.current.addFeature(f);
       });
     } else add(routeResult, 'route');

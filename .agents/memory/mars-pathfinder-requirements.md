@@ -19,6 +19,10 @@ The user requires route graphics to connect to the exact plotted endpoint dots. 
 
 The user also requires optional traveler placement on the current path **before** triggering a random event; rerouting then begins at that position and ends at B. With no position provided, preserve full-route event behavior. Once moved, later events must not return the traveler to A unless the scenario is reset.
 
+Event-origin cells must be forbidden to every routing algorithm, not merely assigned a higher cost. Peripheral cells remain passable, but safe routing should prefer avoiding their increased risk. Closures accumulate until reset and represent hypothetical operational exclusions, not measured physical obstacles.
+
+**Why:** The user rejected routes that entered the event's central cell and explicitly required it to be forbidden, while allowing peripheral cells for both fast and safe routes.
+
 **Why:** The user explicitly defined D-value changes this way in the screenshot-based feature request and prioritizes prototype algorithm correctness and scientific accuracy over implementation convenience or visual appearance.
 
 **How to apply:** Apply these requirements to the Mars pathfinder development, not merely the existing source-data explorer. Missing prototype source must not be replaced with guessed implementations.

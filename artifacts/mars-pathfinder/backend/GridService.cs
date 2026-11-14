@@ -32,9 +32,15 @@ public class GridService(RiskService risk) {
                 Col=Math.Min(g.Columns-1,(int)((lon-r.Grid.StartLng)/(r.Grid.EndLng-r.Grid.StartLng)*g.Columns))};
         }
         var start=Snap(r.StartLat,r.StartLng);var end=Snap(r.EndLat,r.EndLng);
+        if(r.Algorithm is not ("bfs" or "dijkstra" or "astar"))throw new ArgumentException("Unknown algorithm");
+        // Prototype validation rejects blocked endpoints. Report a valid no-route
+        // result instead when an event closes the traveler or destination cell.
+        if(g.Cells[start.Row*g.Columns+start.Col].Blocked==true||g.Cells[end.Row*g.Columns+end.Col].Blocked==true)
+            return new(false,"No route: the start/traveler or destination is in a forbidden event cell. Reset the scenario or change endpoints.",
+                RiskService.Unknowns,[],0,0,0,0,RiskService.Version,false,0,RiskService.Warning+" "+HazardService.Warning);
         var input=Enumerable.Range(0,g.Rows).Select(row=>g.Cells.Skip(row*g.Columns).Take(g.Columns).Select(c=>new Cell{
             Row=c.Row,Col=c.Col,CenterLat=c.CenterLat,CenterLng=c.CenterLng,DF=c.Df,SafetyScore=c.SafetyScore,
-            Blocked=!c.Assessment.GeologyCovered
+            Blocked=c.Blocked==true||!c.Assessment.GeologyCovered
         }).ToArray()).ToArray();
         var result=r.Algorithm switch{
             "bfs"=>ShortestPathAlgorithms.FindShortestPathBFS(input,start,end),
@@ -43,7 +49,7 @@ public class GridService(RiskService risk) {
             _=>throw new ArgumentException("Unknown algorithm")
         };
         var path=result.Path.Select(p=>g.Cells[p.Row*g.Columns+p.Col]).ToArray();
-        return new(path.Length>0,path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers.":"No route within the model's covered grid.",
+        return new(path.Length>0,path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers. Scenario-forbidden cells excluded.":"No route within the covered grid without crossing forbidden event cells or missing-coverage cells.",
             RiskService.Unknowns,path,result.TotalCost,result.AvgSafetyScore,result.MinSafetyScore,PathDistanceKm(path),RiskService.Version,false,
             path.Skip(1).Sum(c=>c.Assessment.RiskScore),RiskService.Warning);
     }

@@ -65,7 +65,9 @@ Only the same factor in at most eight immediate covered neighbors changes; there
 
 The interval 0.05–0.25, attenuation 0.5 and reference area 10,000 km² are analyst-selected scenario parameters, **not empirically calibrated realistic Mars hazard ranges**. Source data do not provide such a calibration. Worked example: δ=0.2 and A=10,000 km² gives orthogonal δ=0.05, diagonal δ≈0.035355; terrain weight45 gives origin ΔDF=0.09 and orthogonal ΔDF=0.0225.
 
-The unchanged algorithms recalculate with updated DF. The old route is wide/dashed amber and the new route solid blue; geometry may remain identical, particularly with unweighted BFS. The UI compares pre-event cost, the old path re-costed on the new grid (start uncharged), and new path cost. This distinguishes a real reroute advantage from a change in costs alone.
+Every event origin is a **forbidden scenario cell** until Reset, including all earlier event origins. The unchanged BFS, Dijkstra and A* receive this closure through their existing blocked-cell mask. It is an operational simulation rule, not a measured physical obstacle. Residual neighbors remain passable with the existing increased DF: weighted Dijkstra/A* penalize them, while BFS minimizes moves and ignores DF. Weighted routing may still use a residual cell when avoiding it would cost more overall; there is no absolute neighbor-avoidance guarantee.
+
+The historical old path remains dashed amber for comparison and is now infeasible; the valid new path is solid blue and cannot enter any forbidden origin. If the event closes B or disconnects the allowed grid, the app reports no route rather than drawing an unsafe fallback. The cost panel marks the previous path as forbidden/unavailable after the event instead of presenting its finite DF sum as a feasible alternative. Source evidence and unknown physical measurements remain unchanged.
 
 ### Traveler position and endpoint display
 

@@ -77,7 +77,7 @@ Check(scenario.Grid.Cells[0]==baseline.Cells[0],"Non-neighbor cells unchanged");
 Check(HazardService.Apply(baseline,new(0,0,"structure",.25)).Changes.Length==4,"Corner has at most three neighbors");
 foreach(var c in scenario.Grid.Cells) {
  var before=baseline.Cells[c.Row*baseline.Columns+c.Col];
- Check(c.Blocked==null&&c.Assessment.GeologyCovered==before.Assessment.GeologyCovered,"Simulation does not invent obstacles/coverage");
+ Check((c.Row==2&&c.Col==2?c.Blocked==true:c.Blocked==null)&&c.Assessment.GeologyCovered==before.Assessment.GeologyCovered,"Only origin gets scenario closure; coverage preserved");
  Check(c.Assessment.Factors.Single(f=>f.Id=="uncertainty")==before.Assessment.Factors.Single(f=>f.Id=="uncertainty"),"Uncertainty preserved");
  Check(c.Assessment.Evidence.SequenceEqual(before.Assessment.Evidence),"Source evidence preserved");
  Check(c.Assessment.Unknowns.SequenceEqual(before.Assessment.Unknowns),"Unknown physical inputs preserved");
@@ -99,6 +99,26 @@ var absent=baseline with { Cells=(ScientificCell[])baseline.Cells.Clone() };
 absent.Cells[12]=absent.Cells[12] with { Assessment=empty };
 try{HazardService.Apply(absent,ev);throw new Exception("Missing geology origin accepted");}catch(ArgumentException){checks++;}
 Check(HazardService.Apply(absent,new(2,1,"terrain",.1)).Changes.All(c=>c.Row!=2||c.Col!=2),"Missing coverage neighbor excluded");
+var twoEvents=HazardService.Apply(scenario.Grid,new(2,3,"structure",.1)).Grid;
+Check(twoEvents.Cells[12].Blocked==true&&twoEvents.Cells[13].Blocked==true,"Prior origin remains forbidden when affected by later residual");
+Check(baseline.Cells.All(c=>c.Blocked==null),"Reset baseline retains unknown physical traversability");
+// Test obstacle mask with the actual GridService adapter and unchanged algorithms.
+var router=new GridService(null!);
+foreach(var algorithm in new[]{"bfs","dijkstra","astar"}) {
+ var req=new RouteInput(algorithm,baseline.Cells[10].CenterLat,baseline.Cells[10].CenterLng,
+     baseline.Cells[14].CenterLat,baseline.Cells[14].CenterLng,baseline.Bounds);
+ var rerouted=router.RouteOnGrid(req,scenario.Grid);
+ Check(rerouted.Available&&rerouted.Path.All(c=>c.Row!=2||c.Col!=2),"Every algorithm avoids event origin");
+ Check(rerouted.Path.Length>5,"Forbidden center forces detour");
+ var closedDestination=router.RouteOnGrid(req with { EndLat=baseline.Cells[12].CenterLat,EndLng=baseline.Cells[12].CenterLng },scenario.Grid);
+ Check(!closedDestination.Available&&closedDestination.Path.Length==0,"Forbidden destination returns no route");
+ var closedStart=router.RouteOnGrid(req with { StartLat=baseline.Cells[12].CenterLat,StartLng=baseline.Cells[12].CenterLng },scenario.Grid);
+ Check(!closedStart.Available&&closedStart.Path.Length==0,"Forbidden start returns no route");
+ var wall=baseline with { Cells=baseline.Cells.Select(c=>c.Col==2?c with { Blocked=true }:c).ToArray() };
+ Check(!router.RouteOnGrid(req,wall).Available,"No route through a forbidden wall");
+ var original=router.RouteOnGrid(req,baseline);
+ Check(original.Available&&original.Path.Length==5,"Reset restores baseline route");
+}
 var pathFixture=baseline.Cells.Take(5).ToArray();
 var full=new ScientificRoute(true,"fixture",[],pathFixture,pathFixture.Skip(1).Sum(c=>c.Df),69,69,0,"fixture",false,124,"fixture");
 var remaining=GridService.RemainingRoute(full,2);
