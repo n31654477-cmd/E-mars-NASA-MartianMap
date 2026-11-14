@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { MarsGridInput } from './marsGridInput';
+import type { MarsHazardEvent } from './marsHazardEvent';
 import type { MarsRouteInputAlgorithm } from './marsRouteInputAlgorithm';
 
 export interface MarsRouteInput {
@@ -15,4 +16,6 @@ export interface MarsRouteInput {
   startLng: number;
   endLat: number;
   endLng: number;
+  /** @maxItems 50 */
+  events?: MarsHazardEvent[];
 }

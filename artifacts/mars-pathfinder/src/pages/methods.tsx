@@ -34,6 +34,22 @@ export default function MethodsPage() {
             <p>Basin/lowland T=0.3, a mapped scarp M=1, and geology present U=7/8: R = 45×0.3 + 35×1 + 20×0.875 = <strong>66</strong>. Inverse model score = 34. DF = 1.66. This example is arithmetic, not a measured location or a 66% chance of harm.</p>
             <h3 className="font-display text-xl">How the route uses this formula</h3><p>{s.riskModel.routingPolicy}</p>
             <p>DF includes a unit step cost. Therefore Dijkstra/A* minimize accumulated step-plus-model-risk cost, not raw total risk alone, shortest kilometers, or actual mission failure probability. This is an explicit new input-cost policy requested for this model; the original prototype algorithms and original ComputeDF implementation remain unchanged. Changing grid resolution changes structural intersections and routes. No cost is charged for entering the starting cell; safety averages include it, as in the prototype.</p>
+            <section className="rounded-md border-2 border-dashed p-4 space-y-3" data-testid="methods-hazard-event">
+              <h3 className="font-display text-xl">Simulated hazard events (hypothetical scenarios)</h3>
+              <p>The map's random-event button runs a what-if scenario. It does not modify source observations, the original algorithms, or the risk formula. The server chooses one random eligible cell on the current path (after the start cell) and one factor that is not yet saturated: terrain T or structure M. Uncertainty U, source geometry, and unknown traversability stay unchanged.</p>
+              <p className="rounded-md border bg-secondary p-3 font-mono text-sm">origin: f' = min(1, f + δ),  δ ~ Uniform[min(0.05, 1−f), min(0.25, 1−f)]<br />neighbor: Δf = min(1−f, δ · 0.5 / (1 + A/10000) / √(dr² + dc²))<br />R = 45T + 35M + 20U,  DF = 1 + R/100</p>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Factor scores are bounded in [0, 1]; values are capped at 1. The delta range [0.05, 0.25] was chosen by the analyst and has no empirical calibration.</li>
+                <li>Only the same factor changes, and only in the origin cell and up to 8 covered neighboring cells (one ring). Nothing beyond that ring changes.</li>
+                <li>A is each receiving cell's area in km²: A = r² × Δλ × |sin(φN) − sin(φS)|, with angles in radians and Mars-sphere radius r = 3396.190 km. The reference area is 10,000 km². Larger cells get a smaller residual. dr/dc are row/column offsets, so diagonal neighbors have an additional √2 attenuation.</li>
+                <li>The guarantee is about added danger: ΔDF of a neighbor &lt; ΔDF of the origin. It does not mean the neighbor's total score ends up lower than the origin's.</li>
+                <li>Events stack, up to 50. Each new event starts from the current event list and the current rerouted path. Reset restores the source-derived grid and original pre-scenario route; Clear route also removes the route.</li>
+                <li>The original BFS, Dijkstra and A* code is unchanged. BFS ignores DF, so it often keeps the same path, and the app reports identical geometry when that happens.</li>
+              </ul>
+              <h4 className="font-display text-lg">Worked example</h4>
+              <p>δ = 0.2, A = 10,000 km². Orthogonal neighbor: 0.2 × 0.5 / 2 / 1 = <strong>0.05</strong>. Diagonal neighbor: 0.05 / √2 = <strong>0.035355</strong>. If the factor is terrain (weight 45): origin ΔDF = 45 × 0.2 / 100 = <strong>0.09</strong>; orthogonal ΔDF = 45 × 0.05 / 100 = <strong>0.0225</strong>.</p>
+              <p className="text-sm text-muted-foreground">Scope: selections are rectangles only and cannot cross the antimeridian. Scenarios are kept in memory only. Nothing is saved, and reloading the page discards them.</p>
+            </section>
             <h3 className="font-display text-xl">Excluded inputs and unresolved limits</h3>
             <ul className="list-disc pl-5">{s.riskModel.exclusions.map(x=><li key={x}>{x}</li>)}</ul>
             <h3 className="font-display text-xl">Evidence and interpretation</h3>

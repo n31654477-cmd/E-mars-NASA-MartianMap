@@ -6,6 +6,7 @@ builder.Services.AddSingleton<SourceService>();
 builder.Services.AddSingleton<LabService>();
 builder.Services.AddSingleton<RiskService>();
 builder.Services.AddSingleton<GridService>();
+builder.Services.AddSingleton<HazardService>();
 var app = builder.Build();
 app.UsePathBase("/mars-pathfinder");
 app.MapControllers();

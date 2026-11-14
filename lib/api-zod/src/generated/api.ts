@@ -215,6 +215,15 @@ export const assessMarsRouteBodyGridRowsMax = 80;
 
 export const assessMarsRouteBodyGridColumnsMax = 80;
 
+export const assessMarsRouteBodyEventsItemRowMin = 0;
+
+export const assessMarsRouteBodyEventsItemColMin = 0;
+
+export const assessMarsRouteBodyEventsItemDeltaExclusiveMin = 0;
+export const assessMarsRouteBodyEventsItemDeltaMax = 0.25;
+
+export const assessMarsRouteBodyEventsMax = 50;
+
 
 
 export const AssessMarsRouteBody = zod.object({
@@ -230,7 +239,13 @@ export const AssessMarsRouteBody = zod.object({
   "startLat": zod.number(),
   "startLng": zod.number(),
   "endLat": zod.number(),
-  "endLng": zod.number()
+  "endLng": zod.number(),
+  "events": zod.array(zod.object({
+  "row": zod.number().int().min(assessMarsRouteBodyEventsItemRowMin),
+  "col": zod.number().int().min(assessMarsRouteBodyEventsItemColMin),
+  "factor": zod.enum(['terrain', 'structure']),
+  "delta": zod.number().gt(assessMarsRouteBodyEventsItemDeltaExclusiveMin).max(assessMarsRouteBodyEventsItemDeltaMax)
+})).max(assessMarsRouteBodyEventsMax).optional()
 })
 
 export const AssessMarsRouteResponse = zod.object({
@@ -282,6 +297,275 @@ export const AssessMarsRouteResponse = zod.object({
   "scientificallyValidated": zod.boolean(),
   "accumulatedRisk": zod.number(),
   "warning": zod.string()
+})
+
+
+/**
+ * @summary Apply a bounded simulated factor increase along the current route and reroute
+ */
+export const simulateMarsEventBodyRouteGridStartLatMin = -90;
+export const simulateMarsEventBodyRouteGridStartLatMax = 90;
+
+export const simulateMarsEventBodyRouteGridEndLatMin = -90;
+export const simulateMarsEventBodyRouteGridEndLatMax = 90;
+
+export const simulateMarsEventBodyRouteGridStartLngMin = -180;
+export const simulateMarsEventBodyRouteGridStartLngMax = 180;
+
+export const simulateMarsEventBodyRouteGridEndLngMin = -180;
+export const simulateMarsEventBodyRouteGridEndLngMax = 180;
+
+export const simulateMarsEventBodyRouteGridRowsMax = 80;
+
+export const simulateMarsEventBodyRouteGridColumnsMax = 80;
+
+export const simulateMarsEventBodyRouteEventsItemRowMin = 0;
+
+export const simulateMarsEventBodyRouteEventsItemColMin = 0;
+
+export const simulateMarsEventBodyRouteEventsItemDeltaExclusiveMin = 0;
+export const simulateMarsEventBodyRouteEventsItemDeltaMax = 0.25;
+
+export const simulateMarsEventBodyRouteEventsMax = 50;
+
+
+
+export const SimulateMarsEventBody = zod.object({
+  "route": zod.object({
+  "algorithm": zod.enum(['bfs', 'dijkstra', 'astar']),
+  "grid": zod.object({
+  "startLat": zod.number().min(simulateMarsEventBodyRouteGridStartLatMin).max(simulateMarsEventBodyRouteGridStartLatMax),
+  "endLat": zod.number().min(simulateMarsEventBodyRouteGridEndLatMin).max(simulateMarsEventBodyRouteGridEndLatMax),
+  "startLng": zod.number().min(simulateMarsEventBodyRouteGridStartLngMin).max(simulateMarsEventBodyRouteGridStartLngMax),
+  "endLng": zod.number().min(simulateMarsEventBodyRouteGridEndLngMin).max(simulateMarsEventBodyRouteGridEndLngMax),
+  "rows": zod.number().int().min(1).max(simulateMarsEventBodyRouteGridRowsMax),
+  "columns": zod.number().int().min(1).max(simulateMarsEventBodyRouteGridColumnsMax)
+}),
+  "startLat": zod.number(),
+  "startLng": zod.number(),
+  "endLat": zod.number(),
+  "endLng": zod.number(),
+  "events": zod.array(zod.object({
+  "row": zod.number().int().min(simulateMarsEventBodyRouteEventsItemRowMin),
+  "col": zod.number().int().min(simulateMarsEventBodyRouteEventsItemColMin),
+  "factor": zod.enum(['terrain', 'structure']),
+  "delta": zod.number().gt(simulateMarsEventBodyRouteEventsItemDeltaExclusiveMin).max(simulateMarsEventBodyRouteEventsItemDeltaMax)
+})).max(simulateMarsEventBodyRouteEventsMax).optional()
+}),
+  "seed": zod.number().int().optional()
+})
+
+export const simulateMarsEventResponseGridBoundsStartLatMin = -90;
+export const simulateMarsEventResponseGridBoundsStartLatMax = 90;
+
+export const simulateMarsEventResponseGridBoundsEndLatMin = -90;
+export const simulateMarsEventResponseGridBoundsEndLatMax = 90;
+
+export const simulateMarsEventResponseGridBoundsStartLngMin = -180;
+export const simulateMarsEventResponseGridBoundsStartLngMax = 180;
+
+export const simulateMarsEventResponseGridBoundsEndLngMin = -180;
+export const simulateMarsEventResponseGridBoundsEndLngMax = 180;
+
+export const simulateMarsEventResponseGridBoundsRowsMax = 80;
+
+export const simulateMarsEventResponseGridBoundsColumnsMax = 80;
+
+export const simulateMarsEventResponseEventSpecRowMin = 0;
+
+export const simulateMarsEventResponseEventSpecColMin = 0;
+
+export const simulateMarsEventResponseEventSpecDeltaExclusiveMin = 0;
+export const simulateMarsEventResponseEventSpecDeltaMax = 0.25;
+
+export const simulateMarsEventResponseEventsItemRowMin = 0;
+
+export const simulateMarsEventResponseEventsItemColMin = 0;
+
+export const simulateMarsEventResponseEventsItemDeltaExclusiveMin = 0;
+export const simulateMarsEventResponseEventsItemDeltaMax = 0.25;
+
+
+
+export const SimulateMarsEventResponse = zod.object({
+  "grid": zod.object({
+  "rows": zod.number().int(),
+  "columns": zod.number().int(),
+  "warning": zod.string(),
+  "bounds": zod.object({
+  "startLat": zod.number().min(simulateMarsEventResponseGridBoundsStartLatMin).max(simulateMarsEventResponseGridBoundsStartLatMax),
+  "endLat": zod.number().min(simulateMarsEventResponseGridBoundsEndLatMin).max(simulateMarsEventResponseGridBoundsEndLatMax),
+  "startLng": zod.number().min(simulateMarsEventResponseGridBoundsStartLngMin).max(simulateMarsEventResponseGridBoundsStartLngMax),
+  "endLng": zod.number().min(simulateMarsEventResponseGridBoundsEndLngMin).max(simulateMarsEventResponseGridBoundsEndLngMax),
+  "rows": zod.number().int().min(1).max(simulateMarsEventResponseGridBoundsRowsMax),
+  "columns": zod.number().int().min(1).max(simulateMarsEventResponseGridBoundsColumnsMax)
+}),
+  "cells": zod.array(zod.object({
+  "row": zod.number().int(),
+  "col": zod.number().int(),
+  "centerLat": zod.number(),
+  "centerLng": zod.number(),
+  "width": zod.number(),
+  "height": zod.number(),
+  "safetyStatus": zod.string(),
+  "assessment": zod.object({
+  "modelVersion": zod.string(),
+  "riskScore": zod.number(),
+  "modelSafetyScore": zod.number(),
+  "movementCost": zod.number(),
+  "geologyCovered": zod.boolean(),
+  "status": zod.string(),
+  "factors": zod.array(zod.object({
+  "id": zod.string(),
+  "name": zod.string(),
+  "weight": zod.number(),
+  "rawScore": zod.number(),
+  "contribution": zod.number(),
+  "basis": zod.string()
+})),
+  "evidence": zod.array(zod.object({
+  "filename": zod.string(),
+  "layer": zod.string(),
+  "featureId": zod.number().int(),
+  "value": zod.string()
+})),
+  "unknowns": zod.array(zod.string()),
+  "warning": zod.string()
+}),
+  "blocked": zod.boolean().nullable(),
+  "df": zod.number().nullable(),
+  "safetyScore": zod.number().nullable(),
+  "units": zod.array(zod.string())
+}))
+}),
+  "oldRoute": zod.object({
+  "available": zod.boolean(),
+  "reason": zod.string(),
+  "missingMeasurements": zod.array(zod.string()),
+  "path": zod.array(zod.object({
+  "row": zod.number().int(),
+  "col": zod.number().int(),
+  "centerLat": zod.number(),
+  "centerLng": zod.number(),
+  "width": zod.number(),
+  "height": zod.number(),
+  "safetyStatus": zod.string(),
+  "assessment": zod.object({
+  "modelVersion": zod.string(),
+  "riskScore": zod.number(),
+  "modelSafetyScore": zod.number(),
+  "movementCost": zod.number(),
+  "geologyCovered": zod.boolean(),
+  "status": zod.string(),
+  "factors": zod.array(zod.object({
+  "id": zod.string(),
+  "name": zod.string(),
+  "weight": zod.number(),
+  "rawScore": zod.number(),
+  "contribution": zod.number(),
+  "basis": zod.string()
+})),
+  "evidence": zod.array(zod.object({
+  "filename": zod.string(),
+  "layer": zod.string(),
+  "featureId": zod.number().int(),
+  "value": zod.string()
+})),
+  "unknowns": zod.array(zod.string()),
+  "warning": zod.string()
+}),
+  "blocked": zod.boolean().nullable(),
+  "df": zod.number().nullable(),
+  "safetyScore": zod.number().nullable(),
+  "units": zod.array(zod.string())
+})),
+  "totalCost": zod.number(),
+  "avgSafetyScore": zod.number(),
+  "minSafetyScore": zod.number(),
+  "distanceKm": zod.number(),
+  "modelVersion": zod.string(),
+  "scientificallyValidated": zod.boolean(),
+  "accumulatedRisk": zod.number(),
+  "warning": zod.string()
+}),
+  "newRoute": zod.object({
+  "available": zod.boolean(),
+  "reason": zod.string(),
+  "missingMeasurements": zod.array(zod.string()),
+  "path": zod.array(zod.object({
+  "row": zod.number().int(),
+  "col": zod.number().int(),
+  "centerLat": zod.number(),
+  "centerLng": zod.number(),
+  "width": zod.number(),
+  "height": zod.number(),
+  "safetyStatus": zod.string(),
+  "assessment": zod.object({
+  "modelVersion": zod.string(),
+  "riskScore": zod.number(),
+  "modelSafetyScore": zod.number(),
+  "movementCost": zod.number(),
+  "geologyCovered": zod.boolean(),
+  "status": zod.string(),
+  "factors": zod.array(zod.object({
+  "id": zod.string(),
+  "name": zod.string(),
+  "weight": zod.number(),
+  "rawScore": zod.number(),
+  "contribution": zod.number(),
+  "basis": zod.string()
+})),
+  "evidence": zod.array(zod.object({
+  "filename": zod.string(),
+  "layer": zod.string(),
+  "featureId": zod.number().int(),
+  "value": zod.string()
+})),
+  "unknowns": zod.array(zod.string()),
+  "warning": zod.string()
+}),
+  "blocked": zod.boolean().nullable(),
+  "df": zod.number().nullable(),
+  "safetyScore": zod.number().nullable(),
+  "units": zod.array(zod.string())
+})),
+  "totalCost": zod.number(),
+  "avgSafetyScore": zod.number(),
+  "minSafetyScore": zod.number(),
+  "distanceKm": zod.number(),
+  "modelVersion": zod.string(),
+  "scientificallyValidated": zod.boolean(),
+  "accumulatedRisk": zod.number(),
+  "warning": zod.string()
+}),
+  "event": zod.object({
+  "seed": zod.number().int(),
+  "spec": zod.object({
+  "row": zod.number().int().min(simulateMarsEventResponseEventSpecRowMin),
+  "col": zod.number().int().min(simulateMarsEventResponseEventSpecColMin),
+  "factor": zod.enum(['terrain', 'structure']),
+  "delta": zod.number().gt(simulateMarsEventResponseEventSpecDeltaExclusiveMin).max(simulateMarsEventResponseEventSpecDeltaMax)
+}),
+  "changes": zod.array(zod.object({
+  "row": zod.number().int(),
+  "col": zod.number().int(),
+  "origin": zod.boolean(),
+  "areaKm2": zod.number(),
+  "factorBefore": zod.number(),
+  "factorAfter": zod.number(),
+  "dfBefore": zod.number(),
+  "dfAfter": zod.number(),
+  "deltaDf": zod.number()
+})),
+  "formula": zod.string(),
+  "warning": zod.string()
+}),
+  "events": zod.array(zod.object({
+  "row": zod.number().int().min(simulateMarsEventResponseEventsItemRowMin),
+  "col": zod.number().int().min(simulateMarsEventResponseEventsItemColMin),
+  "factor": zod.enum(['terrain', 'structure']),
+  "delta": zod.number().gt(simulateMarsEventResponseEventsItemDeltaExclusiveMin).max(simulateMarsEventResponseEventsItemDeltaMax)
+}))
 })
 
 

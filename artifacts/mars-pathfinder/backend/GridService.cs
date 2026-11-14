@@ -3,6 +3,8 @@ using Backend.Business;
 namespace Mars;
 public record ScientificCell(int Row,int Col,double CenterLat,double CenterLng,double Width,double Height,string SafetyStatus,bool? Blocked,double Df,double SafetyScore,string[] Units,RiskAssessment Assessment);
 public record ScientificGrid(int Rows,int Columns,ScientificCell[] Cells,string Warning,GridInput Bounds);
+public record ScientificRoute(bool Available,string Reason,string[] MissingMeasurements,ScientificCell[] Path,double TotalCost,
+    double AvgSafetyScore,double MinSafetyScore,double DistanceKm,string ModelVersion,bool ScientificallyValidated,double AccumulatedRisk,string Warning);
 public class GridService(RiskService risk) {
     public static void Validate(GridInput r) {
         if(r==null||r.Rows<1||r.Rows>80||r.Columns<1||r.Columns>80||
@@ -21,8 +23,8 @@ public class GridService(RiskService risk) {
         })).ToArray();
         return new(r.Rows,r.Columns,cells,RiskService.Warning,r);
     }
-    public object Route(RouteInput r) {
-        var g=Generate(r.Grid);
+    public ScientificRoute Route(RouteInput r) => RouteOnGrid(r,HazardService.ApplyHistory(Generate(r.Grid),r.Events));
+    public ScientificRoute RouteOnGrid(RouteInput r,ScientificGrid g) {
         Point Snap(double lat,double lon) {
             if(!Valid(lat,lon)||lat<r.Grid.StartLat||lat>r.Grid.EndLat||lon<r.Grid.StartLng||lon>r.Grid.EndLng)
                 throw new ArgumentException("Both endpoints must lie inside the generated grid. Adjust bounds and regenerate.");
@@ -48,9 +50,8 @@ public class GridService(RiskService risk) {
             double hav=Math.Pow(Math.Sin((b-a)/2),2)+Math.Cos(a)*Math.Cos(b)*Math.Pow(Math.Sin(dl/2),2);
             distance+=2*3396.190*Math.Asin(Math.Sqrt(Math.Clamp(hav,0,1)));
         }
-        return new { available=path.Length>0,reason=path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers.":"No route within the model's covered grid.",
-            missingMeasurements=RiskService.Unknowns,path,totalCost=result.TotalCost,avgSafetyScore=result.AvgSafetyScore,
-            minSafetyScore=result.MinSafetyScore,distanceKm=distance,modelVersion=RiskService.Version,scientificallyValidated=false,
-            accumulatedRisk=path.Skip(1).Sum(c=>c.Assessment.RiskScore),warning=RiskService.Warning };
+        return new(path.Length>0,path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers.":"No route within the model's covered grid.",
+            RiskService.Unknowns,path,result.TotalCost,result.AvgSafetyScore,result.MinSafetyScore,distance,RiskService.Version,false,
+            path.Skip(1).Sum(c=>c.Assessment.RiskScore),RiskService.Warning);
     }
 }

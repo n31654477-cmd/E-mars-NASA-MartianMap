@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import OLMap from 'ol/Map';
 import View from 'ol/View';
 import ImageLayer from 'ol/layer/Image';
@@ -15,10 +15,12 @@ import { Style, Fill, Stroke, Circle as CircleStyle, Text } from 'ol/style';
 import type { FeatureLike } from 'ol/Feature';
 import {
   useGetMarsSummary, useGetMarsFeatures, useInspectMarsLocation, useGenerateMarsGrid, useAssessMarsRoute,
-  getInspectMarsLocationQueryKey, MarsRouteInputAlgorithm,
+  useSimulateMarsEvent, getInspectMarsLocationQueryKey, MarsRouteInputAlgorithm,
 } from '@workspace/api-client-react';
-import type { MarsFeatureCollection, MarsRouteInputAlgorithm as RouteAlg } from '@workspace/api-client-react';
-import { Crosshair, Flag, MapPin, Maximize, Minus, Plus, Grid3x3, Route as RouteIcon, X } from 'lucide-react';
+import type { MarsFeatureCollection, MarsGrid, MarsRouteInput, MarsRoutingStatus, MarsRouteInputAlgorithm as RouteAlg } from '@workspace/api-client-react';
+import { BoxSelect, Crosshair, Flag, MapPin, Maximize, Minus, Plus, Grid3x3, Route as RouteIcon, X } from 'lucide-react';
+import { boundsFromCorners, insideBounds, pathCostOnGrid } from '@/lib/scenario';
+import { RouteLegend, ScenarioPanel, type Scenario } from '@/components/scenario-panel';
 import { marsProjection, MARS_EXTENT, unitColor } from '@/lib/mars-proj';
 import { ErrorPanel, Sk, Unknown } from '@/components/shell';
 
@@ -30,7 +32,9 @@ const LAYERS: { id: LayerId; label: string }[] = [
   { id: 'layer-04', label: 'Landing sites' },
 ];
 type Pt = { lat: number; lng: number };
-type Mode = 'inspect' | 'start' | 'end';
+type Mode = 'inspect' | 'start' | 'end' | 'area';
+const cellRing = (c: { centerLng: number; centerLat: number; width: number; height: number }) => { const w = c.width / 2, h = c.height / 2; return [[[c.centerLng - w, c.centerLat - h], [c.centerLng + w, c.centerLat - h], [c.centerLng + w, c.centerLat + h], [c.centerLng - w, c.centerLat + h], [c.centerLng - w, c.centerLat - h]]]; };
+const rectRing = (a: Pt, b: Pt) => [[[a.lng, a.lat], [b.lng, a.lat], [b.lng, b.lat], [a.lng, b.lat], [a.lng, a.lat]]];
 
 function unitOf(f: FeatureLike): string { return String(f.get('Unit') ?? f.get('UnitDesc') ?? 'unlabelled'); }
 
@@ -59,6 +63,10 @@ export default function MapPage() {
   const markSrc = useRef(new VectorSource());
   const gridSrc = useRef(new VectorSource());
   const routeSrc = useRef(new VectorSource());
+  const areaSrc = useRef(new VectorSource());
+  const eventSrc = useRef(new VectorSource());
+  const cornerRef = useRef<Pt | null>(null);
+  const applyCornersRef = useRef<(a: Pt, b: Pt) => void>(() => {});
 
   const [visible, setVisible] = useState<Record<string, boolean>>({ 'layer-02': true, 'layer-03': true, 'layer-04': true, 'layer-05': true, hill: true, grid: true });
   const [mode, setMode] = useState<Mode>('inspect');
@@ -75,18 +83,79 @@ export default function MapPage() {
   const inspect = useInspectMarsLocation(params, { query: { enabled: !!probe, queryKey: getInspectMarsLocationQueryKey(params) } });
   const grid = useGenerateMarsGrid();
   const route = useAssessMarsRoute();
-  const routeMatches = !!route.variables && route.variables.data.startLat === start?.lat && route.variables.data.startLng === start?.lng
-    && route.variables.data.endLat === end?.lat && route.variables.data.endLng === end?.lng && route.variables.data.algorithm === routeAlg
-    && JSON.stringify(route.variables.data.grid) === JSON.stringify(grid.data?.bounds);
-  const routeResult = routeMatches ? route.data : undefined;
+  const sim = useSimulateMarsEvent();
+  // Explicit, epoch-guarded state: late responses from stale selections are dropped.
+  const gridEpoch = useRef(0); const routeEpoch = useRef(0);
+  const [sourceGrid, setSourceGrid] = useState<MarsGrid | null>(null);
+  const [activeGrid, setActiveGrid] = useState<MarsGrid | null>(null);
+  const [routeState, setRouteState] = useState<{ input: MarsRouteInput; result: MarsRoutingStatus } | null>(null);
+  const [scenario, setScenario] = useState<Scenario | null>(null);
+  const [corner, setCorner] = useState<Pt | null>(null);
+  const [areaMsg, setAreaMsg] = useState<string | null>(null);
+  const routeResult = routeState?.result;
+  const sourceGridRef = useRef(sourceGrid); sourceGridRef.current = sourceGrid;
+  const gridValid = Object.values(gridForm).every(Number.isFinite) && Number.isInteger(gridForm.rows) && Number.isInteger(gridForm.columns) && gridForm.rows >= 1 && gridForm.rows <= 80 && gridForm.columns >= 1 && gridForm.columns <= 80 && gridForm.startLat >= -90 && gridForm.endLat <= 90 && gridForm.startLng >= -180 && gridForm.endLng <= 180 && gridForm.startLat<gridForm.endLat && gridForm.startLng<gridForm.endLng;
+
+  const clearRoute = useCallback(() => {
+    routeEpoch.current++; route.reset(); sim.reset();
+    setRouteState(null); setScenario(null); setActiveGrid(sourceGridRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const gridKey = JSON.stringify(gridForm);
+  useEffect(() => { // bounds/resolution changed: old grid, route and scenario no longer describe the selection
+    gridEpoch.current++; routeEpoch.current++; grid.reset(); route.reset(); sim.reset();
+    setSourceGrid(null); setActiveGrid(null); setRouteState(null); setScenario(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gridKey]);
+  useEffect(() => { clearRoute(); }, [start?.lat, start?.lng, end?.lat, end?.lng, routeAlg, clearRoute]);
+
+  const cancelArea = useCallback(() => { cornerRef.current = null; setCorner(null); areaSrc.current.getFeatures().filter((f) => f.get('kind') === 'preview').forEach((f) => areaSrc.current.removeFeature(f)); }, []);
+  applyCornersRef.current = (a, b) => {
+    const r = boundsFromCorners(a, b);
+    cancelArea(); setMode('inspect');
+    if (!r.bounds) { setAreaMsg(r.error ?? 'Selection rejected.'); return; }
+    setAreaMsg(r.clamped ? 'A corner fell outside the valid domain and was clamped to lat ±90 / lng ±180 (no antimeridian wrap).' : null);
+    setGridForm((g) => ({ ...g, ...r.bounds! }));
+  };
+  useEffect(() => { if (mode !== 'area') cancelArea(); }, [mode, cancelArea]);
+  useEffect(() => { const k = (e: KeyboardEvent) => { if (e.key === 'Escape' && modeRef.current === 'area') setMode('inspect'); }; window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); }, []);
+
+  const generate = () => {
+    const ep = ++gridEpoch.current; routeEpoch.current++;
+    setSourceGrid(null); setActiveGrid(null);
+    setRouteState(null); setScenario(null); sim.reset(); route.reset();
+    const input = { ...gridForm };
+    grid.mutate({ data: input }, { onSuccess: (g) => { if (ep !== gridEpoch.current) return; setSourceGrid(g); setActiveGrid(g); } });
+  };
+  const assess = () => {
+    if (!start || !end || !sourceGrid) return;
+    const ep = ++routeEpoch.current; sim.reset(); setScenario(null); setActiveGrid(sourceGrid); setRouteState(null);
+    const input: MarsRouteInput = { algorithm: routeAlg, startLat: start.lat, startLng: start.lng, endLat: end.lat, endLng: end.lng, grid: sourceGrid.bounds };
+    route.mutate({ data: input }, { onSuccess: (r) => { if (ep === routeEpoch.current) setRouteState({ input, result: r }); } });
+  };
+  const simulate = () => {
+    if (!routeState) return;
+    const ep = routeEpoch.current;
+    const prevEvents = scenario?.events ?? [];
+    sim.mutate({ data: { route: { ...routeState.input, events: prevEvents } } }, { onSuccess: (r) => {
+      if (ep !== routeEpoch.current) return;
+      setActiveGrid(r.grid);
+      setScenario({ events: r.events, oldRoute: r.oldRoute, oldPathScenarioCost: pathCostOnGrid(r.oldRoute.path, r.grid), newRoute: r.newRoute, event: r.event });
+    } });
+  };
+  const resetScenario = () => { routeEpoch.current++; sim.reset(); setScenario(null); setActiveGrid(sourceGrid); };
+  const currentPath = scenario ? scenario.newRoute : routeResult;
+  const eventBlock = !routeState ? 'Calculate an experimental route first.' : !currentPath?.available || currentPath.path.length < 2 ? 'The current route has no cell after the start to perturb.' : (scenario?.events.length ?? 0) >= 50 ? 'Scenario limit reached (50 events). Reset to continue.' : undefined;
+
   const selectedCell = useMemo(() => {
-    if (!probe || !grid.data) return undefined;
-    const b=grid.data.bounds;
+    if (!probe || !activeGrid) return undefined;
+    const b=activeGrid.bounds;
     if(probe.lat<b.startLat||probe.lat>b.endLat||probe.lng<b.startLng||probe.lng>b.endLng)return undefined;
     const row=Math.min(b.rows-1,Math.floor((probe.lat-b.startLat)/(b.endLat-b.startLat)*b.rows));
     const col=Math.min(b.columns-1,Math.floor((probe.lng-b.startLng)/(b.endLng-b.startLng)*b.columns));
-    return grid.data.cells.find(c=>c.row===row&&c.col===col);
-  },[probe,grid.data]);
+    return activeGrid.cells.find(c=>c.row===row&&c.col===col);
+  },[probe,activeGrid]);
+  const selectedChange = selectedCell && scenario?.event.changes.find((c) => c.row === selectedCell.row && c.col === selectedCell.col);
 
   // Build map once
   useEffect(() => {
@@ -110,7 +179,17 @@ export default function MapPage() {
     const map = new OLMap({
       target: mapEl.current,
       layers: [hill, ...order.map((id) => vec.current[id]), vec.current.grid,
-        new VectorLayer({source:routeSrc.current,style:new Style({stroke:new Stroke({color:'#006e91',width:4})})}), marks],
+        new VectorLayer({ source: eventSrc.current, style: (f) => new Style({ fill: new Fill({ color: f.get('origin') ? 'rgba(91,42,134,.28)' : 'rgba(91,42,134,.1)' }), stroke: new Stroke({ color: '#5b2a86', width: f.get('origin') ? 2.5 : 1.2, lineDash: f.get('origin') ? undefined : [3, 3] }) }) }),
+        new VectorLayer({ source: routeSrc.current, style: (f) => {
+          const k = f.get('kind');
+          if (k === 'old') return new Style({ stroke: new Stroke({ color: '#b5651d', width: 7, lineDash: [10, 7] }), image: new CircleStyle({ radius: 8, stroke: new Stroke({ color: '#b5651d', width: 3 }) }) });
+          if (k === 'new') return new Style({ stroke: new Stroke({ color: '#006e91', width: 3 }), image: new CircleStyle({ radius: 4, fill: new Fill({ color: '#006e91' }) }) });
+          return new Style({ stroke: new Stroke({ color: '#006e91', width: 4 }), image: new CircleStyle({ radius: 5, fill: new Fill({ color: '#006e91' }) }) });
+        } }),
+        new VectorLayer({ source: areaSrc.current, style: (f) => f.get('kind') === 'corner'
+          ? new Style({ image: new CircleStyle({ radius: 6, fill: new Fill({ color: '#f6efe2' }), stroke: new Stroke({ color: '#a8432a', width: 2.5 }) }) })
+          : new Style({ fill: new Fill({ color: f.get('kind') === 'preview' ? 'rgba(168,67,42,.12)' : 'rgba(0,0,0,0)' }), stroke: new Stroke({ color: '#a8432a', width: f.get('kind') === 'preview' ? 2 : 1.25, lineDash: [6, 4] }) }) }),
+        marks],
       view: new View({ projection: proj, center: [0, 0], zoom: 2, extent: MARS_EXTENT, showFullExtent: true, constrainOnlyCenter: true }),
       controls: [],
     });
@@ -118,10 +197,20 @@ export default function MapPage() {
     map.on('singleclick', (e) => {
       const [lng, lat] = e.coordinate;
       const p = { lat: +lat.toFixed(4), lng: +lng.toFixed(4) };
+      if (modeRef.current === 'area') {
+        if (!cornerRef.current) { cornerRef.current = p; setCorner(p); } else applyCornersRef.current(cornerRef.current, p);
+        return;
+      }
       if (modeRef.current === 'start') setStart(p); else if (modeRef.current === 'end') setEnd(p); else setProbe(p);
       if (modeRef.current !== 'inspect') setMode('inspect');
     });
-    map.on('pointermove', (e) => setCursor({ lng: e.coordinate[0], lat: e.coordinate[1] }));
+    map.on('pointermove', (e) => {
+      setCursor({ lng: e.coordinate[0], lat: e.coordinate[1] });
+      const c = cornerRef.current; if (modeRef.current !== 'area' || !c) return;
+      const src = areaSrc.current; let pv = src.getFeatures().find((f) => f.get('kind') === 'preview');
+      const ring = rectRing(c, { lng: Math.max(-180, Math.min(180, e.coordinate[0])), lat: Math.max(-90, Math.min(90, e.coordinate[1])) });
+      if (pv) (pv.getGeometry() as Polygon).setCoordinates(ring); else { pv = new Feature(new Polygon(ring)); pv.set('kind', 'preview'); src.addFeature(pv); }
+    });
     mapRef.current = map;
     return () => { map.setTarget(undefined); mapRef.current = null; };
   }, []);
@@ -153,19 +242,33 @@ export default function MapPage() {
 
   useEffect(() => {
     gridSrc.current.clear();
-    grid.data?.cells.forEach((c) => {
-      const w = c.width / 2, h = c.height / 2;
-      const f = new Feature(new Polygon([[[c.centerLng - w, c.centerLat - h], [c.centerLng + w, c.centerLat - h], [c.centerLng + w, c.centerLat + h], [c.centerLng - w, c.centerLat + h], [c.centerLng - w, c.centerLat - h]]]));
+    activeGrid?.cells.forEach((c) => {
+      const f = new Feature(new Polygon(cellRing(c)));
       f.set('known', c.assessment.geologyCovered); f.set('risk',c.assessment.riskScore); gridSrc.current.addFeature(f);
     });
-  }, [grid.data]);
+  }, [activeGrid]);
   useEffect(()=>{
-    routeSrc.current.clear();
-    if(routeResult?.path.length) {
-      const points=routeResult.path.map(c=>[c.centerLng,c.centerLat]);
-      routeSrc.current.addFeature(new Feature(points.length===1?new Point(points[0]):new LineString(points)));
-    }
-  },[routeResult]);
+    routeSrc.current.clear(); eventSrc.current.clear();
+    const add = (r: MarsRoutingStatus | undefined, kind: string) => {
+      if (!r?.path.length) return;
+      const points=r.path.map(c=>[c.centerLng,c.centerLat]);
+      const f = new Feature(points.length===1?new Point(points[0]):new LineString(points)); f.set('kind', kind); routeSrc.current.addFeature(f);
+    };
+    if (scenario) {
+      add(scenario.oldRoute, 'old'); add(scenario.newRoute, 'new');
+      scenario.event.changes.forEach((ch) => {
+        const c = activeGrid?.cells.find((x) => x.row === ch.row && x.col === ch.col); if (!c) return;
+        const f = new Feature(new Polygon(cellRing(c))); f.set('origin', ch.origin); eventSrc.current.addFeature(f);
+      });
+    } else add(routeResult, 'route');
+  },[routeResult, scenario, activeGrid]);
+  useEffect(() => { // selection rectangle (current bounds) + first corner
+    const src = areaSrc.current;
+    src.getFeatures().filter((f) => f.get('kind') !== 'preview').forEach((f) => src.removeFeature(f));
+    if (gridValid) { const f = new Feature(new Polygon(rectRing({ lat: gridForm.startLat, lng: gridForm.startLng }, { lat: gridForm.endLat, lng: gridForm.endLng }))); f.set('kind', 'selection'); src.addFeature(f); }
+    if (corner) { const f = new Feature(new Point([corner.lng, corner.lat])); f.set('kind', 'corner'); src.addFeature(f); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gridKey, corner]);
 
   const zoom = (d: number) => { const v = mapRef.current?.getView(); if (v) v.animate({ zoom: (v.getZoom() ?? 2) + d, duration: 200 }); };
   const reset = () => mapRef.current?.getView().fit(MARS_EXTENT, { duration: 300 });
@@ -176,8 +279,8 @@ export default function MapPage() {
     return [...m.entries()].sort();
   }, [f03.data]);
 
-  const missingRoute = [!start && 'start point', !end && 'end point',!grid.data && 'generated risk grid'].filter(Boolean) as string[];
-  const gridValid = Object.values(gridForm).every(Number.isFinite) && Number.isInteger(gridForm.rows) && Number.isInteger(gridForm.columns) && gridForm.rows >= 1 && gridForm.rows <= 80 && gridForm.columns >= 1 && gridForm.columns <= 80 && gridForm.startLat >= -90 && gridForm.endLat <= 90 && gridForm.startLng >= -180 && gridForm.endLng <= 180 && gridForm.startLat<gridForm.endLat && gridForm.startLng<gridForm.endLng;
+  const missingRoute = [!start && 'start point', !end && 'end point',!sourceGrid && 'generated risk grid',
+    sourceGrid && start && !insideBounds(start, sourceGrid.bounds) && 'start inside grid bounds', sourceGrid && end && !insideBounds(end, sourceGrid.bounds) && 'end inside grid bounds'].filter(Boolean) as string[];
   const layerMeta = (id: string) => summary.data?.layers.find((l) => l.id === id);
 
   return (
@@ -204,6 +307,18 @@ export default function MapPage() {
         </section>
         <section>
           <h2 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-2">Geographic grid</h2>
+          <div className="mb-3 rounded-md border bg-card p-2.5 text-xs space-y-1.5" data-testid="panel-area-select">
+            <p className="font-mono text-[10px] text-muted-foreground" data-testid="text-selection-bounds">selection: lat {gridForm.startLat}…{gridForm.endLat}° · lng {gridForm.startLng}…{gridForm.endLng}°</p>
+            {mode === 'area'
+              ? <p>{corner ? `Corner 1 at ${corner.lat}°, ${corner.lng}°. Click or tap the opposite corner.` : 'Click or tap the first corner of the rectangle.'} Esc cancels.</p>
+              : <p className="text-muted-foreground">Draw a rectangle with two opposite-corner clicks, or type bounds below. Rectangular, no antimeridian crossing.</p>}
+            <div className="flex gap-1">
+              <button onClick={() => setMode(mode === 'area' ? 'inspect' : 'area')} data-testid="button-select-area" className={`flex-1 inline-flex justify-center items-center gap-1.5 rounded border px-2 py-1 ${mode === 'area' ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'}`}><BoxSelect className="h-3.5 w-3.5" />{mode === 'area' ? 'Selecting…' : 'Select area on map'}</button>
+              {mode === 'area' && <button onClick={() => setMode('inspect')} data-testid="button-cancel-area" className="rounded border px-2 py-1 hover:bg-muted">Cancel</button>}
+            </div>
+            {areaMsg && <p className="text-destructive" data-testid="text-area-message">{areaMsg}</p>}
+            <p className="text-muted-foreground">Changing bounds or rows/columns discards the current grid, route and scenario. Generate explicitly afterwards.</p>
+          </div>
           <div className="grid grid-cols-2 gap-2">
             {(Object.keys(gridForm) as (keyof typeof gridForm)[]).map((k) => (
               <label key={k} className="text-[11px] font-mono text-muted-foreground">{k}
@@ -214,19 +329,19 @@ export default function MapPage() {
               </label>))}
           </div>
           {!gridValid && <p className="mt-2 text-xs text-destructive">Rows/columns 1–80; lat ±90; lng ±180.</p>}
-          <button disabled={!gridValid || grid.isPending} onClick={() => grid.mutate({ data: gridForm })} data-testid="button-generate-grid"
+          <button disabled={!gridValid || grid.isPending} onClick={generate} data-testid="button-generate-grid"
             className="mt-3 w-full inline-flex justify-center items-center gap-2 rounded-md bg-secondary text-secondary-foreground py-1.5 text-sm disabled:opacity-50">
             <Grid3x3 className="h-4 w-4" />{grid.isPending ? 'Generating…' : 'Generate grid'}
           </button>
-          {grid.isError && <div className="mt-2"><ErrorPanel title="Grid failed" error={grid.error} onRetry={() => grid.mutate({ data: gridForm })} /></div>}
-          {grid.data && (
+          {grid.isError && <div className="mt-2"><ErrorPanel title="Grid failed" error={grid.error} onRetry={generate} /></div>}
+          {sourceGrid && (
             <div className="mt-2 text-xs space-y-1" data-testid="text-grid-result">
-              <p className="font-mono">{grid.data.rows}×{grid.data.columns} · all cells have unverified physical safety</p>
-              <p>Generated bounds: {grid.data.bounds.startLat}…{grid.data.bounds.endLat}° latitude, {grid.data.bounds.startLng}…{grid.data.bounds.endLng}° longitude.</p>
-              <p>Risk range: {Math.min(...grid.data.cells.map(c=>c.assessment.riskScore)).toFixed(2)}–{Math.max(...grid.data.cells.map(c=>c.assessment.riskScore)).toFixed(2)} / 100.</p>
+              <p className="font-mono">{sourceGrid.rows}×{sourceGrid.columns} · all cells have unverified physical safety</p>
+              <p>Generated bounds: {sourceGrid.bounds.startLat}…{sourceGrid.bounds.endLat}° latitude, {sourceGrid.bounds.startLng}…{sourceGrid.bounds.endLng}° longitude.</p>
+              <p>Source-derived risk range: {Math.min(...sourceGrid.cells.map(c=>c.assessment.riskScore)).toFixed(2)}–{Math.max(...sourceGrid.cells.map(c=>c.assessment.riskScore)).toFixed(2)} / 100.</p>
               <p>Grid colors: amber = lower model score, red = higher model score; dashed = no midpoint geology. Neither color means safe.</p>
               <p>Inspect a generated cell to see its factor contributions and source feature IDs.</p>
-              <p className="text-muted-foreground">{grid.data.warning}</p>
+              <p className="text-muted-foreground">{sourceGrid.warning}</p>
             </div>)}
         </section>
         {units.length > 0 && (
@@ -246,10 +361,13 @@ export default function MapPage() {
           <MapBtn onClick={reset} label="reset"><Maximize className="h-4 w-4" /></MapBtn>
         </div>
         <div className="absolute top-3 right-3 flex rounded-md border bg-card/95 shadow-sm overflow-hidden text-xs">
-          {([['inspect', Crosshair, 'Inspect'], ['start', MapPin, 'Set start'], ['end', Flag, 'Set end']] as const).map(([m, Icon, l]) => (
+          {([['inspect', Crosshair, 'Inspect'], ['start', MapPin, 'Set start'], ['end', Flag, 'Set end'], ['area', BoxSelect, 'Area']] as const).map(([m, Icon, l]) => (
             <button key={m} onClick={() => setMode(m)} data-testid={`button-mode-${m}`}
               className={`px-3 py-1.5 inline-flex items-center gap-1.5 ${mode === m ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'}`}><Icon className="h-3.5 w-3.5" />{l}</button>))}
         </div>
+        {(routeResult || scenario) && <div className="absolute top-14 right-3"><RouteLegend hasScenario={!!scenario} /></div>}
+        {mode === 'area' && <div className="absolute top-14 left-1/2 -translate-x-1/2 rounded-md border bg-card/95 px-3 py-1.5 text-xs shadow-sm flex items-center gap-2" data-testid="text-area-instructions">
+          {corner ? 'Now click the opposite corner' : 'Click the first corner'}<button onClick={() => setMode('inspect')} className="underline">cancel</button></div>}
         {(f03.isLoading || f02.isLoading) && <div className="absolute inset-x-0 top-0 h-0.5 bg-primary/60 animate-pulse" />}
         <div className="absolute bottom-3 left-3 right-3 flex flex-wrap justify-between gap-2 font-mono text-[11px] pointer-events-none">
           <span className="rounded bg-card/90 px-2 py-1">MARS:2000 · {cursor ? `${cursor.lat.toFixed(3)}°, ${cursor.lng.toFixed(3)}°` : '—'}</span>
@@ -261,7 +379,9 @@ export default function MapPage() {
       <aside className="border-l bg-card/60 p-4 space-y-6 overflow-y-auto lg:max-h-[calc(100dvh-57px)]">
         <section>
           <h2 className="font-display text-xl">Location inspection</h2>
-          {selectedCell && <><p className="mt-2 text-xs font-mono">Generated cell [{selectedCell.row}, {selectedCell.col}] · footprint {selectedCell.width}° × {selectedCell.height}°</p><RiskBreakdown risk={selectedCell.assessment} /></>}
+          {selectedCell && <><p className="mt-2 text-xs font-mono">Generated cell [{selectedCell.row}, {selectedCell.col}] · footprint {selectedCell.width}° × {selectedCell.height}°</p>
+            {scenario && <p className="mt-1 text-xs border-l-2 border-[#5b2a86] pl-2" data-testid="text-inspect-scenario">Showing simulated scenario scores ({scenario.events.length} event{scenario.events.length === 1 ? '' : 's'}), not source-derived values.{selectedChange && ` Latest event: ${scenario.event.spec.factor} ${selectedChange.factorBefore.toFixed(3)}→${selectedChange.factorAfter.toFixed(3)}, DF ${selectedChange.dfBefore.toFixed(4)}→${selectedChange.dfAfter.toFixed(4)}, area ${selectedChange.areaKm2.toFixed(0)} km²${selectedChange.origin ? ' (origin)' : ''}.`}</p>}
+            <RiskBreakdown risk={selectedCell.assessment} /></>}
           {probe && !selectedCell && <p className="mt-2 text-xs">Generate a grid covering this location to calculate its cell risk.</p>}
           {!probe && <p className="mt-2 text-sm text-muted-foreground">Click the map in Inspect mode. Every answer cites the source feature it came from.</p>}
           {probe && inspect.isLoading && <div className="mt-3 space-y-2"><Sk className="h-4 w-2/3" /><Sk className="h-24" /></div>}
@@ -298,14 +418,14 @@ export default function MapPage() {
             <button key={a} onClick={() => setRouteAlg(a)} data-testid={`button-route-alg-${a}`} className={`px-2.5 py-1 rounded border font-mono text-xs ${routeAlg === a ? 'bg-secondary' : 'hover:bg-muted'}`}>{a}</button>))}</div>
           {missingRoute.length > 0 && <p className="mt-2 text-xs text-muted-foreground">Missing inputs: {missingRoute.join(', ')}. Use Set start / Set end on the map.</p>}
           <button disabled={missingRoute.length > 0 || route.isPending} data-testid="button-assess-route"
-            onClick={() => start && end && grid.data && route.mutate({ data: { algorithm: routeAlg, startLat: start.lat, startLng: start.lng, endLat: end.lat, endLng: end.lng, grid:grid.data.bounds } })}
+            onClick={assess}
             className="mt-3 w-full inline-flex justify-center items-center gap-2 rounded-md bg-primary text-primary-foreground py-2 text-sm disabled:opacity-50">
             <RouteIcon className="h-4 w-4" />{route.isPending ? 'Calculating…' : 'Calculate experimental route'}
           </button>
-          {route.isError && <div className="mt-2"><ErrorPanel title="Assessment failed" error={route.error} onRetry={() => route.reset()} /></div>}
+          {route.isError && !routeState && <div className="mt-2"><ErrorPanel title="Assessment failed" error={route.error} onRetry={assess} /></div>}
           {routeResult && (
             <div className="rise mt-3 rounded-md border-2 border-dashed p-3 text-sm" data-testid="panel-route-status">
-              <p className="font-medium">{routeResult.available ? 'Experimental route calculated' : 'No model route found'}</p>
+              <p className="font-medium">{scenario ? 'Original route (before scenario)' : routeResult.available ? 'Experimental route calculated' : 'No model route found'}</p>
               <p className="mt-1 text-xs text-muted-foreground">{routeResult.reason}</p>
               {routeResult.available && <dl className="mt-3 text-xs space-y-1">
                 <div>Path cells: {routeResult.path.length} · Moves: {Math.max(0,routeResult.path.length-1)}</div>
@@ -317,9 +437,12 @@ export default function MapPage() {
               <p className="mt-2 text-xs">{routeResult.warning}</p>
               <div className="mt-2 flex flex-wrap gap-1">{routeResult.missingMeasurements.map((m) => <Unknown key={m} label={`${m}: missing`} />)}</div>
             </div>)}
-          <button className="mt-2 text-xs underline" onClick={()=>{route.reset();routeSrc.current.clear();}}>Clear route</button>
+          {routeResult && scenario && <p className="mt-2 text-xs text-muted-foreground">Panel above shows the original source-grid route. The scenario comparison is below.</p>}
+          <button className="mt-2 text-xs underline" data-testid="button-clear-route" onClick={clearRoute}>Clear route{scenario ? ' and scenario (restores source grid)' : ''}</button>
           {summary.data && !routeResult && <p className="mt-3 text-xs text-muted-foreground">{summary.data.limitation}</p>}
         </section>
+        <ScenarioPanel canSimulate={!eventBlock} disabledReason={eventBlock} pending={sim.isPending} error={sim.isError ? sim.error : null}
+          onSimulate={simulate} onReset={resetScenario} scenario={scenario} />
         {summary.data && (
           <section className="border-t pt-5 text-xs">
             <h2 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-2">Inventory · {summary.data.layers.length} layers</h2>

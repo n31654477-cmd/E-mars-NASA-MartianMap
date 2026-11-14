@@ -46,6 +46,38 @@ Lab fixtures are synthetic and have no geographic position. Weighted fixture: BF
 
 Checks weighted, tied, zero-cost, unreachable and start=destination fixtures, costs, neighbors and blocked/negative input handling. The imported 11 prototype source files were also compared byte-for-byte with the uploaded ZIP. Frontend typecheck and live API requests verified layer counts, source inspection, null scientific inputs and unavailable routing.
 
+## Manual areas and simulated hazard events
+
+Use **Select area on map**, then click/tap two opposite corners. The rectangle fills the numeric geographic bounds; rows and columns remain independently editable. Click **Generate grid**, set start/end inside it, then calculate a route. Selection is rectangular in Mars spherical degrees, not a drawn obstacle polygon, and cannot wrap the longitude seam. Changed bounds/resolution invalidate the current grid and scenario.
+
+**Random event on current path** chooses an eligible entered path cell (not the uncharged start) uniformly, then chooses one unsaturated terrain or structure factor uniformly. The normalized factor increment is:
+
+```
+δ ~ Uniform[min(0.05, 1 − f_origin), min(0.25, 1 − f_origin)]
+f_origin_new = f_origin + δ
+
+A = r² × Δλ × |sin(φN) − sin(φS)|  [km²; angles in radians; r = 3396.190 km]
+δ_neighbor = min(1 − f_neighbor, δ × 0.5 / (1 + A / 10000) / sqrt(dr² + dc²))
+ΔDF = factor_weight × δ_factor / 100
+```
+
+Only the same factor in at most eight immediate covered neighbors changes; there is no further propagation. Each neighbor uses its own spherical area, so larger cells produce smaller increments. Saturated factors do not increase. Missing-geology neighbors are skipped. The strict inequality is **added** neighbor danger < added origin danger, not an ordering of their total pre-existing DF. Weights, uncertainty penalty, source evidence and unknown physical traversability are unchanged. Values remain in [0,1] and DF in [1,2].
+
+The interval 0.05–0.25, attenuation 0.5 and reference area 10,000 km² are analyst-selected scenario parameters, **not empirically calibrated realistic Mars hazard ranges**. Source data do not provide such a calibration. Worked example: δ=0.2 and A=10,000 km² gives orthogonal δ=0.05, diagonal δ≈0.035355; terrain weight45 gives origin ΔDF=0.09 and orthogonal ΔDF=0.0225.
+
+The unchanged algorithms recalculate with updated DF. The old route is wide/dashed amber and the new route solid blue; geometry may remain identical, particularly with unweighted BFS. The UI compares pre-event cost, the old path re-costed on the new grid (start uncharged), and new path cost. This distinguishes a real reroute advantage from a change in costs alone.
+
+Events accumulate up to 50, with an event seed and explicit replayable increments returned by `POST /mars-pathfinder/api/mars/event`. `POST /route` accepts the same optional event history. The server re-derives a source grid then replays increments rather than accepting arbitrary replacements for measured/source values. Scenarios live only in page memory: Reset restores the baseline grid and original route; changing endpoints, algorithm or bounds clears the scenario, and reload discards it.
+
+Additional checks:
+
+```
+python artifacts/mars-pathfinder/tests/scenario_api_checks.py
+pnpm --filter @workspace/scripts exec tsx --test ../artifacts/mars-pathfinder/src/lib/scenario.test.ts
+```
+
+The Python checks require the managed preview API to be running. `MARS_TEST_BASE_URL` can select another API base for developer checks. They exercise deterministic events, cumulative replay, costs, bounds, residual equations, and rejected requests. These checks do not validate real-world mission safety.
+
 ## Run and persistence
 
 Use the managed `artifacts/mars-pathfinder: web` and `artifacts/mars-pathfinder: Mars API` workflows. The API is served under `/mars-pathfinder/api/`.

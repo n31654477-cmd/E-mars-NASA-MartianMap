@@ -84,6 +84,23 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/MarsRoutingStatus" }
+  /mars/event:
+    post:
+      operationId: simulateMarsEvent
+      summary: Apply a bounded simulated factor increase along the current route and reroute
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MarsScenarioInput" }
+      responses:
+        "200":
+          description: Updated scenario grid, immediate old/new routes, and replayable event history
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MarsScenarioResult" }
+        "400":
+          description: Invalid scenario, no route, exhausted factors or event limit
   /mars/lab:
     post:
       operationId: runMarsAlgorithm
@@ -213,6 +230,55 @@ components:
         startLng: { type: number }
         endLat: { type: number }
         endLng: { type: number }
+        events:
+          type: array
+          maxItems: 50
+          items: { $ref: "#/components/schemas/MarsHazardEvent" }
+    MarsHazardEvent:
+      type: object
+      required: [row, col, factor, delta]
+      properties:
+        row: { type: integer, minimum: 0 }
+        col: { type: integer, minimum: 0 }
+        factor: { type: string, enum: [terrain, structure] }
+        delta: { type: number, exclusiveMinimum: 0, maximum: 0.25 }
+    MarsScenarioInput:
+      type: object
+      required: [route]
+      properties:
+        route: { $ref: "#/components/schemas/MarsRouteInput" }
+        seed: { type: integer, format: int32 }
+    MarsEventChange:
+      type: object
+      required: [row, col, origin, areaKm2, factorBefore, factorAfter, dfBefore, dfAfter, deltaDf]
+      properties:
+        row: { type: integer }
+        col: { type: integer }
+        origin: { type: boolean }
+        areaKm2: { type: number }
+        factorBefore: { type: number }
+        factorAfter: { type: number }
+        dfBefore: { type: number }
+        dfAfter: { type: number }
+        deltaDf: { type: number }
+    MarsEventDetail:
+      type: object
+      required: [seed, spec, changes, formula, warning]
+      properties:
+        seed: { type: integer }
+        spec: { $ref: "#/components/schemas/MarsHazardEvent" }
+        changes: { type: array, items: { $ref: "#/components/schemas/MarsEventChange" } }
+        formula: { type: string }
+        warning: { type: string }
+    MarsScenarioResult:
+      type: object
+      required: [grid, oldRoute, newRoute, event, events]
+      properties:
+        grid: { $ref: "#/components/schemas/MarsGrid" }
+        oldRoute: { $ref: "#/components/schemas/MarsRoutingStatus" }
+        newRoute: { $ref: "#/components/schemas/MarsRoutingStatus" }
+        event: { $ref: "#/components/schemas/MarsEventDetail" }
+        events: { type: array, items: { $ref: "#/components/schemas/MarsHazardEvent" } }
     MarsRoutingStatus:
       type: object
       required: [available, reason, missingMeasurements, path, totalCost, avgSafetyScore, minSafetyScore, distanceKm, modelVersion, scientificallyValidated, accumulatedRisk, warning]

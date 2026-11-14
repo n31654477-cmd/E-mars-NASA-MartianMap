@@ -13,6 +13,8 @@ Use only source-supported measurements and danger thresholds. Missing data is ne
 
 The user subsequently requested an explicit weighted per-cell risk formula and safety function from the current data, with all factors and scores documented in Methods & limits. Experimental proxy costs and routes are allowed when clearly distinguished from measured or scientifically validated safety. Preserve the algorithm implementations; label analyst-chosen weights as assumptions, keep missing physical measurements unknown, and document assumed traversability. Synthetic test fixtures remain separate from the geographic map.
 
-**Why:** The user explicitly prioritizes prototype algorithm correctness and scientific accuracy over implementation convenience or visual appearance.
+The user's “D-value increase” means increasing one existing factor at a cell, not changing factor weights or adding an unrelated penalty. Random-event scenarios must support manual map-area selection, area-dependent residual increases in at most eight neighboring cells, automatic rerouting, and differently colored old/new paths. Treat these as hypothetical changes to derived factors, never edited source observations.
+
+**Why:** The user explicitly defined D-value changes this way in the screenshot-based feature request and prioritizes prototype algorithm correctness and scientific accuracy over implementation convenience or visual appearance.
 
 **How to apply:** Apply these requirements to the Mars pathfinder development, not merely the existing source-data explorer. Missing prototype source must not be replaced with guessed implementations.

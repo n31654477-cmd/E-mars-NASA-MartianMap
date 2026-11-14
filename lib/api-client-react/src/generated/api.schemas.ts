@@ -197,6 +197,27 @@ export const MarsRouteInputAlgorithm = {
   astar: 'astar',
 } as const;
 
+export type MarsHazardEventFactor = typeof MarsHazardEventFactor[keyof typeof MarsHazardEventFactor];
+
+
+export const MarsHazardEventFactor = {
+  terrain: 'terrain',
+  structure: 'structure',
+} as const;
+
+export interface MarsHazardEvent {
+  /** @minimum 0 */
+  row: number;
+  /** @minimum 0 */
+  col: number;
+  factor: MarsHazardEventFactor;
+  /**
+     * @maximum 0.25
+     * @exclusiveMinimum 0
+     */
+  delta: number;
+}
+
 export interface MarsRouteInput {
   algorithm: MarsRouteInputAlgorithm;
   grid: MarsGridInput;
@@ -204,6 +225,33 @@ export interface MarsRouteInput {
   startLng: number;
   endLat: number;
   endLng: number;
+  /** @maxItems 50 */
+  events?: MarsHazardEvent[];
+}
+
+export interface MarsScenarioInput {
+  route: MarsRouteInput;
+  seed?: number;
+}
+
+export interface MarsEventChange {
+  row: number;
+  col: number;
+  origin: boolean;
+  areaKm2: number;
+  factorBefore: number;
+  factorAfter: number;
+  dfBefore: number;
+  dfAfter: number;
+  deltaDf: number;
+}
+
+export interface MarsEventDetail {
+  seed: number;
+  spec: MarsHazardEvent;
+  changes: MarsEventChange[];
+  formula: string;
+  warning: string;
 }
 
 export interface MarsRoutingStatus {
@@ -219,6 +267,14 @@ export interface MarsRoutingStatus {
   scientificallyValidated: boolean;
   accumulatedRisk: number;
   warning: string;
+}
+
+export interface MarsScenarioResult {
+  grid: MarsGrid;
+  oldRoute: MarsRoutingStatus;
+  newRoute: MarsRoutingStatus;
+  event: MarsEventDetail;
+  events: MarsHazardEvent[];
 }
 
 export type MarsLabInputAlgorithm = typeof MarsLabInputAlgorithm[keyof typeof MarsLabInputAlgorithm];
