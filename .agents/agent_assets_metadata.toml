@@ -112,3 +112,17 @@ mtime_ms = 1794659436198
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/e712f436-4526-4e32-a50d-82d2351b7617/27e32f52-9874-4005-a551-1d8fdd84cfad"
 storage_version_token = "1794659459177038"
 content_type = "application/pdf"
+
+[[outputs]]
+id = "QNtHT7F0MQUoQ0g8hMTB7"
+uri = "file://generated-artifacts/NASAproV2.zip"
+type = "unspecified"
+title = "NASAproV2 — Windows-ready project ZIP"
+description = "Includes the current Mars Pathfinder workspace, local map data, and Windows install/run launchers."
+logical_id = "1cf2103b-ca86-4fac-be34-1bacbf6d96d4"
+content_hash = "sha256:f035462004d597823da9044e9cb8f759dce99c97e359db7e8abb6156db1dc421"
+size = 83876681
+mtime_ms = 1794662414653
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/1cf2103b-ca86-4fac-be34-1bacbf6d96d4/c207bbb7-2e79-404b-a9da-d0507c0bfa50"
+storage_version_token = "1794662444425990"
+content_type = "application/octet-stream"

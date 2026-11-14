@@ -99,7 +99,7 @@ All three checks should print True. Keep the complete workspace structure, inclu
 
 ### 3.3 Include the runtime data
 
-The source-code download may exclude large generated data. Extract NASA_Pathfinder_Local_Data.zip into the project root, preserving its internal paths. If it is in Downloads:
+The Windows-ready `NASAproV2.zip` bundle already contains these runtime files in the required paths. If you have a regular source-code download instead, it may exclude large generated data. Extract `NASA_Pathfinder_Local_Data.zip` into the project root, preserving its internal paths. If it is in Downloads:
 
 ```powershell
 Expand-Archive `
@@ -125,7 +125,7 @@ Every entry must print True. Extraction with -Force replaces files with the same
 
 ### 3.4 Allow Windows x64 native dependencies
 
-The current Replit-oriented workspace excludes some non-Linux native packages. On your **local Windows copy**, remove the four x64 exclusions below before installation. This procedure makes a backup and leaves other workspace settings unchanged. Skip it if your copy already removed them.
+The current Replit-oriented workspace excludes some non-Linux native packages. The `NASAproV2.zip` bundle already enables these packages for Windows x64. For a regular source-code download, remove the four x64 exclusions below from your **local Windows copy** before installation. This procedure makes a backup and leaves other workspace settings unchanged. Skip it if your copy already removed them.
 
 ```powershell
 if (!(Test-Path ".\pnpm-workspace.yaml.windows-backup")) {
@@ -154,7 +154,7 @@ This updates your local lockfile as necessary. Preserve your working Windows wor
 Open a PowerShell window and run:
 
 ```powershell
-cd "C:\Users\IP3 SLIM\Downloads\NASAPRO"
+cd "$HOME\Downloads\NASAproV2"
 $env:PORT = "18220"
 dotnet run --project ".\artifacts\mars-pathfinder\backend\Mars.Api.csproj" --no-launch-profile
 ```
@@ -169,7 +169,7 @@ Open a second PowerShell window:
 $env:Path = "C:\Program Files\Git\usr\bin;C:\Program Files\nodejs;$env:Path"
 $npmGlobal = (npm.cmd config get prefix).Trim()
 $env:Path = "$npmGlobal;$env:Path"
-cd "C:\Users\IP3 SLIM\Downloads\NASAPRO"
+cd "$HOME\Downloads\NASAproV2"
 
 $env:PORT = "18219"
 $env:BASE_PATH = "/mars-pathfinder/"
