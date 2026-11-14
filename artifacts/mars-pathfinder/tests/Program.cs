@@ -119,6 +119,23 @@ foreach(var algorithm in new[]{"bfs","dijkstra","astar"}) {
  var original=router.RouteOnGrid(req,baseline);
  Check(original.Available&&original.Path.Length==5,"Reset restores baseline route");
 }
+var horizontalReq=new RouteInput("dijkstra",baseline.Cells[10].CenterLat,baseline.Cells[10].CenterLng,
+ baseline.Cells[14].CenterLat,baseline.Cells[14].CenterLng,baseline.Bounds);
+foreach(var algorithm in new[]{"dijkstra","astar"}) {
+ var safe=router.RouteOnGrid(horizontalReq with { Algorithm=algorithm },scenario.Grid);
+ Check(safe.Available&&safe.Path.All(c=>c.SafetyStatus!="simulated"),$"{algorithm} avoids every residual cell when a route around them exists");
+ Check(Math.Abs(safe.TotalCost-safe.Path.Skip(1).Sum(c=>c.Df))<1e-12,$"{algorithm} reports original DF, not preference penalty");
+}
+var fastest=router.RouteOnGrid(horizontalReq with { Algorithm="bfs" },scenario.Grid);
+Check(fastest.Available&&fastest.Path.Any(c=>c.SafetyStatus=="simulated"),"Fastest route may cross passable residual cells");
+var corridorCells=scenario.Grid.Cells.Select(c=> {
+ var allowed=new HashSet<(int,int)>{(2,0),(1,0),(1,1),(1,2),(1,3),(1,4),(2,4)};
+ return allowed.Contains((c.Row,c.Col))?c:c with { Blocked=true };
+}).ToArray();
+var corridor=scenario.Grid with { Cells=corridorCells };
+var unavoidable=router.RouteOnGrid(horizontalReq,corridor);
+Check(unavoidable.Available&&unavoidable.Path.All(c=>c.Blocked!=true)&&unavoidable.Path.Any(c=>c.SafetyStatus=="simulated"),
+ "Safe route can cross residual cells when every alternative is blocked");
 var pathFixture=baseline.Cells.Take(5).ToArray();
 var full=new ScientificRoute(true,"fixture",[],pathFixture,pathFixture.Skip(1).Sum(c=>c.Df),69,69,0,"fixture",false,124,"fixture");
 var remaining=GridService.RemainingRoute(full,2);

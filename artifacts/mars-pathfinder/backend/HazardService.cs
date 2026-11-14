@@ -13,7 +13,7 @@ public class HazardService(GridService grids)
     public const int MaxEvents=50;
     public const double ReferenceAreaKm2=10000;
     public const string Formula="Origin δf ∈ [min(0.05,1−f), min(0.25,1−f)]; neighbor δf = min(1−f, origin δf × 0.5 / (1 + A/10000) / sqrt(dr²+dc²)); ΔDF = weight × δf / 100.";
-    public const string Warning="Synthetic what-if event, not an observed Mars hazard or calibrated hazard probability. Each event origin is forbidden for every route until reset (scenario closure, not measured physical traversability). Residual neighbors remain passable with increased terrain/structure cost; weighted routes consider that penalty, BFS ignores it. Source evidence and missing measurements remain unchanged. Residual inequality applies to added danger, not absolute pre-existing scores.";
+    public const string Warning="Synthetic what-if event, not an observed Mars hazard or calibrated hazard probability. Each event origin is forbidden for every route until reset (scenario closure, not measured physical traversability). Residual neighbors remain passable. Safe Dijkstra/A* routes first minimize the number of residual cells entered, then minimize the original entered-cell DF sum; if no alternative exists, residual cells remain usable. Fastest-by-moves BFS may cross residual cells. Source evidence and missing measurements remain unchanged. Residual inequality applies to added danger, not absolute pre-existing scores.";
 
     public static double AreaKm2(ScientificCell cell)
     {

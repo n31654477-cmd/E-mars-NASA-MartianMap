@@ -40,7 +40,7 @@ Originals are unchanged. The 19 additional layers/tables remain catalogued with 
 
 ## Original algorithm behavior
 
-BFS minimizes grid steps. Dijkstra and A* minimize entered-cell DF excluding the start. A* uses Manhattan distance times minimum unblocked DF. Four-neighbor order is row−1, col+1, row+1, col−1. Weighted priority ties use cost, row, column. Equal-cost relaxations do not replace parents. No diagonal or antimeridian wrapping was introduced.
+BFS minimizes grid steps. Baseline Dijkstra/A* minimize entered-cell DF excluding the start. In event scenarios, safe Dijkstra/A* first minimize entered residual-neighbor cells, then the unchanged DF sum; residual neighbors remain passable if unavoidable. A* uses its original Manhattan heuristic. Four-neighbor order is row−1, col+1, row+1, col−1. Weighted priority ties use cost, row, column. Equal-cost relaxations do not replace parents. No diagonal or antimeridian wrapping was introduced.
 
 Lab fixtures are synthetic and have no geographic position. Weighted fixture: BFS yields 7 path cells and cost 101; Dijkstra and A* each yield 9 path cells and cost 8. Path-cell count is not the number of expanded nodes.
 
@@ -69,7 +69,7 @@ Only the same factor in at most eight immediate covered neighbors changes; there
 
 The interval 0.05–0.25, attenuation 0.5 and reference area 10,000 km² are analyst-selected scenario parameters, **not empirically calibrated realistic Mars hazard ranges**. Source data do not provide such a calibration. Worked example: δ=0.2 and A=10,000 km² gives orthogonal δ=0.05, diagonal δ≈0.035355; terrain weight45 gives origin ΔDF=0.09 and orthogonal ΔDF=0.0225.
 
-Every event origin is a **forbidden scenario cell** until Reset, including all earlier event origins. The unchanged BFS, Dijkstra and A* receive this closure through their existing blocked-cell mask. It is an operational simulation rule, not a measured physical obstacle. Residual neighbors remain passable with the existing increased DF: weighted Dijkstra/A* penalize them, while BFS minimizes moves and ignores DF. Weighted routing may still use a residual cell when avoiding it would cost more overall; there is no absolute neighbor-avoidance guarantee.
+Every event origin is a **forbidden scenario cell** until Reset, including all earlier event origins. The unchanged BFS, Dijkstra and A* receive this closure through their existing blocked-cell mask. It is an operational simulation rule, not a measured physical obstacle. Residual neighbors remain passable. Event scenarios add a safe-route preference for Dijkstra/A*: minimize entered residual-neighbor cells first, then the original entered-cell DF sum. This preference is not itself a physical risk score and does not change reported DF costs. If all feasible routes require residual cells, the safe route uses as few as possible. BFS minimizes moves and may cross residuals when shorter.
 
 The historical old path remains dashed amber for comparison and is now infeasible; the valid new path is solid blue and cannot enter any forbidden origin. If the event closes B or disconnects the allowed grid, the app reports no route rather than drawing an unsafe fallback. The cost panel marks the previous path as forbidden/unavailable after the event instead of presenting its finite DF sum as a feasible alternative. Source evidence and unknown physical measurements remain unchanged.
 

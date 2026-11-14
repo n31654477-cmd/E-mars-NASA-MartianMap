@@ -51,6 +51,15 @@ export function pathCostOnGrid(path: { row: number; col: number }[], grid: MarsG
   return sum;
 }
 
+/** True when an API-returned route crosses any accumulated event-origin cell. */
+export function routeCrossesEventOrigin(
+  path: readonly { row: number; col: number }[],
+  events: readonly { row: number; col: number }[],
+): boolean {
+  const origins = new Set(events.map((event) => `${event.row}:${event.col}`));
+  return path.some((cell) => origins.has(`${cell.row}:${cell.col}`));
+}
+
 export type XY = [number, number];
 const sameXY = (a: XY, b: XY) => a[0] === b[0] && a[1] === b[1];
 

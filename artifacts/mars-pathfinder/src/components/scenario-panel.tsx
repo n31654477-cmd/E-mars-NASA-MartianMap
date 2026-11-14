@@ -51,7 +51,7 @@ export function ScenarioPanel({ canSimulate, disabledReason, pending, error, onS
   return (
     <section className="border-t pt-5" data-testid="panel-scenario">
       <h2 className="font-display text-xl">Simulated hazard event</h2>
-      <p className="mt-2 text-xs">A hypothetical scenario, not an observation. The server picks one random cell on the remaining path (after start), raises one terrain or structure factor, and forbids entry to that cell until Reset. Every routing algorithm must avoid all event origins. Up to 8 neighbors get a smaller risk increase but remain passable: safe routing (Dijkstra/A*) counts their higher cost; fastest-by-moves BFS ignores that cost. No route is returned if B or the remaining journey is blocked. Source data are never modified.</p>
+      <p className="mt-2 text-xs">A hypothetical scenario, not an observation. The server picks one random cell on the remaining path (after start), raises one terrain or structure factor, and forbids entry to that cell until Reset. Every routing algorithm must avoid all event origins. Up to 8 neighbors get a smaller risk increase but remain passable: safe routing (Dijkstra/A*) avoids as many residual cells as possible first, then minimizes the original DF cost; it can use them if unavoidable. Fastest-by-moves BFS may cross residual cells. No route is returned if B or the remaining journey is blocked. Source data are never modified.</p>
       <div className="mt-3 rounded-md border bg-card p-3 space-y-2 text-xs" data-testid="panel-traveler">
         <label className="flex items-center gap-2 font-medium">
           <input type="checkbox" checked={traveler !== null} disabled={pending || selectableCount < 1} data-testid="checkbox-traveler"

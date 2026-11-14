@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { MarsGrid, MarsRoutingStatus } from '@workspace/api-client-react';
-import { boundsFromCorners, insideBounds, samePathGeometry, pathCostOnGrid } from './scenario';
+import { boundsFromCorners, insideBounds, samePathGeometry, pathCostOnGrid, routeCrossesEventOrigin } from './scenario';
 
 const route = (cells: [number, number][]) => ({ path: cells.map(([row, col]) => ({ row, col })) }) as unknown as MarsRoutingStatus;
 
@@ -25,6 +25,13 @@ test('comparison reports missing path cells instead of inventing zero cost', () 
 test('comparison rejects a now-forbidden previous route', () => {
   const grid = { cells: [{ row: 0, col: 0, df: 1.5 }, { row: 0, col: 1, df: 1.7, blocked: true }] } as unknown as MarsGrid;
   assert.equal(pathCostOnGrid(route([[0, 0], [0, 1]]).path, grid), null);
+});
+
+test('client safety guard rejects any accumulated event origin in a returned route', () => {
+  const events = [{ row: 3, col: 4 }, { row: 7, col: 2 }];
+  assert.equal(routeCrossesEventOrigin([{ row: 0, col: 0 }, { row: 3, col: 4 }], events), true);
+  assert.equal(routeCrossesEventOrigin([{ row: 3, col: 3 }, { row: 3, col: 5 }], events), false);
+  assert.equal(routeCrossesEventOrigin([], events), false);
 });
 
 test('reversed corners normalize to min/max', () => {

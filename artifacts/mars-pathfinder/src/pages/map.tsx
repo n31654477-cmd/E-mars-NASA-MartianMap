@@ -19,7 +19,7 @@ import {
 } from '@workspace/api-client-react';
 import type { MarsFeatureCollection, MarsGrid, MarsRouteInput, MarsRoutingStatus, MarsRouteInputAlgorithm as RouteAlg } from '@workspace/api-client-react';
 import { BoxSelect, Crosshair, Flag, MapPin, Maximize, Minus, Plus, Grid3x3, Route as RouteIcon, X } from 'lucide-react';
-import { boundsFromCorners, insideBounds, pathCostOnGrid, routeDisplayGeometry, nearestPathIndex, type XY } from '@/lib/scenario';
+import { boundsFromCorners, insideBounds, pathCostOnGrid, routeCrossesEventOrigin, routeDisplayGeometry, nearestPathIndex, type XY } from '@/lib/scenario';
 import { RouteLegend, ScenarioPanel, type Scenario } from '@/components/scenario-panel';
 import { marsProjection, MARS_EXTENT, unitColor } from '@/lib/mars-proj';
 import { ErrorPanel, Sk, Unknown } from '@/components/shell';
@@ -151,10 +151,16 @@ export default function MapPage() {
     const moved = (scenario?.moved ?? false) || idx !== null;
     sim.mutate({ data: { route: { ...routeState.input, startLat: origin.lat, startLng: origin.lng, events: prevEvents }, ...(idx !== null ? { travelerPathIndex: idx } : {}) } }, { onSuccess: (r) => {
       if (ep !== routeEpoch.current) return;
+      // Fail closed even if an older or inconsistent local API returns an
+      // unsafe path: never draw a route through any accumulated event origin.
+      const newRoute = routeCrossesEventOrigin(r.newRoute.path, r.events)
+        ? { ...r.newRoute, available: false, path: [], totalCost: 0,
+            reason: 'Display safety guard stopped a route that entered a forbidden event-origin cell. Update the local API before continuing.' }
+        : r.newRoute;
       setActiveGrid(r.grid);
-      setScenario({ events: r.events, oldRoute: r.oldRoute, oldPathScenarioCost: pathCostOnGrid(r.oldRoute.path, r.grid), newRoute: r.newRoute, event: r.event, origin: nextOrigin, moved });
+      setScenario({ events: r.events, oldRoute: r.oldRoute, oldPathScenarioCost: pathCostOnGrid(r.oldRoute.path, r.grid), newRoute, event: r.event, origin: nextOrigin, moved });
       // Traveler now stands at index 0 of the rerouted path; later picks move forward from there.
-      setTraveler(idx !== null && r.newRoute.available && r.newRoute.path.length > 1 ? 0 : null);
+      setTraveler(idx !== null && newRoute.available && newRoute.path.length > 1 ? 0 : null);
       setMode((m) => m === 'traveler' ? 'inspect' : m);
     } });
   };

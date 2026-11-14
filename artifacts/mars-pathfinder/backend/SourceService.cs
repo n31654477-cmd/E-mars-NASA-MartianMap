@@ -38,8 +38,8 @@ public class SourceService
         riskModel=RiskService.Model,
         algorithms=new[]{
             new { id="bfs", name="BFS", objective="Fewest grid moves", description="FIFO; four neighbors in row−1, col+1, row+1, col−1 order. Not minimum kilometers.", source="Business/ShortestPathAlgorethims.cs" },
-            new { id="dijkstra", name="Dijkstra", objective="Minimum entered-cell DF sum", description="Start uncharged; ties by cost, row, column; nonnegative finite weights.", source="Business/SafePathsAlgorithimsGreedy.cs" },
-            new { id="astar", name="A*", objective="Minimum entered-cell DF sum", description="Manhattan distance × minimum unblocked DF heuristic; exact original tie-breaking.", source="Business/SafePathsAlgorithimsGreedy.cs" }
+            new { id="dijkstra", name="Dijkstra", objective="Baseline: minimum entered-cell DF; event scenarios: fewest residual cells, then DF", description="Start uncharged; ties by cost, row, column. Event-only residual avoidance is a scenario preference; residual cells remain passable.", source="Business/SafePathsAlgorithimsGreedy.cs" },
+            new { id="astar", name="A*", objective="Baseline: minimum entered-cell DF; event scenarios: fewest residual cells, then DF", description="Manhattan heuristic and original tie-breaking. Event-only residual avoidance is a scenario preference; residual cells remain passable.", source="Business/SafePathsAlgorithimsGreedy.cs" }
         },
         layers=Catalog.GetProperty("layers").EnumerateArray().Select(l => new {
             id=l.GetProperty("id").GetString(), name=l.GetProperty("name").GetString(), filename=Path.GetFileName(l.GetProperty("source").GetString()),

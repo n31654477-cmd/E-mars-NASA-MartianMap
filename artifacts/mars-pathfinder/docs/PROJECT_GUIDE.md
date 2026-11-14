@@ -339,8 +339,8 @@ DF=1.66 is an experimental movement cost, not a 66% chance of harm. The inverse 
 | Algorithm | Objective | Effect of residual risk | Event origins |
 | --- | --- | --- | --- |
 | BFS | Fewest four-neighbor moves | Ignores DF differences | Always excluded |
-| Dijkstra | Lowest sum of entered-cell DF | Counts the increased DF | Always excluded |
-| A* | Same DF objective with heuristic | Counts the increased DF | Always excluded |
+| Dijkstra | Baseline: lowest entered-cell DF; event scenario: fewest residual cells first, then lowest DF | Avoids residual cells when an alternative exists; uses them if needed | Always excluded |
+| A* | Same two-stage event objective with its original heuristic | Avoids residual cells when an alternative exists; uses them if needed | Always excluded |
 
 “Fastest” here means fewest grid moves, not modeled travel time. No speed, energy use or real rover dynamics are available.
 
@@ -351,7 +351,7 @@ totalCost = sum(DF(ci), i=1..n)
           = n + sum(R(ci), i=1..n)/100
 ```
 
-The start/current traveler cell is not charged. Dijkstra/A* therefore balance steps and proxy-risk cost; they do not minimize only raw risk or kilometers. Average/minimum inverse model scores describe path cells, while accumulatedRisk sums R for entered cells after the start.
+The start/current traveler cell is not charged. On baseline grids, Dijkstra/A* minimize entered-cell DF. During a hazard scenario, a separate, event-only lexicographic preference first minimizes the number of entered residual cells, then the unchanged DF sum. The internal preference is large enough to prioritize one fewer residual entry over any possible DF difference on this grid (DF is at most 2 and the grid at most 80×80); it is not included in reported DF costs, scores, or the risk formula. This is a conservative route-planning preference, not a calibrated physical risk value. Average/minimum inverse model scores describe path cells, while accumulatedRisk sums R for entered cells after the start.
 
 The preserved prototype uses four neighbors in order row-1, col+1, row+1, col-1. No diagonals or seam wrapping are added. A* uses Manhattan distance times the minimum unblocked DF. The scenario changes its input costs and blocked-cell mask, not the original algorithm implementations.
 
@@ -432,7 +432,7 @@ The guarantee is **added neighbor danger < added origin danger**, not neighbor t
 
 All event origins remain closed until the scenario is reset. Their blocked=true value describes a scenario exclusion, not measured physical traversability.
 
-Peripheral cells are not automatically closed. Weighted Dijkstra/A* consider their increased DF and prefer a lower-total-cost alternative when available, but may still use a peripheral cell if a detour costs more overall. BFS ignores residual DF and can use a neighbor if that gives fewer moves. Neither behavior allows entry into the forbidden central cell.
+Peripheral cells are not automatically closed. Safe Dijkstra/A* first minimize the number of residual cells entered, then minimize the existing DF sum; they avoid the residual area whenever a route with fewer residual cells exists, and still use residual cells when a detour is unavoidable. Fastest-by-moves BFS ignores residual DF and may cross the area for a shorter route. Neither behavior allows entry into any forbidden event-origin cell.
 
 If an event closes B, or closures disconnect the allowed grid, the result is an empty new path with a no-route explanation. There is no fallback through forbidden cells.
 

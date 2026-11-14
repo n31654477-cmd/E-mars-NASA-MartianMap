@@ -38,8 +38,16 @@ public class GridService(RiskService risk) {
         if(g.Cells[start.Row*g.Columns+start.Col].Blocked==true||g.Cells[end.Row*g.Columns+end.Col].Blocked==true)
             return new(false,"No route: the start/traveler or destination is in a forbidden event cell. Reset the scenario or change endpoints.",
                 RiskService.Unknowns,[],0,0,0,0,RiskService.Version,false,0,RiskService.Warning+" "+HazardService.Warning);
+        bool weighted=r.Algorithm is "dijkstra" or "astar";
+        bool hasResiduals=g.Cells.Any(c=>c.SafetyStatus=="simulated");
+        // One fewer residual entry must outrank any possible difference in the
+        // original DF sum (<= 2 per cell, at most Rows*Columns cells). This is
+        // an event-only lexicographic preference: residual cells stay passable,
+        // then original DF decides among routes with the same exposure count.
+        double residualPenalty=weighted&&hasResiduals?2d*g.Rows*g.Columns+1:0;
         var input=Enumerable.Range(0,g.Rows).Select(row=>g.Cells.Skip(row*g.Columns).Take(g.Columns).Select(c=>new Cell{
-            Row=c.Row,Col=c.Col,CenterLat=c.CenterLat,CenterLng=c.CenterLng,DF=c.Df,SafetyScore=c.SafetyScore,
+            Row=c.Row,Col=c.Col,CenterLat=c.CenterLat,CenterLng=c.CenterLng,
+            DF=c.Df+(c.SafetyStatus=="simulated"?residualPenalty:0),SafetyScore=c.SafetyScore,
             Blocked=c.Blocked==true||!c.Assessment.GeologyCovered
         }).ToArray()).ToArray();
         var result=r.Algorithm switch{
@@ -49,8 +57,18 @@ public class GridService(RiskService risk) {
             _=>throw new ArgumentException("Unknown algorithm")
         };
         var path=result.Path.Select(p=>g.Cells[p.Row*g.Columns+p.Col]).ToArray();
-        return new(path.Length>0,path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers. Scenario-forbidden cells excluded.":"No route within the covered grid without crossing forbidden event cells or missing-coverage cells.",
-            RiskService.Unknowns,path,result.TotalCost,result.AvgSafetyScore,result.MinSafetyScore,PathDistanceKm(path),RiskService.Version,false,
+        // Fail closed if an adapter or prototype regression ever returns a
+        // path that violates the hard event-origin closure.
+        if(path.Any(c=>c.Blocked==true))
+            return new(false,"Safety guard stopped the route: it included a forbidden event-origin cell. No route is displayed.",
+                RiskService.Unknowns,[],0,0,0,0,RiskService.Version,false,0,RiskService.Warning+" "+HazardService.Warning);
+        string objective=weighted&&hasResiduals
+            ?" Safe-route event policy: minimize entered residual-cell count first, then the original DF sum; residual cells remain passable if no alternative exists."
+            :r.Algorithm=="bfs"&&hasResiduals
+                ?" BFS minimizes moves and may use passable residual cells; all event origins remain forbidden."
+                :"";
+        return new(path.Length>0,path.Length>0?"Experimental model route, not verified traversability. Endpoints snapped to grid centers. Scenario-forbidden cells excluded."+objective:"No route within the covered grid without crossing forbidden event cells or missing-coverage cells.",
+            RiskService.Unknowns,path,path.Skip(1).Sum(c=>c.Df),result.AvgSafetyScore,result.MinSafetyScore,PathDistanceKm(path),RiskService.Version,false,
             path.Skip(1).Sum(c=>c.Assessment.RiskScore),RiskService.Warning);
     }
     public static ScientificRoute RemainingRoute(ScientificRoute route,int index) {
