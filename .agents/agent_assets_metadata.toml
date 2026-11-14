@@ -126,3 +126,17 @@ mtime_ms = 1794662414653
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/1cf2103b-ca86-4fac-be34-1bacbf6d96d4/c207bbb7-2e79-404b-a9da-d0507c0bfa50"
 storage_version_token = "1794662444425990"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "C8mMa2XQdKc7fNqngOlzw"
+uri = "file://generated-artifacts/NASAproV2_RouteSafety_Fix.zip"
+type = "unspecified"
+title = "NASAproV2 — event-routing fix for Windows"
+description = "Updated source and map data, with hard-blocked event origins, safe-route residual avoidance, and refreshed Windows package settings."
+logical_id = "c7df425d-77e3-465a-80df-267b2925ad92"
+content_hash = "sha256:e181a4671406fb723988702b3b36dc2653bb78fc277348258ce8eaf6b0be0d0d"
+size = 83878565
+mtime_ms = 1794666234540
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/c7df425d-77e3-465a-80df-267b2925ad92/d262f530-43fa-4a20-9353-c7a0064a8085"
+storage_version_token = "1794666359636557"
+content_type = "application/octet-stream"
