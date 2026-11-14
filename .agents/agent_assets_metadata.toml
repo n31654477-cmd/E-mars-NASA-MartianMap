@@ -84,3 +84,31 @@ mtime_ms = 1794580796781
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/c9d4c697-c429-4d27-bab2-41d0f4f1b583/f0a2c5b8-c401-4a09-8e96-7a23f2a40d5d"
 storage_version_token = "1794580836718204"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "4qBMyFS7fMtGirSJJNVYR"
+uri = "file://generated-artifacts/documentation/Mars_Pathfinder_Project_Guide.docx"
+type = "word_document"
+title = "Mars Pathfinder — Editable Project Guide"
+description = "Complete Word documentation: Windows setup, usage, DF equations and factor scores, routing, traveler placement, hazard events, API and scientific limits."
+logical_id = "b5e7870f-1cc2-4ce6-963a-03ef399eb739"
+content_hash = "sha256:1a93edb75054e032e93f9d4d3036390d58139278f7e8658e2e4c2a249f218179"
+size = 51712
+mtime_ms = 1794655367873
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/b5e7870f-1cc2-4ce6-963a-03ef399eb739/c0e934ee-2013-4fbc-85f1-9958e85d6e67"
+storage_version_token = "1794655425212213"
+content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+[[outputs]]
+id = "tUNgDO-kwkg6OEV2EqB9S"
+uri = "file://generated-artifacts/documentation/Mars_Pathfinder_Project_Guide.pdf"
+type = "pdf"
+title = "Mars Pathfinder — Project Guide PDF"
+description = "13-page printable guide, including exact DF and residual equations, Windows PowerShell commands and troubleshooting."
+logical_id = "e712f436-4526-4e32-a50d-82d2351b7617"
+content_hash = "sha256:99d0210cacd2a67ad43b722d69e725bf654f62f41f7fbae74269569565e741bc"
+size = 76862
+mtime_ms = 1794655367993
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:51c76143-732c-4137-b6be-68f7414db355/e712f436-4526-4e32-a50d-82d2351b7617/3c23e62c-f8f9-4e53-88a0-a888a22efec3"
+storage_version_token = "1794655426510310"
+content_type = "application/pdf"

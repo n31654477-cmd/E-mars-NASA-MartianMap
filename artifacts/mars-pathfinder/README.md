@@ -1,5 +1,9 @@
 # Mars Surface Analysis & Path Finder
 
+## Complete project documentation
+
+See [the project guide](docs/PROJECT_GUIDE.md) for Windows PowerShell installation and startup, runtime data, interface usage, exact DF/category equations, route objectives, traveler placement, event closures/residuals, API examples, troubleshooting and developer checks. Word and PDF copies can be regenerated using `python artifacts/mars-pathfinder/docs/export_guide.py` when python-docx and ReportLab are installed; Python is not required to run the app.
+
 ## Approved scientific scope
 
 The user requested an explicit experimental per-cell risk formula and safety function using existing data. This is not an operational Mars navigation system. Unknown physical measurements and traversability remain unknown. Experimental routes assume covered cells can be crossed; that is an explicit scenario policy, not measured traversability. Scientifically validated routing is still unavailable.
@@ -98,10 +102,10 @@ The scientific catalog, originals and generated derivatives are local, excluded 
 
 The source-code download alone omits the generated map assets. Download `NASA_Pathfinder_Local_Data.zip` from this Repl's Library (or regenerate it with `research/package_mars_local.py`) and extract its contents into the project root; preserve the archive paths. It includes the runtime map derivatives and source catalog needed to run this preview. The 1.1 GB full NASA source archive is optional for running the app; retain it separately if you need the original inputs.
 
-Install Node.js 24, pnpm 10, and the .NET 9 SDK, then in PowerShell at the extracted project root:
+Install a compatible Node.js LTS release, pnpm 10, the .NET 9 SDK and Git for Windows. Follow the [Windows preparation steps](docs/PROJECT_GUIDE.md#3-windows-powershell-install-and-prepare) first: the current workspace needs four Windows x64 native-package exclusions removed locally, and Git's `usr\bin` on PATH for its `sh` install script. Use `.cmd` wrappers if PowerShell scripts are disabled. Then, in PowerShell at the extracted project root:
 
 ```powershell
-pnpm install
+pnpm.cmd install --no-frozen-lockfile
 ```
 
 Open two PowerShell windows in that directory. In window 1, start the API:
@@ -117,7 +121,7 @@ In window 2, start the web app and its local API proxy:
 $env:PORT = "18219"
 $env:BASE_PATH = "/mars-pathfinder/"
 $env:LOCAL_API_PROXY = "1"
-pnpm --filter @workspace/mars-pathfinder run dev
+pnpm.cmd --filter @workspace/mars-pathfinder run dev
 ```
 
 Open `http://localhost:18219/mars-pathfinder/`. Keep both windows running. No Python or database is required to run the packaged preview; Python GIS dependencies are only needed to regenerate the map-data archive.
