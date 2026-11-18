@@ -1,0 +1,54 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS C:\Users\IP3 SLIM> $env:Path = "C:\Program Files\Git\usr\bin;C:\Program Files\nodejs;$env:Path"
+PS C:\Users\IP3 SLIM> $npmGlobal = npm.cmd config get prefix
+PS C:\Users\IP3 SLIM> $env:Path = "$npmGlobal;$env:Path"
+PS C:\Users\IP3 SLIM> sh --version
+GNU bash, version 5.3.15(2)-release (x86_64-pc-cygwin)
+Copyright (C) 2025 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+
+This is free software; you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+PS C:\Users\IP3 SLIM> cd "C:\Users\IP3 SLIM\Downloads\NASAPRO"
+PS C:\Users\IP3 SLIM\Downloads\NASAPRO> pnpm.cmd install
+Scope: all 10 workspace projects
+Lockfile is up to date, resolution step is skipped
+Already up to date
+. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm…
+└─ Done in 270ms
+Done in 3.5s using pnpm v10.34.9
+PS C:\Users\IP3 SLIM\Downloads\NASAPRO> $env:PORT = "18220"
+PS C:\Users\IP3 SLIM\Downloads\NASAPRO> dotnet run --project "artifacts\mars-pathfinder\backend\Mars.Api.csproj"
+
+Welcome to .NET 9.0!
+---------------------
+SDK Version: 9.0.321
+
+Telemetry
+---------
+The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+
+Read more about .NET CLI Tools telemetry: https://aka.ms/dotnet-cli-telemetry
+
+----------------
+Installed an ASP.NET Core HTTPS development certificate.
+To trust the certificate, run 'dotnet dev-certs https --trust'
+Learn about HTTPS: https://aka.ms/dotnet-https
+
+----------------
+Write your first app: https://aka.ms/dotnet-hello-world
+Find out what's new: https://aka.ms/dotnet-whats-new
+Explore documentation: https://aka.ms/dotnet-docs
+Report issues and find source on GitHub: https://github.com/dotnet/core
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli
+--------------------------------------------------------------------------------------
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://0.0.0.0:18220
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\IP3 SLIM\Downloads\NASAPRO\artifacts\mars-pathfinder\backend

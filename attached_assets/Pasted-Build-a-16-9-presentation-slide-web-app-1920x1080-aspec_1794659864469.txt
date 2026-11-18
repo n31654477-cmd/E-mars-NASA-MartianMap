@@ -1,0 +1,26 @@
+Build a 16:9 presentation slide web app (1920x1080 aspect ratio) using React, Three.js (@react-three/fiber and @react-three/drei), and Tailwind CSS for our NASA Space Apps Challenge project: "Interplanetary Survival Guide: Martian Map" by Team E-Mars.
+
+This must function as our high-impact Starter Slide (Slide 1) that we can both present live and export/capture cleanly for PowerPoint.
+
+### Visual & 3D Scene Requirements:
+1. **Martian Terrain:** Create a detailed 3D procedural Martian surface mesh (rust-red/terracotta tones, subtle elevation noise, craters, and rocky ridges) set against a dark space/atmospheric horizon (#0B0E14).
+2. **Astronaut & Destination:**
+   - Place a stylized 3D NASA astronaut (white spacesuit, gold-tinted visor, backpack PLSS unit) at the starting coordinates on the near side of the terrain, facing toward a distant elevated geological ridge (like Mount Sharp boxwork formations).
+   - Place a glowing cyan target beacon marker at the destination on the distant ridge.
+3. **Two Dual-Path Splines (Initially hidden in Camera View 1, fading in smoothly during the transition to View 2):**
+   - **SAFEST PATH (Emerald Green `#22C55E` glowing tube/line):** Curves around craters and steep elevation gradients, staying on low-slope terrain.
+   - **FASTEST PATH (Amber/Red `#F59E0B` / `#EF4444` dashed glowing tube/line):** Cuts directly in a near-straight line across steep crater rims and high-hazard terrain.
+4. **Smooth Camera Transition (The Core Shot):**
+   - **State 1 (Initial Over-the-Shoulder Shot):** Position the camera directly behind and slightly above the astronaut's back/shoulder, looking forward across the rocky terrain toward the distant ridge.
+   - **State 2 (Isometric Tactical View):** When triggered (via a subtle "Start Mission" / "Play Transition" trigger or pressing Spacebar), smoothly interpolate (`lerp` over ~2.5 seconds) the camera upward and outward into a 45-degree **Isometric Tactical View** framing the entire route from the astronaut to the destination beacon, revealing the Safest and Fastest path lines and floating 3D waypoint tags.
+
+### Slide UI Overlay (NASA Tactical HUD Style):
+- Keep the UI ultra-clean, dark-mode, and uncluttered so it works as a PowerPoint title/problem slide:
+  - **Top Left:** Small badge `NASA SPACE APPS 2026 // TEAM E-MARS` and bold title: **INTERPLANETARY SURVIVAL GUIDE: MARTIAN MAP**
+  - **Subtitle:** *Hyperlocalized EVA Route Optimization & Multi-Layer Hazard Mapping*
+  - **Bottom Right (Appears in Isometric View):** A crisp glassmorphism legend card comparing the two routes:
+    - 🟢 **SAFEST ROUTE:** Low Slope (<12°) • High O₂ & Battery Margin • +14 min
+    - 🟠 **FASTEST ROUTE:** Direct Vector • High Regolith/Slope Risk • -14 min
+- **Presentation Controls (Hideable for Clean Recording/Screenshots):**
+  - Include a minimal floating control bar in the bottom-left corner with:
+    1. `Play Camera Transition

@@ -1,0 +1,61 @@
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> npm.cmd --version
+12.0.2
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> pnpm.cmd --version
+10.34.9
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> dotnet --version
+9.0.321
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor>
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Set-Location $project
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Test-Path .\package.json
+True
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Test-Path .\artifacts\mars-pathfinder\backend\Mars.Api.csproj
+True
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> pnpm.cmd install --no-frozen-lockfile
+Scope: all 5 workspace projects
+artifacts/mars-pathfinder                |  WARN  deprecated recharts@2.15.4
+C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor\artifacts\api-server:
+ ERR_PNPM_WORKSPACE_PKG_NOT_FOUND  In artifacts\api-server: "@workspace/api-zod@workspace:*" is in the dependencies but no package named "@workspace/api-zod" is present in the workspace
+
+This error happened while installing a direct dependency of C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor\artifacts\api-server
+
+Packages found in the workspace:
+Progress: resolved 80, reused 81, downloaded 0, added 0
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Test-Path .\lib\api-zod\package.json
+False
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Get-ChildItem "$HOME\Downloads" -Directory -Recurse -Filter api-zod -ErrorAction SilentlyContinue |
+>>   Where-Object { Test-Path (Join-Path $_.FullName "package.json") } |
+>>   ForEach-Object { Split-Path (Split-Path $_.FullName -Parent) -Parent } |
+>>   Sort-Object -Unique
+C:\Users\IP3 SLIM\Downloads\NASAPRO
+C:\Users\IP3 SLIM\Downloads\NASAPRO\artifacts\api-server\node_modules
+C:\Users\IP3 SLIM\Downloads\NASAPRO\node_modules\.pnpm\node_modules
+C:\Users\IP3 SLIM\Downloads\NASAproV2\NASA-Data-Extractor
+C:\Users\IP3 SLIM\Downloads\NASAproV2\NASA-Data-Extractor\artifacts\api-server\node_modules
+C:\Users\IP3 SLIM\Downloads\NASAproV2\NASA-Data-Extractor\node_modules\.pnpm\node_modules
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> $target = "C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor"
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> $source = "PASTE_THE_COMPLETE_PROJECT_ROOT_FROM_THE_RESULTS_HERE"
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> New-Item -ItemType Directory -Path "$target\lib" -Force | Out-Null
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Copy-Item "$source\lib\api-zod" "$target\lib" -Recurse -Force
+Copy-Item : Cannot find path 'C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor\PASTE_THE_COMPLETE_PROJ
+ECT_ROOT_FROM_THE_RESULTS_HERE\lib\api-zod' because it does not exist.
+At line:1 char:1
++ Copy-Item "$source\lib\api-zod" "$target\lib" -Recurse -Force
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\IP3 SL...ERE\lib\api-zod:String) [Copy-Item], ItemNotFoundExce
+   ption
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Set-Location $target
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Test-Path .\lib\api-zod\package.json
+False
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> pnpm.cmd install --no-frozen-lockfile
+Scope: all 5 workspace projects
+artifacts/mars-pathfinder                |  WARN  deprecated recharts@2.15.4
+C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor\artifacts\api-server:
+ ERR_PNPM_WORKSPACE_PKG_NOT_FOUND  In artifacts\api-server: "@workspace/api-zod@workspace:*" is in the dependencies but no package named "@workspace/api-zod" is present in the workspace
+
+This error happened while installing a direct dependency of C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor\artifacts\api-server
+
+Packages found in the workspace:
+Progress: resolved 81, reused 81, downloaded 0, added 0
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor>

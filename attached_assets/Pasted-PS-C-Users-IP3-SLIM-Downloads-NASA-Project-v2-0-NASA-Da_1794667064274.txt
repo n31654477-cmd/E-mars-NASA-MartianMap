@@ -1,0 +1,30 @@
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> $project = "C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor"
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> $env:Path = "C:\Program Files\Git\usr\bin;C:\Program Files\nodejs;$env:Path"
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> $npmGlobal = (npm.cmd config get prefix).Trim()
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> $env:Path = "$npmGlobal;$env:Path"
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor>
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> node.exe --version
+v26.13.1
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> npm.cmd --version
+12.0.2
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> pnpm.cmd --version
+10.34.9
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> dotnet --version
+9.0.321
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor>
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Set-Location $project
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Test-Path .\package.json
+True
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> Test-Path .\artifacts\mars-pathfinder\backend\Mars.Api.csproj
+True
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor> pnpm.cmd install --no-frozen-lockfile
+Scope: all 5 workspace projects
+artifacts/mars-pathfinder                |  WARN  deprecated recharts@2.15.4
+C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor\artifacts\api-server:
+ ERR_PNPM_WORKSPACE_PKG_NOT_FOUND  In artifacts\api-server: "@workspace/api-zod@workspace:*" is in the dependencies but no package named "@workspace/api-zod" is present in the workspace
+
+This error happened while installing a direct dependency of C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor\artifacts\api-server
+
+Packages found in the workspace:
+Progress: resolved 80, reused 81, downloaded 0, added 0
+PS C:\Users\IP3 SLIM\Downloads\NASA-Project-v2.0\NASA-Data-Extractor>

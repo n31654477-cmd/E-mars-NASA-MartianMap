@@ -1,0 +1,384 @@
+# Project Development: Mars Surface Analysis & Safe Path Finder
+
+I want you to develop a complete web application that generates an interactive 2D map of Mars and identifies dangerous and relatively safe regions using the scientific data provided through the connected Google Drive sources.
+
+The application must use:
+
+- **Backend:** C# with ASP.NET Core Web API.
+- **Frontend:** HTML, CSS, and JavaScript.
+- **Map visualization:** An appropriate 2D mapping library capable of displaying Mars geographic data and custom GIS layers.
+
+The Google Drive integration is already authorized. Use the previously extracted information from the documents, PDFs, spreadsheets, GIS files, and databases.
+
+I will also provide an existing source-code prototype of the application. This prototype is extremely important and must be treated as the primary technical reference for the application's functionality and algorithms.
+
+---
+
+# 1. Scientific Data Is the Foundation
+
+Use the extracted scientific information from ALL relevant provided sources, including:
+
+- Scientific documents and research papers.
+- PDFs and their extracted tables.
+- Spreadsheets and datasets.
+- GIS vector and raster files.
+- Databases and their tables.
+- Any other relevant information identified during the previous data extraction process.
+
+Identify all available environmental and terrain factors that could affect the safety of traveling across the Martian surface.
+
+Examples include:
+
+- Elevation.
+- Geographic coordinates (latitude and longitude).
+- Surface temperature and temperature variations.
+- Radiation levels.
+- Slope and terrain inclination.
+- Mountains and rocky terrain.
+- Surface characteristics.
+- Atmospheric and weather-related conditions.
+- Any additional danger indicators discovered in the scientific sources.
+
+These are examples, not assumptions that every variable exists in the datasets.
+
+Only implement criteria supported by the available scientific information.
+
+Do not invent measurements, values, thresholds, or scientific relationships.
+
+Preserve original measurements, units, coordinate reference systems, and source references.
+
+# 2. Existing Prototype — Critical Requirement
+
+I am providing an existing source-code prototype that demonstrates the intended functionality and contains the actual pathfinding algorithm implementations.
+
+**You MUST inspect and understand the entire relevant source code before implementing the new application.**
+
+The prototype is not merely a visual reference or an example of what the application might do.
+
+It is the technical reference implementation that defines how the application should work.
+
+In particular:
+
+### Algorithm preservation
+
+You MUST use the exact same pathfinding algorithms implemented in the provided prototype.
+
+This means:
+
+1. Preserve the same algorithms.
+2. Preserve their underlying logic and execution flow.
+3. Preserve their neighbor-selection mechanisms.
+4. Preserve their movement-cost calculations.
+5. Preserve their heuristic calculations, where applicable.
+6. Preserve their obstacle and blocked-cell handling.
+7. Preserve their path reconstruction mechanisms.
+8. Preserve their optimization objectives.
+9. Preserve their existing behavior and algorithm-specific characteristics.
+
+Do not replace an existing algorithm with another algorithm.
+
+Do not implement a supposedly better or more optimized alternative.
+
+Do not substitute a different implementation of A*, Dijkstra, BFS, or any other algorithm found in the prototype.
+
+Do not redesign the algorithms based on your own assumptions.
+
+If the prototype contains custom modifications to standard algorithms, preserve those modifications exactly.
+
+### Porting the prototype
+
+The new application will have an ASP.NET Core backend written in C#.
+
+If the prototype uses C#, preserve its algorithm implementations and adapt only the surrounding application architecture where necessary.
+
+If any part needs to be translated into another language or adapted to a different data representation, reproduce its original behavior and logic faithfully.
+
+Changes required for integration must not silently change algorithm behavior.
+
+If an implementation detail cannot be preserved exactly, explain why and ask for approval before changing it.
+
+### Prototype functionality
+
+Inspect and understand:
+
+- Grid generation.
+- Cell representation.
+- Cell coordinates.
+- Cell safety and danger values.
+- Blocked-cell representation.
+- Neighbor identification.
+- Start and destination selection.
+- Algorithm execution.
+- Path reconstruction.
+- Path visualization.
+- Results and statistics.
+- Existing UI behavior.
+
+Preserve the intended functionality and improve the presentation and application architecture without changing the underlying algorithmic behavior.
+
+### Algorithm verification
+
+After implementation, compare the new implementation against the prototype using equivalent inputs.
+
+Verify:
+
+- The same traversable and blocked cells.
+- The same neighbor relationships.
+- The same movement costs.
+- The same heuristic calculations.
+- The same algorithm execution rules.
+- The same resulting paths when deterministic inputs and equivalent conditions are used.
+
+If multiple equally optimal paths are possible, preserve the prototype's tie-breaking behavior wherever possible.
+
+Document any differences rather than silently accepting them.
+
+**The prototype's algorithms are not suggestions. They are requirements.**
+
+---
+
+# 3. Interactive 2D Mars Map
+
+Create an interactive 2D representation of Mars that allows users to explore its surface.
+
+The map should:
+
+- Display actual Mars geographic data rather than an arbitrary simulated map.
+- Support geographic coordinates.
+- Allow zooming and panning.
+- Display relevant GIS layers extracted from the provided datasets.
+- Visualize dangerous and relatively safe regions.
+- Allow users to select locations.
+- Display scientific information about selected locations.
+- Show geographic boundaries and coverage of available datasets.
+- Handle missing or unavailable data transparently.
+
+Use the appropriate map projection and coordinate reference system for the source data.
+
+The map should support multiple environmental and terrain layers.
+
+# 4. Danger Analysis and Visualization
+
+The UI must clearly display the danger criteria discovered in the scientific sources.
+
+Users must understand WHY a particular location is considered dangerous.
+
+Selecting a location should display its available environmental measurements, such as:
+
+- Elevation.
+- Temperature.
+- Radiation.
+- Slope.
+- Terrain characteristics.
+- Other available scientific measurements.
+
+Implement appropriate visualizations:
+
+- Color-coded danger levels.
+- Individual GIS overlays for different danger criteria.
+- Combined danger or safety visualization.
+- A legend explaining each color.
+- Detailed information panels for selected locations.
+- Controls to enable and disable individual environmental layers.
+
+Danger classification must use scientifically supported thresholds and relationships found in the provided sources.
+
+If a source does not establish a reliable threshold, identify that limitation instead of inventing one.
+
+Clearly distinguish between measured, derived, and estimated values.
+
+# 5. Integration of Scientific Data With the Existing Algorithms
+
+This section is especially important.
+
+The new scientific datasets must supply the environmental information used by the existing prototype's grid and pathfinding system.
+
+The objective is to integrate real Mars data into the prototype's existing computational model, not to create an entirely different pathfinding system.
+
+For example:
+
+- Populate grid cells using actual geographic and GIS information.
+- Associate relevant environmental measurements with their corresponding cells.
+- Calculate danger or safety values using scientifically justified methods.
+- Identify blocked or impassable regions using supported criteria.
+- Supply the resulting cell information to the existing pathfinding algorithms.
+
+Preserve the prototype's algorithm implementations.
+
+If the scientific datasets require additional preprocessing, coordinate transformations, normalization, or data aggregation, perform those operations before passing the data to the algorithms.
+
+Do not change the algorithms simply to accommodate a new dataset.
+
+If the prototype's existing data model cannot represent an important scientific measurement, extend the data model without changing the existing algorithm's behavior unless I explicitly approve such a change.
+
+# 6. Pathfinding and Route Visualization
+
+Use the exact pathfinding algorithms provided in the prototype.
+
+Do not independently select replacement algorithms.
+
+The application should allow users to:
+
+- Select a starting location.
+- Select a destination.
+- Select one of the algorithms already implemented in the prototype.
+- Execute the selected algorithm.
+- Display the resulting path on the Mars map.
+
+Display useful path information, including:
+
+- Total path distance.
+- Accumulated danger or safety cost, if supported by the algorithm.
+- Relevant environmental risks along the route.
+- Number of cells or locations traversed.
+- Other meaningful statistics supported by the implementation and available data.
+
+Keep shortest-distance and safety-oriented optimization objectives distinct wherever the prototype supports them.
+
+Do not introduce a new balanced algorithm or a different cost function without my approval.
+
+# 7. Backend Architecture — C# ASP.NET Core
+
+Build the backend using C# and ASP.NET Core Web API.
+
+Use a clean, maintainable architecture with clear separation of responsibilities.
+
+Organize the application into appropriate components:
+
+- Controllers.
+- Business logic / Services.
+- Data access.
+- Models and DTOs.
+- GIS data processing.
+- Grid generation and spatial analysis.
+- Danger assessment.
+- Existing pathfinding algorithms.
+
+The backend should handle:
+
+1. Loading and processing scientific datasets.
+2. Converting and normalizing spatial data when necessary.
+3. Generating the internal representation of the Martian surface.
+4. Calculating supported danger and safety metrics.
+5. Identifying obstacles and traversable regions.
+6. Executing the existing prototype algorithms.
+7. Returning map information and analysis results through API endpoints.
+
+Keep original data separate from processed and derived data.
+
+Do not place scientific calculations or pathfinding logic directly inside controllers.
+
+Keep algorithm implementations isolated and reusable.
+
+Use appropriate libraries for GIS processing and coordinate transformations.
+
+# 8. Frontend — HTML, CSS and JavaScript
+
+Create a clean, modern, scientific-looking interface.
+
+The UI should prioritize the map while making scientific information easy to understand.
+
+Suggested layout:
+
+**Main map area:**
+- Interactive 2D Mars map.
+- Start and destination markers.
+- Generated paths.
+- Danger overlays.
+- Map legends.
+
+**Side panel:**
+- Available environmental layers.
+- Danger criteria.
+- Layer visibility controls.
+- Selected location information.
+- Scientific measurements.
+
+**Pathfinding controls:**
+- Start location selection.
+- Destination selection.
+- Algorithm selection.
+- Pathfinding execution.
+- Path statistics and results.
+
+**Additional interface elements:**
+- Map zoom controls.
+- Reset map.
+- Clear path.
+- Danger visualization settings.
+- Loading and error states.
+
+Use responsive HTML, CSS, and JavaScript.
+
+Keep the frontend separate from the backend and communicate through REST API endpoints.
+
+# 9. Scientific Accuracy and Data Integrity
+
+- Never fabricate scientific measurements.
+- Never silently discard datasets.
+- Never assume different datasets share the same coordinate reference system.
+- Preserve original units and values.
+- Document coordinate transformations.
+- Identify missing and conflicting measurements.
+- Document all derived calculations.
+- Maintain traceability between map values and their original sources.
+- Do not classify a location as safe merely because data is missing.
+- Do not interpret unavailable measurements as zero.
+
+If multiple datasets describe the same environmental variable, investigate their spatial resolution, coverage, units, and measurement context before combining them.
+
+# 10. Development Workflow
+
+Before writing or modifying application code:
+
+1. Inspect the complete provided prototype.
+2. Identify every implemented pathfinding algorithm.
+3. Document how each algorithm works in the existing code.
+4. Identify the existing data models and grid structure.
+5. Review the previously extracted scientific data and database structures.
+6. Identify available GIS layers and their spatial properties.
+7. Determine which environmental variables can actually be used.
+8. Identify danger criteria supported by the sources.
+9. Design the integration between scientific data and the existing prototype.
+10. Design the ASP.NET Core architecture around the preserved algorithm implementations.
+
+Before implementation, provide me with:
+
+- A summary of the prototype's functionality.
+- A list of the exact algorithms found in the source code.
+- An explanation of how their existing implementations will be preserved.
+- A mapping between available scientific datasets and the prototype's data model.
+- A proposed backend and frontend architecture.
+- Any compatibility problems or scientific ambiguities.
+
+Do not replace or rewrite the algorithms during this analysis.
+
+After reviewing the proposed approach, proceed with implementation.
+
+Build incrementally and test GIS processing, backend functionality, algorithm behavior, and frontend integration.
+
+---
+
+# Final Objective
+
+Develop a functional Mars Surface Analysis and Safe Path Finder website.
+
+Users should be able to explore a scientifically grounded 2D map of Mars, inspect environmental danger criteria at different locations, understand why certain regions are dangerous, select two locations, and calculate and visualize routes between them.
+
+The application must combine:
+
+1. The actual scientific information provided through Google Drive.
+2. The exact algorithm implementations and functionality of the supplied prototype.
+3. A clean C# ASP.NET Core backend.
+4. An interactive HTML, CSS, and JavaScript frontend.
+
+**Priority order:**
+
+1. Preserve the prototype's exact algorithmic behavior.
+2. Maintain scientific accuracy and data integrity.
+3. Correctly integrate GIS data with the existing computational model.
+4. Deliver reliable pathfinding and visualization.
+5. Build a clean, maintainable application architecture.
+6. Deliver a polished user interface.
+
+Do not sacrifice algorithm correctness or scientific accuracy for implementation convenience or visual appearance.
