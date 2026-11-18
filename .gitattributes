@@ -1,0 +1,1 @@
+generated-artifacts/NASA_Pathfinder_Local_Data.zip filter=lfs diff=lfs merge=lfs -text
